@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<h3 class="mb-4"><i class="fa-solid fa-id-badge me-2"></i>My Profile</h3>
+<div class="card-panel p-4" style="max-width: 500px;">
+  <p><span class="text-muted">Name:</span> {{ current_user.name }}</p>
+  <p><span class="text-muted">Email:</span> {{ current_user.email }}</p>
+  <p><span class="text-muted">Role:</span> {{ current_user.role | capitalize }}</p>
+  <p><span class="text-muted">Member since:</span> {{ current_user.created_at.strftime('%Y-%m-%d') }}</p>
+  <p class="mb-0"><span class="text-muted">Total emails analyzed:</span> {{ total_detections }}</p>
+</div>
+{% endblock %}

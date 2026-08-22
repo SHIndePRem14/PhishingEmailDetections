@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h3 class="mb-4"><i class="fa-solid fa-gauge me-2"></i>Admin Dashboard</h3>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3 col-6">
+    <div class="stat-card">
+      <div class="stat-icon bg-icon-accent mb-2"><i class="fa-solid fa-users"></i></div>
+      <div class="stat-value">{{ total_users }}</div>
+      <div class="stat-label">Total Users</div>
+    </div>
+  </div>
+  <div class="col-md-3 col-6">
+    <div class="stat-card">
+      <div class="stat-icon bg-icon-accent mb-2"><i class="fa-solid fa-envelope"></i></div>
+      <div class="stat-value">{{ total_detections }}</div>
+      <div class="stat-label">Total Detections</div>
+    </div>
+  </div>
+  <div class="col-md-3 col-6">
+    <div class="stat-card">
+      <div class="stat-icon bg-icon-danger mb-2"><i class="fa-solid fa-skull-crossbones"></i></div>
+      <div class="stat-value">{{ phishing_count }}</div>
+      <div class="stat-label">Phishing</div>
+    </div>
+  </div>
+  <div class="col-md-3 col-6">
+    <div class="stat-card">
+      <div class="stat-icon bg-icon-safe mb-2"><i class="fa-solid fa-circle-check"></i></div>
+      <div class="stat-value">{{ legitimate_count }}</div>
+      <div class="stat-label">Legitimate</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="card-panel p-3">
+      <h5 class="mb-3">Recent Users</h5>
+      <table class="table table-dark-panel">
+        <thead><tr><th>Name</th><th>Email</th><th>Role</th></tr></thead>
+        <tbody>
+        {% for u in recent_users %}
+          <tr><td>{{ u.name }}</td><td>{{ u.email }}</td><td>{{ u.role }}</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card-panel p-3">
+      <h5 class="mb-3">Recent Detections</h5>
+      <table class="table table-dark-panel">
+        <thead><tr><th>Subject</th><th>Prediction</th><th>Risk</th></tr></thead>
+        <tbody>
+        {% for d in recent_detections %}
+          <tr>
+            <td>{{ d.subject or '(no subject)' }}</td>
+            <td>{{ d.prediction }}</td>
+            <td><span class="badge {{ 'badge-risk-high' if d.risk_level == 'High' else ('badge-risk-medium' if d.risk_level == 'Medium' else 'badge-risk-low') }}">{{ d.risk_level }}</span></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% if latest_metric %}
+<div class="card-panel p-3 mt-3">
+  <h5 class="mb-3">Latest Model Metrics</h5>
+  <div class="row small">
+    <div class="col-md-3">Accuracy: {{ (latest_metric.accuracy * 100) | round(1) }}%</div>
+    <div class="col-md-3">Precision: {{ (latest_metric.precision * 100) | round(1) }}%</div>
+    <div class="col-md-3">Recall: {{ (latest_metric.recall * 100) | round(1) }}%</div>
+    <div class="col-md-3">F1: {{ (latest_metric.f1_score * 100) | round(1) }}%</div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

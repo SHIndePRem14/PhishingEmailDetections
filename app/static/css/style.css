@@ -1,0 +1,179 @@
+:root {
+    --bg-dark: #0b0f14;
+    --bg-panel: #121822;
+    --bg-panel-light: #1a2230;
+    --border-color: #22303f;
+    --accent: #00d4a0;
+    --accent-soft: #0ea578;
+    --danger: #ff5470;
+    --warning: #ffb020;
+    --safe: #00d4a0;
+    --text-main: #e6edf3;
+    --text-muted: #8b98a5;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.navbar-phishguard {
+    background-color: var(--bg-panel);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-phishguard .navbar-brand {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.navbar-phishguard .nav-link {
+    color: var(--text-muted);
+}
+
+.navbar-phishguard .nav-link:hover,
+.navbar-phishguard .nav-link.active {
+    color: var(--text-main);
+}
+
+.card-panel {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.stat-card {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    height: 100%;
+}
+
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.stat-card .stat-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.bg-icon-safe { background: rgba(0,212,160,0.15); color: var(--safe); }
+.bg-icon-danger { background: rgba(255,84,112,0.15); color: var(--danger); }
+.bg-icon-warning { background: rgba(255,176,32,0.15); color: var(--warning); }
+.bg-icon-accent { background: rgba(0,212,160,0.15); color: var(--accent); }
+
+.badge-risk-high { background-color: var(--danger); }
+.badge-risk-medium { background-color: var(--warning); color: #1a1a1a; }
+.badge-risk-low { background-color: var(--safe); color: #063d2f; }
+
+.table-dark-panel {
+    --bs-table-bg: var(--bg-panel);
+    --bs-table-color: var(--text-main);
+    --bs-table-border-color: var(--border-color);
+}
+
+.sidebar {
+    background-color: var(--bg-panel);
+    border-right: 1px solid var(--border-color);
+    min-height: calc(100vh - 56px);
+}
+
+.sidebar .nav-link {
+    color: var(--text-muted);
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 2px;
+}
+
+.sidebar .nav-link.active,
+.sidebar .nav-link:hover {
+    background-color: var(--bg-panel-light);
+    color: var(--accent);
+}
+
+.btn-phishguard {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #06231b;
+    font-weight: 600;
+}
+
+.btn-phishguard:hover {
+    background-color: var(--accent-soft);
+    border-color: var(--accent-soft);
+    color: #06231b;
+}
+
+.keyword-chip {
+    display: inline-block;
+    background-color: rgba(255,176,32,0.15);
+    color: var(--warning);
+    border: 1px solid rgba(255,176,32,0.3);
+    border-radius: 20px;
+    padding: 0.25rem 0.75rem;
+    margin: 0.15rem;
+    font-size: 0.85rem;
+}
+
+.url-chip {
+    display: inline-block;
+    background-color: rgba(255,84,112,0.12);
+    color: var(--danger);
+    border: 1px solid rgba(255,84,112,0.3);
+    border-radius: 6px;
+    padding: 0.25rem 0.6rem;
+    margin: 0.15rem;
+    font-size: 0.8rem;
+    word-break: break-all;
+}
+
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top, #14202b 0%, #0b0f14 70%);
+}
+
+.auth-card {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px;
+}
+
+.form-control, .form-select {
+    background-color: var(--bg-panel-light);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: var(--bg-panel-light);
+    color: var(--text-main);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.2rem rgba(0,212,160,0.15);
+}
+
+.result-card-safe { border-left: 5px solid var(--safe); }
+.result-card-danger { border-left: 5px solid var(--danger); }
+.result-card-warning { border-left: 5px solid var(--warning); }

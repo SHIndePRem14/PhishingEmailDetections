@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+<h3 class="mb-4"><i class="fa-solid fa-circle-info me-2"></i>About PhishGuard</h3>
+<div class="card-panel p-4">
+  <p>PhishGuard is an AI-powered phishing email detection system built as a final-year cybersecurity project.
+     It combines a TF-IDF + Logistic Regression machine learning model with keyword and URL heuristics
+     to classify emails as legitimate or phishing, and stores results for dashboard analytics and Power BI reporting.</p>
+  <p class="mb-0 text-muted small">PhishGuard never opens, executes, or downloads links/attachments from analyzed emails.</p>
+</div>
+{% endblock %}

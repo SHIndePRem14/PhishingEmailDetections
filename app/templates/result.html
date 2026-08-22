@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Detection Result{% endblock %}
+{% block content %}
+{% set is_phishing = detection.prediction == 'phishing' %}
+{% set card_class = 'result-card-danger' if is_phishing else 'result-card-safe' %}
+
+<h3 class="mb-4"><i class="fa-solid fa-file-shield me-2"></i>Detection Result</h3>
+
+<div class="card-panel p-4 {{ card_class }} mb-4">
+  <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+    <div>
+      <div class="text-muted small mb-1">Prediction</div>
+      <h2 class="mb-0" style="color: {{ '#ff5470' if is_phishing else '#00d4a0' }};">
+        {{ 'PHISHING EMAIL' if is_phishing else 'LEGITIMATE EMAIL' }}
+      </h2>
+      <p class="mt-2 mb-0">
+        {% if detection.risk_level == 'High' %}
+          High probability of phishing detected.
+        {% elif detection.risk_level == 'Medium' %}
+          Email contains potentially dangerous characteristics.
+        {% else %}
+          Email appears legitimate.
+        {% endif %}
+      </p>
+    </div>
+    <div class="text-end">
+      <span class="badge {{ 'badge-risk-high' if detection.risk_level == 'High' else ('badge-risk-medium' if detection.risk_level == 'Medium' else 'badge-risk-low') }} fs-6 mb-2">{{ detection.risk_level }} Risk</span>
+      <div class="stat-value">{{ (detection.confidence * 100) | round(1) }}%</div>
+      <div class="stat-label">Confidence Score</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card-panel p-3 h-100">
+      <h5 class="mb-3"><i class="fa-solid fa-key me-2"></i>Suspicious Keywords Detected</h5>
+      {% if detection.keyword_list() %}
+        {% for kw in detection.keyword_list() %}
+          <span class="keyword-chip">{{ kw }}</span>
+        {% endfor %}
+      {% else %}
+        <p class="text-muted mb-0">No suspicious keywords detected.</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card-panel p-3 h-100">
+      <h5 class="mb-3"><i class="fa-solid fa-link me-2"></i>Suspicious URLs Detected</h5>
+      {% if detection.url_list() %}
+        {% for url in detection.url_list() %}
+          <div class="url-chip">{{ url }}</div>
+        {% endfor %}
+      {% else %}
+        <p class="text-muted mb-0">No suspicious URLs detected.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="card-panel p-3 mt-3">
+  <h5 class="mb-3">Email Details</h5>
+  <div class="row small">
+    <div class="col-md-3 mb-2"><span class="text-muted">Sender:</span> {{ detection.sender_email or '—' }}</div>
+    <div class="col-md-3 mb-2"><span class="text-muted">Receiver:</span> {{ detection.receiver_email or '—' }}</div>
+    <div class="col-md-3 mb-2"><span class="text-muted">Model Used:</span> {{ detection.model_name }}</div>
+    <div class="col-md-3 mb-2"><span class="text-muted">Date:</span> {{ detection.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+  </div>
+  <div class="mb-2"><span class="text-muted">Subject:</span> {{ detection.subject or '(no subject)' }}</div>
+  <div class="text-muted mb-1">Body:</div>
+  <pre class="p-2" style="white-space: pre-wrap; background: var(--bg-panel-light); border-radius: 8px;">{{ detection.email_body }}</pre>
+</div>
+
+<a href="{{ url_for('detection.analyze') }}" class="btn btn-phishguard mt-3"><i class="fa-solid fa-plus me-1"></i>Analyze Another Email</a>
+{% endblock %}

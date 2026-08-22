@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="text-center mb-4">
+      <i class="fa-solid fa-shield-halved fa-2x" style="color: var(--accent);"></i>
+      <h3 class="mt-2 mb-0">PhishGuard</h3>
+      <p class="text-muted small">AI-Powered Phishing Email Detection</p>
+    </div>
+    <form method="POST" novalidate>
+      {{ form.hidden_tag() }}
+      <div class="mb-3">
+        {{ form.email.label(class="form-label") }}
+        {{ form.email(class="form-control", placeholder="you@example.com") }}
+        {% for error in form.email.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+      </div>
+      <div class="mb-3">
+        {{ form.password.label(class="form-label") }}
+        {{ form.password(class="form-control", placeholder="••••••••") }}
+        {% for error in form.password.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+      </div>
+      {{ form.submit(class="btn btn-phishguard w-100") }}
+    </form>
+    <p class="text-center text-muted small mt-3 mb-0">
+      Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

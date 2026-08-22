@@ -1,0 +1,793 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- =========================
+     Dashboard Background/UI
+     Bootstrap + Small Custom CSS
+     ========================= -->
+<style>
+    body {
+        background:
+            radial-gradient(circle at 15% 15%, rgba(13, 110, 253, 0.10), transparent 30%),
+            radial-gradient(circle at 85% 85%, rgba(111, 66, 193, 0.10), transparent 30%),
+            linear-gradient(135deg, #0f172a, #111827, #0b1120);
+        background-attachment: fixed;
+        min-height: 100vh;
+    }
+
+    .dashboard-container {
+        min-height: calc(100vh - 100px);
+    }
+
+    .dashboard-header {
+        background: rgba(15, 23, 42, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 20px;
+    }
+
+    .dashboard-header h3 {
+        color: #f8fafc;
+        font-weight: 700;
+    }
+
+    .dashboard-subtitle {
+        color: #94a3b8;
+        font-size: 14px;
+    }
+
+    .btn-phishguard {
+        background: linear-gradient(135deg, #0d6efd, #6610f2);
+        border: none;
+        color: white !important;
+        border-radius: 10px;
+        padding: 10px 18px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .btn-phishguard:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(13, 110, 253, 0.35);
+        color: white !important;
+    }
+
+    /* Statistics Cards */
+    .stat-card {
+        position: relative;
+        overflow: hidden;
+        background: rgba(15, 23, 42, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 22px;
+        min-height: 155px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(13, 110, 253, 0.35);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .stat-card::after {
+        content: "";
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        right: -35px;
+        bottom: -35px;
+        background: rgba(13, 110, 253, 0.06);
+        border-radius: 50%;
+    }
+
+    .stat-icon {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        font-size: 18px;
+    }
+
+    .bg-icon-accent {
+        background: rgba(13, 110, 253, 0.15);
+        color: #60a5fa;
+    }
+
+    .bg-icon-safe {
+        background: rgba(25, 135, 84, 0.15);
+        color: #4ade80;
+    }
+
+    .bg-icon-warning {
+        background: rgba(255, 193, 7, 0.15);
+        color: #facc15;
+    }
+
+    .bg-icon-danger {
+        background: rgba(220, 53, 69, 0.15);
+        color: #f87171;
+    }
+
+    .stat-value {
+        color: #f8fafc;
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .stat-label {
+        color: #94a3b8;
+        font-size: 13px;
+    }
+
+    /* Analytics */
+    .card-panel {
+        background: rgba(15, 23, 42, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .analytics-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: rgba(13, 110, 253, 0.12);
+        color: #60a5fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Table */
+    .table-dark-panel {
+        --bs-table-bg: transparent;
+        --bs-table-color: #e2e8f0;
+        --bs-table-border-color: rgba(255,255,255,0.07);
+        margin-bottom: 0;
+    }
+
+    .table-dark-panel thead th {
+        color: #94a3b8;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        padding: 14px;
+    }
+
+    .table-dark-panel tbody td {
+        padding: 14px;
+    }
+
+    .table-dark-panel tbody tr {
+        transition: 0.2s;
+    }
+
+    .table-dark-panel tbody tr:hover {
+        background: rgba(13, 110, 253, 0.05);
+    }
+
+    /* Risk Badges */
+    .badge-risk-high {
+        background: rgba(220, 53, 69, 0.15);
+        color: #ff6b7a;
+        border: 1px solid rgba(220, 53, 69, 0.2);
+        padding: 6px 10px;
+        border-radius: 20px;
+    }
+
+    .badge-risk-medium {
+        background: rgba(255, 193, 7, 0.15);
+        color: #ffd43b;
+        border: 1px solid rgba(255, 193, 7, 0.2);
+        padding: 6px 10px;
+        border-radius: 20px;
+    }
+
+    .badge-risk-low {
+        background: rgba(25, 135, 84, 0.15);
+        color: #51cf66;
+        border: 1px solid rgba(25, 135, 84, 0.2);
+        padding: 6px 10px;
+        border-radius: 20px;
+    }
+
+    /* Model Info */
+    .model-info-item {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .model-info-item:last-child {
+        border-bottom: none;
+    }
+
+    .model-label {
+        color: #64748b;
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+
+    .model-value {
+        color: #f8fafc;
+        font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .dashboard-header {
+            padding: 16px;
+        }
+
+        .dashboard-header .btn {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            min-height: 135px;
+            padding: 18px;
+        }
+
+        .stat-value {
+            font-size: 25px;
+        }
+    }
+</style>
+
+
+<div class="container-fluid dashboard-container py-4">
+
+    <!-- =========================
+         HEADER
+         ========================= -->
+    <div class="dashboard-header d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+
+        <div>
+            <h3 class="mb-1">
+                <i class="fa-solid fa-gauge-high me-2 text-primary"></i>
+                Dashboard
+            </h3>
+
+            <div class="dashboard-subtitle">
+                AI-powered phishing email detection and threat monitoring
+            </div>
+        </div>
+
+        <a href="{{ url_for('detection.analyze') }}"
+           class="btn btn-phishguard mt-3 mt-md-0">
+
+            <i class="fa-solid fa-magnifying-glass me-1"></i>
+            Analyze Email
+
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         MODEL WARNING
+         ========================= -->
+    {% if not model_ready %}
+
+    <div class="alert alert-warning d-flex align-items-center shadow-sm mb-4"
+         role="alert">
+
+        <i class="fa-solid fa-triangle-exclamation fs-5 me-3"></i>
+
+        <div>
+            <strong>ML Model Not Found.</strong>
+            Run
+            <code>python scripts/train_model.py</code>
+            before analyzing emails.
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- =========================
+         STAT CARDS
+         ========================= -->
+    <div class="row g-3 mb-4">
+
+        <!-- Total -->
+        <div class="col-xl-3 col-md-6 col-6">
+
+            <div class="stat-card">
+
+                <div class="d-flex justify-content-between align-items-start mb-3">
+
+                    <div class="stat-icon bg-icon-accent">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <span class="badge text-bg-primary">
+                        Total
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    {{ total }}
+                </div>
+
+                <div class="stat-label mt-1">
+                    Emails Analyzed
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Safe -->
+        <div class="col-xl-3 col-md-6 col-6">
+
+            <div class="stat-card">
+
+                <div class="d-flex justify-content-between align-items-start mb-3">
+
+                    <div class="stat-icon bg-icon-safe">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <span class="badge text-bg-success">
+                        Safe
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    {{ safe }}
+                </div>
+
+                <div class="stat-label mt-1">
+                    Safe Emails
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Suspicious -->
+        <div class="col-xl-3 col-md-6 col-6">
+
+            <div class="stat-card">
+
+                <div class="d-flex justify-content-between align-items-start mb-3">
+
+                    <div class="stat-icon bg-icon-warning">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+
+                    <span class="badge text-bg-warning">
+                        Warning
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    {{ suspicious }}
+                </div>
+
+                <div class="stat-label mt-1">
+                    Suspicious
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Phishing -->
+        <div class="col-xl-3 col-md-6 col-6">
+
+            <div class="stat-card">
+
+                <div class="d-flex justify-content-between align-items-start mb-3">
+
+                    <div class="stat-icon bg-icon-danger">
+                        <i class="fa-solid fa-skull-crossbones"></i>
+                    </div>
+
+                    <span class="badge text-bg-danger">
+                        Threat
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    {{ phishing }}
+                </div>
+
+                <div class="stat-label mt-1">
+                    Phishing Detected
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ANALYTICS
+         ========================= -->
+    <div class="row g-3 mb-4">
+
+        <!-- Accuracy -->
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card-panel p-3">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <div class="stat-label mb-1">
+                            Detection Accuracy
+                        </div>
+
+                        <div class="stat-value">
+
+                            {{ metrics.accuracy * 100 if metrics else '--' }}{{ '%' if metrics }}
+
+                        </div>
+
+                    </div>
+
+                    <div class="analytics-icon">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Threat Percentage -->
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card-panel p-3">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <div class="stat-label mb-1">
+                            Threat Percentage
+                        </div>
+
+                        <div class="stat-value">
+                            {{ threat_percentage }}%
+                        </div>
+
+                    </div>
+
+                    <div class="analytics-icon">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Confidence -->
+        <div class="col-lg-4 col-md-12">
+
+            <div class="card-panel p-3">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <div class="stat-label mb-1">
+                            Avg. Confidence
+                        </div>
+
+                        <div class="stat-value">
+                            {{ avg_confidence }}%
+                        </div>
+
+                    </div>
+
+                    <div class="analytics-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         RECENT DETECTION + MODEL
+         ========================= -->
+    <div class="row g-3">
+
+
+        <!-- Detection History -->
+        <div class="col-lg-8">
+
+            <div class="card-panel overflow-hidden">
+
+                <div class="p-3 border-bottom border-secondary border-opacity-10
+                            d-flex justify-content-between align-items-center">
+
+                    <h5 class="mb-0 text-light">
+                        <i class="fa-solid fa-clock-rotate-left text-primary me-2"></i>
+                        Recent Detection History
+                    </h5>
+
+                    <span class="badge text-bg-dark">
+                        Recent
+                    </span>
+
+                </div>
+
+
+                {% if recent %}
+
+                <div class="table-responsive">
+
+                    <table class="table table-dark-panel align-middle">
+
+                        <thead>
+
+                        <tr>
+                            <th>Date</th>
+                            <th>Subject</th>
+                            <th>Prediction</th>
+                            <th>Risk</th>
+                        </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        {% for d in recent %}
+
+                        <tr>
+
+                            <td class="text-muted small">
+                                {{ d.created_at.strftime('%Y-%m-%d %H:%M') }}
+                            </td>
+
+
+                            <td>
+
+                                <span class="text-light">
+
+                                    {{ d.subject or '(no subject)' }}
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                {% if d.prediction == 'phishing' %}
+
+                                <span class="badge badge-risk-high">
+
+                                    <i class="fa-solid fa-triangle-exclamation me-1"></i>
+                                    Phishing
+
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge badge-risk-low">
+
+                                    <i class="fa-solid fa-circle-check me-1"></i>
+                                    Legitimate
+
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="badge
+                                {{ 'badge-risk-high' if d.risk_level == 'High'
+                                else ('badge-risk-medium' if d.risk_level == 'Medium'
+                                else 'badge-risk-low') }}">
+
+                                    {{ d.risk_level }}
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                {% else %}
+
+                <div class="text-center py-5">
+
+                    <div class="mb-3">
+
+                        <i class="fa-solid fa-envelope-open-text
+                                  fs-1 text-primary opacity-50"></i>
+
+                    </div>
+
+                    <p class="text-muted mb-2">
+                        No detections yet.
+                    </p>
+
+                    <a href="{{ url_for('detection.analyze') }}"
+                       class="btn btn-sm btn-outline-primary">
+
+                        Analyze your first email
+
+                    </a>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             ML MODEL INFO
+             ========================= -->
+        <div class="col-lg-4">
+
+            <div class="card-panel h-100">
+
+                <div class="p-3 border-bottom border-secondary border-opacity-10">
+
+                    <h5 class="mb-0 text-light">
+
+                        <i class="fa-solid fa-microchip text-primary me-2"></i>
+
+                        ML Model Info
+
+                    </h5>
+
+                </div>
+
+
+                <div class="p-3">
+
+                    {% if metrics %}
+
+                    <!-- Algorithm -->
+                    <div class="model-info-item">
+
+                        <div class="model-label">
+                            Algorithm
+                        </div>
+
+                        <div class="model-value">
+                            <i class="fa-solid fa-code text-primary me-1"></i>
+                            {{ metrics.algorithm }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- F1 Score -->
+                    <div class="model-info-item">
+
+                        <div class="model-label">
+                            F1 Score
+                        </div>
+
+                        <div class="model-value">
+                            {{ metrics.f1_score }}
+                        </div>
+
+                    </div>
+
+
+                    <!-- Accuracy -->
+                    <div class="model-info-item">
+
+                        <div class="model-label">
+                            Accuracy
+                        </div>
+
+                        <div class="model-value">
+
+                            {{ metrics.accuracy * 100 }}%
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Model Status -->
+                    <div class="mt-3">
+
+                        {% if model_ready %}
+
+                        <div class="alert alert-success py-2 mb-0">
+
+                            <i class="fa-solid fa-circle-check me-2"></i>
+
+                            ML Model Ready
+
+                        </div>
+
+                        {% else %}
+
+                        <div class="alert alert-warning py-2 mb-0">
+
+                            <i class="fa-solid fa-triangle-exclamation me-2"></i>
+
+                            ML Model Not Ready
+
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    {% else %}
+
+                    <div class="text-center py-4">
+
+                        <i class="fa-solid fa-microchip fs-1
+                                  text-secondary opacity-50 mb-3"></i>
+
+                        <p class="text-muted mb-0">
+                            No trained model metrics available yet.
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Model Metrics{% endblock %}
+{% block content %}
+<h3 class="mb-4"><i class="fa-solid fa-chart-line me-2"></i>Model Metrics</h3>
+<div class="card-panel p-3">
+  {% if metrics %}
+  <div class="table-responsive">
+    <table class="table table-dark-panel align-middle">
+      <thead><tr><th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>Trained At</th></tr></thead>
+      <tbody>
+      {% for m in metrics %}
+        <tr>
+          <td>{{ m.model_name }}</td>
+          <td>{{ (m.accuracy * 100) | round(1) if m.accuracy else '—' }}%</td>
+          <td>{{ (m.precision * 100) | round(1) if m.precision else '—' }}%</td>
+          <td>{{ (m.recall * 100) | round(1) if m.recall else '—' }}%</td>
+          <td>{{ (m.f1_score * 100) | round(1) if m.f1_score else '—' }}%</td>
+          <td class="text-muted small">{{ m.trained_at.strftime('%Y-%m-%d %H:%M') }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="text-muted mb-0">No model metrics recorded yet. Run <code>python scripts/train_model.py</code> to train a model.</p>
+  {% endif %}
+</div>
+{% endblock %}
