@@ -1,12 +1,220 @@
 {% extends "base.html" %}
+
 {% block title %}Profile{% endblock %}
+
 {% block content %}
-<h3 class="mb-4"><i class="fa-solid fa-id-badge me-2"></i>My Profile</h3>
-<div class="card-panel p-4" style="max-width: 500px;">
-  <p><span class="text-muted">Name:</span> {{ current_user.name }}</p>
-  <p><span class="text-muted">Email:</span> {{ current_user.email }}</p>
-  <p><span class="text-muted">Role:</span> {{ current_user.role | capitalize }}</p>
-  <p><span class="text-muted">Member since:</span> {{ current_user.created_at.strftime('%Y-%m-%d') }}</p>
-  <p class="mb-0"><span class="text-muted">Total emails analyzed:</span> {{ total_detections }}</p>
+
+<style>
+
+/* =========================================
+   FULL PROFILE CONTENT AREA
+   Sidebar remains from base.html
+   ========================================= */
+
+.profile-page {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+
+    /* Space from top and sidebar */
+    padding: 24px 24px 40px 24px;
+
+    margin: 0 !important;
+}
+
+
+/* =========================================
+   PROFILE HEADER
+   ========================================= */
+
+.profile-header {
+    width: 100%;
+
+    color: #ffffff !important;
+
+    margin: 0 0 28px 0 !important;
+
+    padding: 0 !important;
+}
+
+.profile-title {
+    color: #ffffff !important;
+
+    font-size: 1.7rem;
+    font-weight: 600;
+
+    margin: 0 !important;
+
+    line-height: 1.4;
+}
+
+.profile-title i {
+    color: #00d4a0 !important;
+}
+
+
+/* =========================================
+   PROFILE MAIN CARD
+   ========================================= */
+
+.profile-card {
+    width: 100%;
+    max-width: none;
+
+    color: #ffffff !important;
+
+    background-color: #121822 !important;
+
+    border: 1px solid #22303f !important;
+
+    border-radius: 10px;
+
+    padding: 28px !important;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   PROFILE INFORMATION
+   ========================================= */
+
+.profile-card p {
+    color: #ffffff !important;
+
+    font-size: 1rem;
+
+    margin-bottom: 20px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   PROFILE LABEL
+   ========================================= */
+
+.profile-card span {
+    color: #00d4a0 !important;
+
+    font-weight: 600;
+
+    margin-right: 5px;
+}
+
+
+/* =========================================
+   LAST ITEM
+   ========================================= */
+
+.profile-card p:last-child {
+    margin-bottom: 0 !important;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .profile-page {
+        padding: 24px 16px 40px 16px;
+    }
+
+    .profile-title {
+        font-size: 1.45rem;
+    }
+
+    .profile-header {
+        margin-bottom: 20px !important;
+    }
+
+    .profile-card {
+        padding: 20px !important;
+    }
+
+    .profile-card p {
+        font-size: 0.9rem;
+    }
+}
+
+</style>
+
+
+<!-- =========================================
+     PROFILE PAGE
+     ========================================= -->
+
+<div class="profile-page">
+
+
+    <!-- =====================================
+         PROFILE HEADER
+         ===================================== -->
+
+    <div class="profile-header">
+
+        <h3 class="profile-title">
+
+            <i class="fa-solid fa-id-badge me-2"></i>
+
+            My Profile
+
+        </h3>
+
+    </div>
+
+
+    <!-- =====================================
+         PROFILE CARD
+         ===================================== -->
+
+    <div class="card-panel profile-card">
+
+
+        <!-- NAME -->
+
+        <p>
+            <span>Name:</span>
+            {{ current_user.name }}
+        </p>
+
+
+        <!-- EMAIL -->
+
+        <p>
+            <span>Email:</span>
+            {{ current_user.email }}
+        </p>
+
+
+        <!-- ROLE -->
+
+        <p>
+            <span>Role:</span>
+            {{ current_user.role | capitalize }}
+        </p>
+
+
+        <!-- MEMBER SINCE -->
+
+        <p>
+            <span>Member since:</span>
+            {{ current_user.created_at.strftime('%Y-%m-%d') }}
+        </p>
+
+
+        <!-- TOTAL EMAILS -->
+
+        <p>
+            <span>Total emails analyzed:</span>
+            {{ total_detections }}
+        </p>
+
+
+    </div>
+
 </div>
+
 {% endblock %}

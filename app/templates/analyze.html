@@ -1,37 +1,500 @@
 {% extends "base.html" %}
+
 {% block title %}Analyze Email{% endblock %}
+
 {% block content %}
-<h3 class="mb-4"><i class="fa-solid fa-magnifying-glass me-2"></i>Analyze Email</h3>
 
-<div class="card-panel p-4">
-  <form method="POST" novalidate>
-    {{ form.hidden_tag() }}
-    <div class="row g-3 mb-3">
-      <div class="col-md-6">
-        {{ form.sender_email.label(class="form-label") }}
-        {{ form.sender_email(class="form-control", placeholder="sender@example.com") }}
-      </div>
-      <div class="col-md-6">
-        {{ form.receiver_email.label(class="form-label") }}
-        {{ form.receiver_email(class="form-control", placeholder="you@example.com") }}
-      </div>
+<style>
+/* =========================================
+   ANALYZE EMAIL PAGE
+   ========================================= */
+
+.analyze-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 3px 18px 40px 18px;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   PAGE HEADER
+   ========================================= */
+
+.analyze-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+    padding: 0 2px;
+}
+
+.analyze-header h3 {
+    margin: 0;
+    color: #f1f5f9;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.analyze-header h3 i {
+    color: #00d4a0;
+    margin-right: 8px;
+}
+
+.analyze-subtitle {
+    margin-top: 5px;
+    margin-bottom: 0;
+
+    color: #8b98a5;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   MAIN ANALYZE CARD
+   ========================================= */
+
+.analyze-card {
+    width: 100%;
+
+    background-color: #121822;
+    border: 1px solid #22303f;
+    border-radius: 12px;
+
+    padding: 24px;
+
+    box-sizing: border-box;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   FORM ROW
+   ========================================= */
+
+.analyze-card .row {
+    --bs-gutter-x: 18px;
+    --bs-gutter-y: 18px;
+}
+
+
+/* =========================================
+   FORM LABELS
+   ========================================= */
+
+.analyze-card .form-label {
+    display: block;
+
+    color: #dbeafe !important;
+
+    font-size: 15px !important;
+    font-weight: 600 !important;
+
+    margin-bottom: 7px;
+}
+
+
+/* =========================================
+   INPUT FIELDS
+   ========================================= */
+
+.analyze-card .form-control {
+    width: 100%;
+
+    background-color: #1a2230 !important;
+
+    border: 1px solid #2b3a4d !important;
+    border-radius: 7px;
+
+    color: #f1f5f9 !important;
+
+    font-size: 15px !important;
+    font-weight: 400 !important;
+
+    padding: 11px 13px;
+
+    min-height: 45px;
+
+    box-shadow: none !important;
+
+    transition: all 0.2s ease;
+}
+
+
+/* =========================================
+   INPUT PLACEHOLDER
+   ========================================= */
+
+.analyze-card .form-control::placeholder {
+    color: #687586 !important;
+
+    opacity: 1 !important;
+
+    font-size: 14px !important;
+}
+
+
+/* =========================================
+   INPUT FOCUS
+   ========================================= */
+
+.analyze-card .form-control:focus {
+    background-color: #1a2230 !important;
+
+    color: #ffffff !important;
+
+    border-color: #00d4a0 !important;
+
+    box-shadow: 0 0 0 3px rgba(0, 212, 160, 0.10) !important;
+
+    outline: none;
+}
+
+
+/* =========================================
+   EMAIL BODY TEXTAREA
+   ========================================= */
+
+.analyze-card textarea.form-control {
+    min-height: 250px;
+
+    height: 250px;
+
+    resize: vertical;
+
+    line-height: 1.6;
+
+    padding: 13px 14px;
+}
+
+
+/* =========================================
+   CHARACTER COUNTER
+   ========================================= */
+
+#body-char-count {
+    color: #718096 !important;
+
+    font-size: 13px !important;
+
+    margin-top: 7px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================
+   ERROR MESSAGE
+   ========================================= */
+
+.analyze-card .text-danger {
+    margin-top: 3px;
+
+    font-size: 13px !important;
+}
+
+
+/* =========================================
+   ANALYZE BUTTON
+   ========================================= */
+
+.analyze-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    background-color: #00d4a0 !important;
+
+    border: 1px solid #00d4a0 !important;
+
+    color: #06231b !important;
+
+    font-size: 15px !important;
+
+    font-weight: 700 !important;
+
+    padding: 11px 20px;
+
+    min-height: 45px;
+
+    border-radius: 7px;
+
+    transition: all 0.2s ease;
+}
+
+.analyze-btn:hover {
+    background-color: #0ea578 !important;
+
+    border-color: #0ea578 !important;
+
+    color: #ffffff !important;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   SECURITY INFORMATION
+   ========================================= */
+
+.analyze-security-note {
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 14px 16px;
+
+    box-sizing: border-box;
+
+    background-color: #1a2230;
+
+    border: 1px solid #22303f;
+
+    border-radius: 8px;
+
+    color: #cbd5e1;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.analyze-security-note i {
+    color: #00d4a0;
+
+    margin-right: 6px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .analyze-page {
+        padding: 18px 12px 30px 12px;
+    }
+
+    .analyze-header h3 {
+        font-size: 24px;
+    }
+
+    .analyze-card {
+        padding: 18px;
+    }
+
+    .analyze-card textarea.form-control {
+        min-height: 220px;
+        height: 220px;
+    }
+}
+</style>
+
+
+<div class="analyze-page">
+
+    <!-- =====================================
+         PAGE HEADER
+         ====================================== -->
+
+    <div class="analyze-header">
+
+        <div>
+            <h3>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Analyze Email
+            </h3>
+
+            <p class="analyze-subtitle">
+                Analyze an email for potential phishing threats using PhishGuard AI.
+            </p>
+        </div>
+
     </div>
-    <div class="mb-3">
-      {{ form.subject.label(class="form-label") }}
-      {{ form.subject(class="form-control", placeholder="Email subject line") }}
+
+
+    <!-- =====================================
+         ANALYZE FORM CARD
+         ====================================== -->
+
+    <div class="analyze-card">
+
+        <form method="POST" novalidate>
+
+            {{ form.hidden_tag() }}
+
+
+            <!-- =================================
+                 SENDER + RECEIVER
+                 ================================== -->
+
+            <div class="row mb-3">
+
+                <!-- Sender Email -->
+
+                <div class="col-md-6">
+
+                    {{ form.sender_email.label(class="form-label") }}
+
+                    {{ form.sender_email(
+                        class="form-control",
+                        placeholder="sender@example.com"
+                    ) }}
+
+                    {% for error in form.sender_email.errors %}
+                        <div class="text-danger small">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Receiver Email -->
+
+                <div class="col-md-6">
+
+                    {{ form.receiver_email.label(class="form-label") }}
+
+                    {{ form.receiver_email(
+                        class="form-control",
+                        placeholder="you@example.com"
+                    ) }}
+
+                    {% for error in form.receiver_email.errors %}
+                        <div class="text-danger small">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 SUBJECT
+                 ================================== -->
+
+            <div class="mb-3">
+
+                {{ form.subject.label(class="form-label") }}
+
+                {{ form.subject(
+                    class="form-control",
+                    placeholder="Enter the email subject line"
+                ) }}
+
+                {% for error in form.subject.errors %}
+                    <div class="text-danger small">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+
+            </div>
+
+
+            <!-- =================================
+                 EMAIL BODY
+                 ================================== -->
+
+            <div class="mb-1">
+
+                {{ form.email_body.label(class="form-label") }}
+
+                {{ form.email_body(
+                    class="form-control",
+                    id="email_body",
+                    rows="10",
+                    placeholder="Paste the full email body here..."
+                ) }}
+
+                {% for error in form.email_body.errors %}
+                    <div class="text-danger small">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+
+            </div>
+
+
+            <!-- =================================
+                 CHARACTER COUNT
+                 ================================== -->
+
+            <div id="body-char-count">
+                0 characters
+            </div>
+
+
+            <!-- =================================
+                 ANALYZE BUTTON
+                 ================================== -->
+
+            <button
+                type="submit"
+                class="btn analyze-btn"
+            >
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Analyze Email
+            </button>
+
+        </form>
+
     </div>
-    <div class="mb-1">
-      {{ form.email_body.label(class="form-label") }}
-      {{ form.email_body(class="form-control", id="email_body", rows="10", placeholder="Paste the full email body here...") }}
-      {% for error in form.email_body.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+
+
+    <!-- =====================================
+         SECURITY INFORMATION
+         ====================================== -->
+
+    <div class="analyze-security-note">
+
+        <i class="fa-solid fa-circle-info"></i>
+
+        <strong>Security Notice:</strong>
+
+        PhishGuard never opens or executes links or attachments.
+        It only analyzes the email text that you provide.
+
     </div>
-    <div class="text-muted small mb-3" id="body-char-count">0 characters</div>
-    <button type="submit" class="btn btn-phishguard"><i class="fa-solid fa-magnifying-glass me-1"></i> Analyze Email</button>
-  </form>
+
 </div>
 
-<div class="alert alert-secondary mt-3 small">
-  <i class="fa-solid fa-circle-info me-1"></i>
-  PhishGuard never opens or executes links/attachments — it only analyzes the text you provide.
-</div>
+
+<!-- =========================================
+     CHARACTER COUNTER JAVASCRIPT
+     ========================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const emailBody = document.getElementById("email_body");
+    const counter = document.getElementById("body-char-count");
+
+    if (!emailBody || !counter) {
+        return;
+    }
+
+    function updateCharacterCount() {
+
+        const length = emailBody.value.length;
+
+        counter.textContent = length + " characters";
+    }
+
+    emailBody.addEventListener("input", updateCharacterCount);
+
+    updateCharacterCount();
+
+});
+
+</script>
+
 {% endblock %}

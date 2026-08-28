@@ -1,11 +1,1133 @@
 {% extends "base.html" %}
+
 {% block title %}About{% endblock %}
+
 {% block content %}
-<h3 class="mb-4"><i class="fa-solid fa-circle-info me-2"></i>About PhishGuard</h3>
-<div class="card-panel p-4">
-  <p>PhishGuard is an AI-powered phishing email detection system built as a final-year cybersecurity project.
-     It combines a TF-IDF + Logistic Regression machine learning model with keyword and URL heuristics
-     to classify emails as legitimate or phishing, and stores results for dashboard analytics and Power BI reporting.</p>
-  <p class="mb-0 text-muted small">PhishGuard never opens, executes, or downloads links/attachments from analyzed emails.</p>
+
+<style>
+
+/* =========================================================
+   ABOUT PAGE
+   ========================================================= */
+
+.about-page {
+    width: 100%;
+    padding: 8px 18px 40px 18px;   /* SMALL TOP MARGIN */
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ABOUT HEADER
+   ========================================================= */
+
+.about-header {
+    width: 100%;
+
+    background: rgba(15, 23, 42, 0.80);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    backdrop-filter: blur(10px);
+
+    box-sizing: border-box;
+
+    margin-bottom: 18px !important;   /* SMALL GAP BELOW HEADER */
+}
+
+.about-header h3 {
+    color: #f8fafc !important;
+
+    font-weight: 700;
+
+    margin: 0;
+}
+
+.about-subtitle {
+    color: #45e207 !important;
+
+    font-size: 14px;
+
+    margin-top: 5px;
+}
+
+
+/* =========================================================
+   ABOUT ICON
+   ========================================================= */
+
+.about-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: rgba(13, 110, 253, 0.12);
+
+    color: #45e207 !important;
+
+    font-size: 20px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   MAIN ABOUT CARDS
+   ========================================================= */
+
+.about-main-row {
+
+    display: flex !important;
+
+    flex-wrap: nowrap !important;
+
+    width: 100% !important;
+
+    gap: 20px !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+}
+
+
+/* Remove Bootstrap column spacing */
+
+.about-main-row > .col-lg-7,
+.about-main-row > .col-lg-5 {
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* Left card */
+
+.about-main-row > .col-lg-7 {
+
+    flex: 0 0 calc(58.333333% - 10px) !important;
+
+    max-width: calc(58.333333% - 10px) !important;
+}
+
+
+/* Right card */
+
+.about-main-row > .col-lg-5 {
+
+    flex: 0 0 calc(41.666667% - 10px) !important;
+
+    max-width: calc(41.666667% - 10px) !important;
+}
+
+
+/* =========================================================
+   ABOUT CARD
+   ========================================================= */
+
+.about-card {
+
+    background: rgba(15, 23, 42, 0.82);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 14px;
+
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    transition: all 0.25s ease;
+}
+
+
+.about-card:hover {
+
+    border-color: rgba(13, 110, 253, 0.35);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   ABOUT CARD TEXT
+   ========================================================= */
+
+.about-card h5,
+.about-card h6 {
+
+    color: #eceaea !important;
+
+    font-weight: 600;
+}
+
+
+.about-card p {
+
+    color: #d6dbe2 !important;
+
+    line-height: 1.7;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ABOUT PROJECT TEXT
+   ========================================================= */
+
+.about-text {
+
+    color: #cbd5e1 !important;
+
+    line-height: 1.8;
+
+    font-size: 14px;
+
+    margin-bottom: 3px;
+}
+
+
+/* =========================================================
+   PROJECT SECURITY NOTE
+   ========================================================= */
+
+.project-note {
+
+    background: #000000 !important;
+
+    color: #ffffff !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+
+    border-radius: 6px;
+
+    padding: 12px 14px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.project-note i {
+
+    color: #45e207 !important;
+}
+
+
+/* =========================================================
+   ML MODEL INFORMATION
+   ========================================================= */
+
+.ml-header {
+
+    padding: 18px 20px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+.ml-content {
+
+    padding: 20px;
+}
+
+
+.info-item {
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+.info-item:last-child {
+
+    border-bottom: none;
+}
+
+
+.info-label {
+
+    color: #94a3b8 !important;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+
+    margin-bottom: 5px;
+}
+
+
+.info-value {
+
+    color: #45e207 !important;
+
+    font-weight: 600;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   ML EMPTY INFORMATION
+   ========================================================= */
+
+.ml-description {
+
+    color: #d6dbe2 !important;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    text-align: center;
+
+    margin: 0;
+}
+
+
+.ml-model-icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 12px auto;
+
+    border-radius: 10px;
+
+    background: rgba(13, 110, 253, 0.12);
+
+    color: #dce3ea !important;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   BOTTOM THREE CARDS
+   ========================================================= */
+
+.about-bottom-row {
+
+    display: flex !important;
+
+    flex-wrap: nowrap !important;
+
+    width: 100% !important;
+
+    gap: 20px !important;
+
+    margin: 18px 0 0 0 !important;
+
+    padding: 0 !important;
+}
+
+
+/* Remove Bootstrap column spacing */
+
+.about-bottom-row > .col-md-4 {
+
+    flex: 1 1 0 !important;
+
+    max-width: none !important;
+
+    width: auto !important;
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* Bottom card */
+
+.about-bottom-row .about-card {
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    min-height: 130px;
+
+    padding: 20px !important;
+}
+
+
+/* =========================================================
+   BOTTOM CARD ICON
+   ========================================================= */
+
+.about-bottom-row .about-icon {
+
+    margin-bottom: 12px;
+}
+
+
+.about-bottom-row h6 {
+
+    font-size: 15px;
+
+    margin-bottom: 7px;
+}
+
+
+.about-bottom-row p {
+
+    color: #bfc7d1 !important;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   BOOTSTRAP ALERT OVERRIDE
+   ========================================================= */
+
+.about-card .alert {
+
+    border-radius: 7px;
+
+    font-size: 13px;
+}
+
+
+.about-card .alert-success {
+
+    background-color: rgba(0, 212, 160, 0.10);
+
+    border-color: rgba(0, 212, 160, 0.25);
+
+    color: #00d4a0 !important;
+}
+
+
+.about-card .alert-success strong {
+
+    color: #00d4a0 !important;
+}
+
+
+.about-card .alert-warning {
+
+    background-color: rgba(255, 176, 32, 0.10);
+
+    border-color: rgba(255, 176, 32, 0.25);
+
+    color: #ffb020 !important;
+}
+
+
+.about-card .alert-warning strong {
+
+    color: #ffb020 !important;
+}
+
+
+/* =========================================================
+   FORCE TEXT COLORS
+   ========================================================= */
+
+.about-card .text-light {
+
+    color: #eceaea !important;
+}
+
+
+.about-card .text-muted {
+
+    color: #b8c1cc !important;
+}
+
+
+.about-card .text-primary {
+
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   DESKTOP LARGE SCREEN
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+    .about-page {
+
+        padding-top: 8px;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .about-header {
+
+        padding: 20px;
+
+        margin-bottom: 18px !important;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .about-page {
+
+        padding-top: 8px;
+    }
+
+    .about-main-row {
+
+        display: block !important;
+    }
+
+
+    .about-main-row > .col-lg-7,
+    .about-main-row > .col-lg-5 {
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        margin-bottom: 20px !important;
+    }
+
+
+    .about-bottom-row {
+
+        display: block !important;
+    }
+
+
+    .about-bottom-row > .col-md-4 {
+
+        width: 100% !important;
+
+        margin-bottom: 20px !important;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    .about-page {
+
+        padding: 8px 12px 30px 12px;
+    }
+
+
+    .about-header {
+
+        padding: 16px;
+
+        margin-bottom: 15px !important;
+    }
+
+
+    .about-header h3 {
+
+        font-size: 1.25rem;
+    }
+
+
+    .about-subtitle {
+
+        font-size: 12px;
+    }
+
+
+    .about-main-row {
+
+        display: block !important;
+
+        width: 100% !important;
+    }
+
+
+    .about-main-row > .col-lg-7,
+    .about-main-row > .col-lg-5 {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        margin-bottom: 20px !important;
+
+        padding: 0 !important;
+    }
+
+
+    .about-bottom-row {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        margin-top: 0 !important;
+    }
+
+
+    .about-bottom-row > .col-md-4 {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        margin-bottom: 20px !important;
+
+        padding: 0 !important;
+    }
+
+
+    .about-card {
+
+        border-radius: 12px;
+    }
+
+
+    .about-card p {
+
+        font-size: 13px;
+    }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     ABOUT PAGE
+     ========================================================= -->
+
+<div class="about-page">
+
+
+    <!-- =====================================================
+         ABOUT HEADER
+         ===================================================== -->
+
+    <div class="about-header">
+
+        <div class="d-flex align-items-center">
+
+            <div class="about-icon me-3">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+            </div>
+
+
+            <div>
+
+                <h3 class="mb-1">
+
+                    About PhishGuard
+
+                </h3>
+
+
+                <div class="about-subtitle">
+
+                    AI-powered phishing email detection system
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN TWO CARDS
+         ===================================================== -->
+
+    <div class="row about-main-row">
+
+
+        <!-- =================================================
+             ABOUT PROJECT
+             ================================================= -->
+
+        <div class="col-lg-7">
+
+            <div class="about-card p-4 h-100">
+
+
+                <h5 class="mb-3">
+
+                    <i class="fa-solid fa-shield-halved me-2"></i>
+
+                    About the Project
+
+                </h5>
+
+
+                <p class="about-text">
+
+                    PhishGuard is an AI-powered phishing email
+                    detection system designed to identify
+                    potentially fraudulent, malicious, or
+                    suspicious emails.
+
+                </p>
+
+
+                <p class="about-text">
+
+                    The system combines Machine Learning,
+                    Natural Language Processing (NLP), keyword
+                    analysis, and URL-based security heuristics
+                    to analyze the content of an email and
+                    determine whether it is Phishing or
+                    Legitimate.
+
+                </p>
+
+
+                <p class="about-text">
+
+                    It is designed as a cybersecurity project
+                    to provide users with a simple and effective
+                    way to analyze suspicious emails without
+                    opening potentially dangerous links or
+                    attachments.
+
+                </p>
+
+
+                <p class="about-text">
+
+                    The main machine learning component of
+                    PhishGuard uses TF-IDF and Logistic
+                    Regression.
+
+                </p>
+
+
+                <p class="about-text">
+
+                    TF-IDF converts the subject and body of an
+                    email into numerical features based on the
+                    importance of words and terms. These
+                    features are then provided to the Logistic
+                    Regression classifier, which predicts
+                    whether the email is phishing or legitimate.
+
+                </p>
+
+
+                <p class="about-text">
+
+                    Along with the ML prediction, the system can
+                    identify suspicious keywords, URLs,
+                    urgency-related language, account-verification
+                    requests, password-related requests, and
+                    other common phishing indicators.
+
+                </p>
+
+
+                <!-- Security Note -->
+
+                <div class="project-note mt-4 mb-0">
+
+                    <i class="fa-solid fa-circle-info me-2"></i>
+
+                    PhishGuard never opens, executes, or
+                    downloads links/attachments from analyzed
+                    emails.
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ML MODEL INFORMATION
+             ================================================= -->
+
+        <div class="col-lg-5">
+
+            <div class="about-card h-100">
+
+
+                <!-- Header -->
+
+                <div class="ml-header">
+
+                    <h5 class="mb-0">
+
+                        <i class="fa-solid fa-microchip me-2"></i>
+
+                        ML Model Information
+
+                    </h5>
+
+                </div>
+
+
+                <!-- Content -->
+
+                <div class="ml-content">
+
+
+                    {% if metrics %}
+
+
+                    <!-- Algorithm -->
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+
+                            Algorithm
+
+                        </div>
+
+
+                        <div class="info-value">
+
+                            <i class="fa-solid fa-code me-2"></i>
+
+                            {{ metrics.algorithm }}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- F1 Score -->
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+
+                            F1 Score
+
+                        </div>
+
+
+                        <div class="info-value">
+
+                            <i class="fa-solid fa-chart-line me-2"></i>
+
+                            {{ metrics.f1_score }}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Accuracy -->
+
+                    <div class="info-item">
+
+                        <div class="info-label">
+
+                            Accuracy
+
+                        </div>
+
+
+                        <div class="info-value">
+
+                            <i class="fa-solid fa-bullseye me-2"></i>
+
+                            {{ (metrics.accuracy * 100) | round(2) }}%
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Model Status -->
+
+                    <div class="mt-4">
+
+
+                        {% if model_ready %}
+
+                        <div class="alert alert-success mb-0">
+
+                            <i class="fa-solid fa-circle-check me-2"></i>
+
+                            <strong>ML Model Ready</strong>
+
+                            <div class="small mt-1">
+
+                                The trained model is available
+                                for email analysis.
+
+                            </div>
+
+                        </div>
+
+
+                        {% else %}
+
+                        <div class="alert alert-warning mb-0">
+
+                            <i class="fa-solid fa-triangle-exclamation me-2"></i>
+
+                            <strong>ML Model Not Ready</strong>
+
+                            <div class="small mt-1">
+
+                                Train the model before analyzing
+                                emails.
+
+                            </div>
+
+                        </div>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                    {% else %}
+
+
+                    <!-- =================================================
+                         NO METRICS - MODEL DESCRIPTION
+                         ================================================= -->
+
+                    <div class="text-center py-2">
+
+
+                        <div class="ml-model-icon">
+
+                            <i class="fa-solid fa-microchip"></i>
+
+                        </div>
+
+
+                        <p class="ml-description">
+
+                            PhishGuard uses a TF-IDF
+                            (Term Frequency-Inverse Document
+                            Frequency) with Logistic Regression
+                            machine learning model to detect
+                            phishing emails.
+
+                        </p>
+
+
+                        <p class="ml-description mt-3">
+
+                            The TF-IDF technique converts email
+                            text into numerical features by
+                            identifying important words and
+                            patterns, while the Logistic Regression
+                            classifier uses these features to
+                            classify emails as Phishing or
+                            Legitimate.
+
+                        </p>
+
+
+                        <p class="ml-description mt-3">
+
+                            In addition to the machine learning
+                            model, PhishGuard uses suspicious
+                            keyword and URL-based heuristics to
+                            identify additional phishing
+                            indicators.
+
+                        </p>
+
+
+                        <p class="ml-description mt-3 mb-0">
+
+                            The model's performance is evaluated
+                            using metrics such as Accuracy and
+                            F1 Score.
+
+                        </p>
+
+
+                    </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         BOTTOM THREE CARDS
+         ===================================================== -->
+
+    <div class="row about-bottom-row">
+
+
+        <!-- =================================================
+             MACHINE LEARNING
+             ================================================= -->
+
+        <div class="col-md-4">
+
+            <div class="about-card p-4 h-100">
+
+
+                <div class="about-icon">
+
+                    <i class="fa-brands fa-python"></i>
+
+                </div>
+
+
+                <h6 class="mt-3">
+
+                    Machine Learning
+
+                </h6>
+
+
+                <p>
+
+                    TF-IDF and Logistic Regression are used
+                    for phishing email classification.
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SECURITY HEURISTICS
+             ================================================= -->
+
+        <div class="col-md-4">
+
+            <div class="about-card p-4 h-100">
+
+
+                <div class="about-icon">
+
+                    <i class="fa-solid fa-link"></i>
+
+                </div>
+
+
+                <h6 class="mt-3">
+
+                    Security Heuristics
+
+                </h6>
+
+
+                <p>
+
+                    Keyword and URL-based heuristics provide
+                    additional phishing threat indicators.
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ANALYTICS
+             ================================================= -->
+
+        <div class="col-md-4">
+
+            <div class="about-card p-4 h-100">
+
+
+                <div class="about-icon">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                </div>
+
+
+                <h6 class="mt-3">
+
+                    Analytics
+
+                </h6>
+
+
+                <p>
+
+                    Detection results are stored for dashboard
+                    analytics and Power BI reporting.
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
 </div>
+
+
 {% endblock %}

@@ -1,77 +1,754 @@
 {% extends "base.html" %}
+
 {% block title %}Detection History{% endblock %}
+
 {% block content %}
-<h3 class="mb-4"><i class="fa-solid fa-clock-rotate-left me-2"></i>Detection History</h3>
 
-<div class="card-panel p-3 mb-3">
-  <form method="GET" class="row g-2 align-items-end">
-    <div class="col-md-5">
-      <label class="form-label small text-muted">Search subject/sender</label>
-      <input type="text" name="q" value="{{ search }}" class="form-control" placeholder="Search...">
-    </div>
-    <div class="col-md-3">
-      <label class="form-label small text-muted">Prediction</label>
-      <select name="prediction" class="form-select">
-        <option value="" {{ 'selected' if not prediction_filter }}>All</option>
-        <option value="phishing" {{ 'selected' if prediction_filter == 'phishing' }}>Phishing</option>
-        <option value="legitimate" {{ 'selected' if prediction_filter == 'legitimate' }}>Legitimate</option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-phishguard w-100">Filter</button>
-    </div>
-    <div class="col-md-2">
-      <a href="{{ url_for('detection.history') }}" class="btn btn-outline-secondary w-100">Reset</a>
-    </div>
-  </form>
-</div>
+<style>
 
-<div class="card-panel p-3">
-  {% if detections %}
-  <div class="table-responsive">
-    <table class="table table-dark-panel align-middle">
-      <thead><tr><th>Date</th><th>Sender</th><th>Subject</th><th>Prediction</th><th>Confidence</th><th>Risk</th><th></th></tr></thead>
-      <tbody>
-      {% for d in detections %}
-        <tr>
-          <td class="text-muted small">{{ d.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
-          <td>{{ d.sender_email or '—' }}</td>
-          <td>{{ d.subject or '(no subject)' }}</td>
-          <td>
-            {% if d.prediction == 'phishing' %}
-              <span class="badge badge-risk-high">Phishing</span>
-            {% else %}
-              <span class="badge badge-risk-low">Legitimate</span>
-            {% endif %}
-          </td>
-          <td>{{ (d.confidence * 100) | round(1) }}%</td>
-          <td><span class="badge {{ 'badge-risk-high' if d.risk_level == 'High' else ('badge-risk-medium' if d.risk_level == 'Medium' else 'badge-risk-low') }}">{{ d.risk_level }}</span></td>
-          <td><a href="{{ url_for('detection.result', detection_id=d.id) }}" class="btn btn-sm btn-outline-light">View</a></td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
+/* =========================================
+   HISTORY PAGE
+   ========================================= */
 
-  <nav>
-    <ul class="pagination justify-content-center mt-3">
-      {% if pagination.has_prev %}
-      <li class="page-item"><a class="page-link" href="{{ url_for('detection.history', page=pagination.prev_num, q=search, prediction=prediction_filter) }}">Previous</a></li>
-      {% endif %}
-      {% for p in pagination.iter_pages() %}
-        {% if p %}
-          <li class="page-item {{ 'active' if p == pagination.page }}"><a class="page-link" href="{{ url_for('detection.history', page=p, q=search, prediction=prediction_filter) }}">{{ p }}</a></li>
+.history-page {
+    width: 100%;
+    box-sizing: border-box;
+
+    /* TOP | RIGHT | BOTTOM | LEFT */
+    padding: 24px 24px 40px 24px;
+
+    margin: 0 !important;
+}
+
+
+/* =========================================
+   PAGE TITLE
+   ========================================= */
+
+.history-title {
+    color: #ffffff !important;
+    font-size: 1.7rem;
+    font-weight: 600;
+
+    /* Space below title */
+    margin: 0 0 28px 0 !important;
+
+    /* Space between sidebar and icon */
+    padding-left: 0 !important;
+
+    line-height: 1.4;
+}
+
+.history-title i {
+    color: #00d4a0 !important;
+}
+
+
+/* =========================================
+   SEARCH / FILTER CARD
+   ========================================= */
+
+.history-filter-card {
+    background-color: #121822 !important;
+    border: 1px solid #22303f !important;
+    border-radius: 10px;
+
+    padding: 18px !important;
+
+    margin-bottom: 24px !important;
+}
+
+.history-search label {
+    color: #ffffff !important;
+    font-size: 0.9rem;
+    margin-bottom: 7px;
+}
+
+.history-search input,
+.history-search select {
+    color: #ffffff !important;
+    background-color: #1a2434 !important;
+
+    border: 1px solid #22303f !important;
+
+    height: 42px;
+}
+
+.history-search input::placeholder {
+    color: #ffffff !important;
+    opacity: 0.65;
+}
+
+.history-search input:focus,
+.history-search select:focus {
+    color: #ffffff !important;
+    background-color: #1a2434 !important;
+
+    border-color: #00d4a0 !important;
+
+    box-shadow:
+        0 0 0 0.15rem
+        rgba(0, 212, 160, 0.15) !important;
+}
+
+.history-search select option {
+    color: #ffffff;
+    background-color: #1a2434;
+}
+
+
+/* =========================================
+   FILTER BUTTON
+   ========================================= */
+
+.history-search .btn-phishguard {
+    height: 42px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   RESET BUTTON
+   ========================================= */
+
+.history-search .btn-outline-secondary {
+    height: 42px;
+
+    color: #b8c1cc;
+    border-color: #526070;
+}
+
+.history-search .btn-outline-secondary:hover {
+    background-color: #1a2434;
+
+    color: #ffffff;
+
+    border-color: #00d4a0;
+}
+
+
+/* =========================================
+   HISTORY TABLE CARD
+   ========================================= */
+
+.history-table-card {
+    background-color: #121822 !important;
+
+    border: 1px solid #22303f !important;
+
+    border-radius: 10px;
+
+    padding: 16px !important;
+
+    margin-top: 0 !important;
+}
+
+
+/* =========================================
+   TABLE WRAPPER
+   ========================================= */
+
+.history-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+/* =========================================
+   HISTORY TABLE
+   ========================================= */
+
+.history-table {
+    width: 100%;
+
+    margin-bottom: 0 !important;
+
+    color: #ffffff !important;
+}
+
+.history-table thead th {
+    color: #b8c1cc !important;
+
+    background-color: #121822 !important;
+
+    border-bottom: 1px solid #263444 !important;
+
+    font-size: 0.82rem;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    padding: 13px 10px !important;
+
+    white-space: nowrap;
+}
+
+.history-table tbody td {
+    color: #dce3ea !important;
+
+    background-color: #121822 !important;
+
+    border-bottom: 1px solid #22303f !important;
+
+    padding: 14px 10px !important;
+
+    vertical-align: middle;
+}
+
+.history-table tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+.history-table tbody tr:hover td {
+    background-color: #182130 !important;
+}
+
+
+/* =========================================
+   DATE
+   ========================================= */
+
+.history-date {
+    color: #b8c1cc !important;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   SUBJECT
+   ========================================= */
+
+.history-subject {
+    color: #ffffff !important;
+
+    min-width: 250px;
+}
+
+
+/* =========================================
+   SENDER
+   ========================================= */
+
+.history-sender {
+    color: #b8c1cc !important;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   BADGES
+   ========================================= */
+
+.badge-risk-high {
+    background-color: #ff5470 !important;
+    color: #ffffff !important;
+}
+
+.badge-risk-medium {
+    background-color: #ffb020 !important;
+    color: #111111 !important;
+}
+
+.badge-risk-low {
+    background-color: #00d4a0 !important;
+    color: #063d2f !important;
+}
+
+.history-table .badge {
+    padding: 5px 9px;
+
+    font-size: 0.75rem;
+
+    font-weight: 600;
+
+    border-radius: 6px;
+}
+
+
+/* =========================================
+   VIEW BUTTON
+   ========================================= */
+
+.history-view-btn {
+    color: #ffffff !important;
+
+    border: 1px solid #526070 !important;
+
+    background: transparent !important;
+
+    padding: 5px 12px;
+
+    font-size: 0.8rem;
+
+    border-radius: 5px;
+}
+
+.history-view-btn:hover {
+    color: #00d4a0 !important;
+
+    border-color: #00d4a0 !important;
+
+    background-color:
+        rgba(0, 212, 160, 0.08) !important;
+}
+
+
+/* =========================================
+   PAGINATION
+   ========================================= */
+
+.history-pagination {
+    margin-top: 18px !important;
+
+    margin-bottom: 0 !important;
+}
+
+.history-pagination .page-link {
+    background-color: #1a2434;
+
+    color: #ffffff;
+
+    border: 1px solid #22303f;
+
+    margin: 0 2px;
+
+    border-radius: 5px;
+}
+
+.history-pagination .page-link:hover {
+    background-color: #00d4a0;
+
+    color: #06231b;
+
+    border-color: #00d4a0;
+}
+
+.history-pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+
+    border-color: #0d6efd;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   NO RECORDS
+   ========================================= */
+
+.no-history {
+    color: #8b98a5 !important;
+
+    padding: 20px 5px;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .history-page {
+        padding: 24px 16px 40px 16px;
+    }
+
+    .history-title {
+        font-size: 1.45rem;
+
+        margin-bottom: 20px !important;
+    }
+
+    .history-filter-card,
+    .history-table-card {
+        padding: 12px !important;
+    }
+
+    .history-search .col-md-5,
+    .history-search .col-md-3,
+    .history-search .col-md-2 {
+        width: 100%;
+    }
+}
+
+</style>
+
+
+<div class="history-page">
+
+    <!-- =========================================
+         PAGE TITLE
+         ========================================= -->
+
+    <h3 class="history-title">
+        <i class="fa-solid fa-clock-rotate-left me-2"></i>
+        Detection History
+    </h3>
+
+
+    <!-- =========================================
+         SEARCH / FILTER SECTION
+         ========================================= -->
+
+    <div class="history-filter-card">
+
+        <form method="GET"
+              class="row g-3 align-items-end history-search">
+
+            <!-- Search -->
+
+            <div class="col-md-5">
+
+                <label class="form-label">
+                    Search subject/sender
+                </label>
+
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ search }}"
+                    class="form-control"
+                    placeholder="Search..."
+                >
+
+            </div>
+
+
+            <!-- Prediction -->
+
+            <div class="col-md-3">
+
+                <label class="form-label">
+                    Prediction
+                </label>
+
+                <select
+                    name="prediction"
+                    class="form-select"
+                >
+
+                    <option
+                        value=""
+                        {% if not prediction_filter %}selected{% endif %}
+                    >
+                        All
+                    </option>
+
+                    <option
+                        value="phishing"
+                        {% if prediction_filter == 'phishing' %}
+                            selected
+                        {% endif %}
+                    >
+                        Phishing
+                    </option>
+
+                    <option
+                        value="legitimate"
+                        {% if prediction_filter == 'legitimate' %}
+                            selected
+                        {% endif %}
+                    >
+                        Legitimate
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Filter -->
+
+            <div class="col-md-2">
+
+                <button
+                    type="submit"
+                    class="btn btn-phishguard w-100"
+                >
+                    <i class="fa-solid fa-filter me-1"></i>
+                    Filter
+                </button>
+
+            </div>
+
+
+            <!-- Reset -->
+
+            <div class="col-md-2">
+
+                <a
+                    href="{{ url_for('detection.history') }}"
+                    class="btn btn-outline-secondary w-100"
+                >
+                    <i class="fa-solid fa-rotate-left me-1"></i>
+                    Reset
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- =========================================
+         DETECTION HISTORY TABLE
+         ========================================= -->
+
+    <div class="history-table-card">
+
+        {% if detections %}
+
+        <div class="history-table-wrapper">
+
+            <table class="table history-table align-middle">
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Sender</th>
+                        <th>Subject</th>
+                        <th>Prediction</th>
+                        <th>Confidence</th>
+                        <th>Risk</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                {% for d in detections %}
+
+                    <tr>
+
+                        <!-- Date -->
+
+                        <td class="history-date small">
+                            {{ d.created_at.strftime('%Y-%m-%d %H:%M') }}
+                        </td>
+
+
+                        <!-- Sender -->
+
+                        <td class="history-sender">
+                            {{ d.sender_email or '—' }}
+                        </td>
+
+
+                        <!-- Subject -->
+
+                        <td class="history-subject">
+                            {{ d.subject or '(no subject)' }}
+                        </td>
+
+
+                        <!-- Prediction -->
+
+                        <td>
+
+                            {% if d.prediction == 'phishing' %}
+
+                                <span class="badge badge-risk-high">
+
+                                    <i class="fa-solid fa-triangle-exclamation me-1"></i>
+
+                                    Phishing
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge badge-risk-low">
+
+                                    <i class="fa-solid fa-circle-check me-1"></i>
+
+                                    Legitimate
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- Confidence -->
+
+                        <td>
+                            {{ (d.confidence * 100) | round(1) }}%
+                        </td>
+
+
+                        <!-- Risk -->
+
+                        <td>
+
+                            <span
+                                class="badge
+                                {{
+                                    'badge-risk-high'
+                                    if d.risk_level == 'High'
+                                    else
+                                    (
+                                        'badge-risk-medium'
+                                        if d.risk_level == 'Medium'
+                                        else
+                                        'badge-risk-low'
+                                    )
+                                }}"
+                            >
+
+                                {{ d.risk_level }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- View -->
+
+                        <td>
+
+                            <a
+                                href="{{ url_for(
+                                    'detection.result',
+                                    detection_id=d.id
+                                ) }}"
+                                class="btn btn-sm history-view-btn"
+                            >
+
+                                <i class="fa-solid fa-eye me-1"></i>
+
+                                View
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- =========================================
+             PAGINATION
+             ========================================= -->
+
+        <nav>
+
+            <ul class="pagination justify-content-center history-pagination">
+
+                {% if pagination.has_prev %}
+
+                    <li class="page-item">
+
+                        <a
+                            class="page-link"
+                            href="{{ url_for(
+                                'detection.history',
+                                page=pagination.prev_num,
+                                q=search,
+                                prediction=prediction_filter
+                            ) }}"
+                        >
+                            Previous
+                        </a>
+
+                    </li>
+
+                {% endif %}
+
+
+                {% for p in pagination.iter_pages() %}
+
+                    {% if p %}
+
+                        <li
+                            class="page-item
+                            {% if p == pagination.page %}active{% endif %}"
+                        >
+
+                            <a
+                                class="page-link"
+                                href="{{ url_for(
+                                    'detection.history',
+                                    page=p,
+                                    q=search,
+                                    prediction=prediction_filter
+                                ) }}"
+                            >
+                                {{ p }}
+                            </a>
+
+                        </li>
+
+                    {% else %}
+
+                        <li class="page-item disabled">
+
+                            <span class="page-link">
+                                …
+                            </span>
+
+                        </li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+                {% if pagination.has_next %}
+
+                    <li class="page-item">
+
+                        <a
+                            class="page-link"
+                            href="{{ url_for(
+                                'detection.history',
+                                page=pagination.next_num,
+                                q=search,
+                                prediction=prediction_filter
+                            ) }}"
+                        >
+                            Next
+                        </a>
+
+                    </li>
+
+                {% endif %}
+
+            </ul>
+
+        </nav>
+
+
         {% else %}
-          <li class="page-item disabled"><span class="page-link">…</span></li>
+
+            <p class="no-history">
+
+                <i class="fa-solid fa-circle-info me-2"></i>
+
+                No detection records found.
+
+            </p>
+
         {% endif %}
-      {% endfor %}
-      {% if pagination.has_next %}
-      <li class="page-item"><a class="page-link" href="{{ url_for('detection.history', page=pagination.next_num, q=search, prediction=prediction_filter) }}">Next</a></li>
-      {% endif %}
-    </ul>
-  </nav>
-  {% else %}
-  <p class="text-muted mb-0">No detection records found.</p>
-  {% endif %}
+
+    </div>
+
 </div>
+
 {% endblock %}

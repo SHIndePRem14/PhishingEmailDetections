@@ -3,20 +3,33 @@
     --bg-panel: #121822;
     --bg-panel-light: #1a2230;
     --border-color: #22303f;
+
     --accent: #00d4a0;
     --accent-soft: #0ea578;
+
     --danger: #ff5470;
     --warning: #ffb020;
     --safe: #00d4a0;
-    --text-main: #e6edf3;
+
+    --text-main: #93b392;
     --text-muted: #8b98a5;
 }
+
+
+/* =========================================
+   GLOBAL
+   ========================================= */
 
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: "Segoe UI", Roboto, sans-serif;
 }
+
+
+/* =========================================
+   NAVBAR
+   ========================================= */
 
 .navbar-phishguard {
     background-color: var(--bg-panel);
@@ -38,11 +51,21 @@ body {
     color: var(--text-main);
 }
 
+
+/* =========================================
+   GENERAL CARDS
+   ========================================= */
+
 .card-panel {
     background-color: var(--bg-panel);
     border: 1px solid var(--border-color);
     border-radius: 10px;
 }
+
+
+/* =========================================
+   STAT CARDS
+   ========================================= */
 
 .stat-card {
     background-color: var(--bg-panel);
@@ -50,6 +73,7 @@ body {
     border-radius: 12px;
     padding: 1.25rem;
     height: 100%;
+    box-sizing: border-box;
 }
 
 .stat-card .stat-value {
@@ -64,24 +88,66 @@ body {
     letter-spacing: 0.5px;
 }
 
+
+/* =========================================
+   STAT ICONS
+   ========================================= */
+
 .stat-icon {
     width: 46px;
     height: 46px;
     border-radius: 10px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 1.2rem;
 }
 
-.bg-icon-safe { background: rgba(0,212,160,0.15); color: var(--safe); }
-.bg-icon-danger { background: rgba(255,84,112,0.15); color: var(--danger); }
-.bg-icon-warning { background: rgba(255,176,32,0.15); color: var(--warning); }
-.bg-icon-accent { background: rgba(0,212,160,0.15); color: var(--accent); }
+.bg-icon-safe {
+    background: rgba(0, 212, 160, 0.15);
+    color: var(--safe);
+}
 
-.badge-risk-high { background-color: var(--danger); }
-.badge-risk-medium { background-color: var(--warning); color: #1a1a1a; }
-.badge-risk-low { background-color: var(--safe); color: #063d2f; }
+.bg-icon-danger {
+    background: rgba(255, 84, 112, 0.15);
+    color: var(--danger);
+}
+
+.bg-icon-warning {
+    background: rgba(255, 176, 32, 0.15);
+    color: var(--warning);
+}
+
+.bg-icon-accent {
+    background: rgba(0, 212, 160, 0.15);
+    color: var(--accent);
+}
+
+
+/* =========================================
+   RISK BADGES
+   ========================================= */
+
+.badge-risk-high {
+    background-color: var(--danger);
+}
+
+.badge-risk-medium {
+    background-color: var(--warning);
+    color: #1a1a1a;
+}
+
+.badge-risk-low {
+    background-color: var(--safe);
+    color: #063d2f;
+}
+
+
+/* =========================================
+   TABLE
+   ========================================= */
 
 .table-dark-panel {
     --bs-table-bg: var(--bg-panel);
@@ -89,91 +155,987 @@ body {
     --bs-table-border-color: var(--border-color);
 }
 
+
+/* =========================================
+   SIDEBAR
+   ========================================= */
+
 .sidebar {
     background-color: var(--bg-panel);
+
     border-right: 1px solid var(--border-color);
-    min-height: calc(100vh - 56px);
+
+    min-height: 100vh;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar .nav-link {
     color: var(--text-muted);
+
+    font-size: 22px !important;
+    font-weight: 500;
+
     padding: 0.6rem 1rem;
+
     border-radius: 6px;
+
     margin-bottom: 2px;
+
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link i {
+    font-size: 15px !important;
 }
 
 .sidebar .nav-link.active,
 .sidebar .nav-link:hover {
     background-color: var(--bg-panel-light);
     color: var(--accent);
+
+    transform: translateX(2px);
 }
+
+
+/* =========================================
+   SIDEBAR LOGOUT
+   ========================================= */
+
+.sidebar-logout {
+    margin-top: auto;
+
+    width: 100%;
+
+    padding: 15px 16px 20px 16px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    color: #ff5470 !important;
+
+    font-size: 20px !important;
+    font-weight: 600;
+
+    transition: all 0.25s ease;
+}
+
+.logout-link i {
+    font-size: 18px !important;
+
+    width: 22px;
+
+    text-align: center;
+}
+
+.logout-link:hover {
+    background-color: rgba(255, 84, 112, 0.12);
+
+    color: #ff7185 !important;
+
+    transform: translateX(3px);
+}
+
+
+/* =========================================
+   PHISHGUARD BUTTON
+   ========================================= */
 
 .btn-phishguard {
     background-color: var(--accent);
+
     border-color: var(--accent);
+
     color: #06231b;
+
     font-weight: 600;
 }
 
 .btn-phishguard:hover {
     background-color: var(--accent-soft);
+
     border-color: var(--accent-soft);
+
     color: #06231b;
 }
 
+
+/* =========================================
+   KEYWORD CHIP
+   ========================================= */
+
 .keyword-chip {
     display: inline-block;
-    background-color: rgba(255,176,32,0.15);
+
+    background-color: rgba(255, 176, 32, 0.15);
+
     color: var(--warning);
-    border: 1px solid rgba(255,176,32,0.3);
+
+    border: 1px solid rgba(255, 176, 32, 0.3);
+
     border-radius: 20px;
+
     padding: 0.25rem 0.75rem;
+
     margin: 0.15rem;
+
     font-size: 0.85rem;
 }
 
+
+/* =========================================
+   URL CHIP
+   ========================================= */
+
 .url-chip {
     display: inline-block;
-    background-color: rgba(255,84,112,0.12);
+
+    background-color: rgba(255, 84, 112, 0.12);
+
     color: var(--danger);
-    border: 1px solid rgba(255,84,112,0.3);
+
+    border: 1px solid rgba(255, 84, 112, 0.3);
+
     border-radius: 6px;
+
     padding: 0.25rem 0.6rem;
+
     margin: 0.15rem;
+
     font-size: 0.8rem;
+
     word-break: break-all;
 }
 
+
+/* =========================================
+   LOGIN PAGE
+   DO NOT CHANGE
+   ========================================= */
+
 .auth-wrapper {
     min-height: 100vh;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    background: radial-gradient(circle at top, #14202b 0%, #0b0f14 70%);
+
+    background: radial-gradient(
+        circle at top,
+        #14202b 0%,
+        #0b0f14 70%
+    );
 }
 
 .auth-card {
     background-color: var(--bg-panel);
+
     border: 1px solid var(--border-color);
+
     border-radius: 14px;
+
     padding: 2.5rem;
+
     width: 100%;
+
     max-width: 420px;
 }
 
-.form-control, .form-select {
+
+/* =========================================
+   FORM CONTROL
+   ========================================= */
+
+.form-control,
+.form-select {
     background-color: var(--bg-panel-light);
+
     border: 1px solid var(--border-color);
+
     color: var(--text-main);
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
     background-color: var(--bg-panel-light);
+
     color: var(--text-main);
+
     border-color: var(--accent);
-    box-shadow: 0 0 0 0.2rem rgba(0,212,160,0.15);
+
+    box-shadow: 0 0 0 0.2rem rgba(39, 178, 212, 0.15);
 }
 
-.result-card-safe { border-left: 5px solid var(--safe); }
-.result-card-danger { border-left: 5px solid var(--danger); }
-.result-card-warning { border-left: 5px solid var(--warning); }
+
+/* =========================================
+   RESULT CARDS
+   ========================================= */
+
+.result-card-safe {
+    border-left: 5px solid var(--safe);
+}
+
+.result-card-danger {
+    border-left: 5px solid var(--danger);
+}
+
+.result-card-warning {
+    border-left: 5px solid var(--warning);
+}
+
+
+/* =========================================
+   ABOUT PAGE
+   ========================================= */
+
+.about-card {
+    background: rgba(15, 23, 42, 0.82);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 16px;
+
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    box-sizing: border-box;
+}
+
+.about-card * {
+    color: #eceaea !important;
+}
+
+.about-card:hover {
+    border-color: rgba(13, 110, 253, 0.25);
+}
+
+
+/* =========================================
+   ABOUT HEADER
+   ========================================= */
+
+.about-header {
+    background: rgba(15, 23, 42, 0.80);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    backdrop-filter: blur(10px);
+}
+
+.about-header h3 {
+    color: #f8fafc !important;
+
+    font-weight: 700;
+}
+
+.about-subtitle {
+    color: #45e207 !important;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   ABOUT ICON
+   ========================================= */
+
+.about-icon {
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: rgba(13, 110, 253, 0.12);
+
+    color: #4ff50d !important;
+
+    font-size: 20px;
+}
+
+
+/* =========================================
+   ABOUT TEXT
+   ========================================= */
+
+.about-text {
+    color: #cbd5e1 !important;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================
+   ML INFORMATION
+   ========================================= */
+
+.info-item {
+    padding: 14px 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: #64748b !important;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+
+    margin-bottom: 5px;
+}
+
+.info-value {
+    color: #36f806 !important;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   PROJECT SECURITY NOTE
+   ========================================= */
+
+.project-note {
+    background: #000000 !important;
+
+    color: #ffffff !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+
+    border-radius: 6px;
+
+    padding: 14px 16px;
+
+    font-size: 14px;
+}
+
+.project-note i {
+    color: #45e207 !important;
+}
+
+
+/* =================================================
+   LOGIN PAGE - BIG FONT
+   ================================================= */
+
+.auth-card h3 {
+    font-size: 2.5rem !important;
+
+    font-weight: 700 !important;
+}
+
+.auth-card .auth-subtitle {
+    font-size: 1.15rem !important;
+}
+
+.auth-card .form-label {
+    font-size: 1.15rem !important;
+
+    font-weight: 600 !important;
+}
+
+.auth-card .form-control {
+    font-size: 1.15rem !important;
+
+    padding: 0.85rem 1rem !important;
+
+    min-height: 50px;
+}
+
+.auth-card .form-control::placeholder {
+    font-size: 1.2rem !important;
+}
+
+.auth-card .btn-phishguard {
+    font-size: 1.2rem !important;
+
+    font-weight: 700 !important;
+
+    padding: 0.85rem 0 !important;
+
+    min-height: 50px;
+}
+
+.auth-card .auth-register {
+    font-size: 1rem !important;
+}
+
+.auth-card .auth-register a {
+    font-size: 1rem !important;
+
+    font-weight: 600 !important;
+}
+
+
+/* =================================================
+   LOGIN INPUT FONT FIX
+   ================================================= */
+
+.auth-card input.form-control {
+    font-family: "Segoe UI", Roboto, sans-serif !important;
+
+    font-size: 18px !important;
+
+    font-weight: 500 !important;
+
+    line-height: 1.5 !important;
+
+    height: 52px !important;
+
+    padding: 10px 14px !important;
+
+    color: #111827 !important;
+
+    background-color: #eef1f7 !important;
+}
+
+.auth-card input.form-control::placeholder {
+    font-family: "Segoe UI", Roboto, sans-serif !important;
+
+    font-size: 18px !important;
+
+    font-weight: 500 !important;
+
+    color: #555f6d !important;
+
+    opacity: 1 !important;
+}
+
+.auth-card input[type="email"] {
+    font-size: 18px !important;
+}
+
+.auth-card input[type="password"] {
+    font-size: 18px !important;
+}
+
+.auth-card .form-control,
+.auth-card .form-control:hover,
+.auth-card .form-control:focus,
+.auth-card .form-control:active {
+    font-size: 1.2rem !important;
+
+    font-family: inherit !important;
+
+    font-weight: 400 !important;
+
+    line-height: 1.5 !important;
+}
+
+
+/* ==========================================================
+   DASHBOARD CARD SPACING
+   ========================================================== */
+
+.dashboard-container .dashboard-cards-row {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-left: 0 !important;
+
+    margin-right: 0 !important;
+}
+
+.dashboard-container .dashboard-cards-row > [class*="col-"] {
+    padding-left: 0 !important;
+
+    padding-right: 0 !important;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   4 STAT CARDS - DESKTOP
+   ========================================================== */
+
+@media (min-width: 1200px) {
+
+    .dashboard-container .dashboard-cards-row .col-xl-3 {
+        flex: 0 0 calc(25% - 9px);
+
+        max-width: calc(25% - 9px);
+    }
+
+}
+
+
+/* ==========================================================
+   3 ANALYTICS CARDS - DESKTOP
+   ========================================================== */
+
+@media (min-width: 992px) {
+
+    .dashboard-container .dashboard-cards-row .col-lg-4 {
+        flex: 0 0 calc(33.333333% - 8px);
+
+        max-width: calc(33.333333% - 8px);
+    }
+
+}
+
+
+/* ==========================================================
+   TABLET
+   ========================================================== */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+
+    .dashboard-container .dashboard-cards-row .col-md-6 {
+        flex: 0 0 calc(50% - 6px);
+
+        max-width: calc(50% - 6px);
+    }
+
+}
+
+
+/* ==========================================================
+   FULL WIDTH DETECTION HISTORY
+   ========================================================== */
+
+.dashboard-container .dashboard-cards-row .col-12 {
+    flex: 0 0 100%;
+
+    max-width: 100%;
+}
+
+
+/* ==========================================================
+   CARD BOX SIZING
+   ========================================================== */
+
+.dashboard-container .stat-card,
+.dashboard-container .card-panel {
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   ANALYTICS / RECENT HISTORY
+   ========================================================== */
+
+.dashboard-container .analytics-row {
+    margin-bottom: 18px !important;
+}
+
+.dashboard-container .recent-history-card {
+    margin-top: 20px !important;
+
+    margin-bottom: 20px !important;
+}
+
+
+/* ==========================================================
+   DASHBOARD TOP SPACE
+   ========================================================== */
+
+.dashboard-container {
+    padding-top: 20px !important;
+}
+
+
+/* ==========================================================
+   EXTRA SPACE BEFORE SUBJECT
+   ========================================================== */
+
+.analyze-card .mb-3:nth-of-type(2) {
+    margin-top: 10px !important;
+}
+
+
+/* ==========================================================
+   HISTORY PAGE
+   ========================================================== */
+
+.history-page {
+    width: 100%;
+
+    padding-top: 25px;
+
+    padding-left: 25px;
+
+    padding-right: 0;
+
+    padding-bottom: 40px;
+}
+
+.history-title {
+    margin: 0 0 22px 0 !important;
+
+    padding-left: 0 !important;
+}
+
+
+/* ==========================================================
+   ABOUT PAGE - MAIN CARDS GAP
+   ========================================================== */
+
+.about-main-row {
+    display: flex !important;
+
+    flex-wrap: nowrap;
+
+    gap: 20px !important;
+
+    margin: 0 !important;
+}
+
+
+/* Remove Bootstrap column gutters */
+
+.about-main-row > .col-lg-7,
+.about-main-row > .col-lg-5 {
+    padding: 0 !important;
+
+    box-sizing: border-box;
+}
+
+
+/* Left card */
+
+.about-main-row > .col-lg-7 {
+    flex: 0 0 calc(58.333333% - 10px);
+
+    max-width: calc(58.333333% - 10px);
+}
+
+
+/* Right card */
+
+.about-main-row > .col-lg-5 {
+    flex: 0 0 calc(41.666667% - 10px);
+
+    max-width: calc(41.666667% - 10px);
+}
+
+
+/* ==========================================================
+   ABOUT PAGE - BOTTOM CARDS
+   ========================================================== */
+
+.about-bottom-row {
+    display: flex !important;
+
+    flex-wrap: nowrap;
+
+    gap: 20px !important;
+
+    margin: 20px 0 0 0 !important;
+}
+
+.about-bottom-row > .col-md-4 {
+    padding: 0 !important;
+
+    flex: 1 1 0;
+
+    max-width: none;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   ABOUT PAGE - CARD WIDTH
+   ========================================================== */
+
+.about-main-row .about-card,
+.about-bottom-row .about-card {
+    width: 100%;
+
+    height: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   ABOUT PAGE - EXTRA FALLBACK
+   ========================================================== */
+
+/*
+   This makes the gap work even if the HTML still has
+   <div class="row g-4"> instead of .about-main-row.
+*/
+
+.row:has(> .col-lg-7 .about-card) {
+    display: flex !important;
+
+    flex-wrap: nowrap;
+
+    gap: 20px !important;
+
+    margin-left: 0 !important;
+
+    margin-right: 0 !important;
+}
+
+.row:has(> .col-lg-7 .about-card) > .col-lg-7,
+.row:has(> .col-lg-7 .about-card) > .col-lg-5 {
+    padding-left: 0 !important;
+
+    padding-right: 0 !important;
+
+    box-sizing: border-box;
+}
+
+.row:has(> .col-lg-7 .about-card) > .col-lg-7 {
+    flex: 0 0 calc(58.333333% - 10px);
+
+    max-width: calc(58.333333% - 10px);
+}
+
+.row:has(> .col-lg-7 .about-card) > .col-lg-5 {
+    flex: 0 0 calc(41.666667% - 10px);
+
+    max-width: calc(41.666667% - 10px);
+}
+
+
+/* ==========================================================
+   ABOUT PAGE - BOTTOM ROW FALLBACK
+   ========================================================== */
+
+.row:has(> .col-md-4 .about-card) {
+    display: flex !important;
+
+    flex-wrap: nowrap;
+
+    gap: 20px !important;
+
+    margin-left: 0 !important;
+
+    margin-right: 0 !important;
+}
+
+.row:has(> .col-md-4 .about-card) > .col-md-4 {
+    padding-left: 0 !important;
+
+    padding-right: 0 !important;
+
+    flex: 1 1 0;
+
+    max-width: none;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 991px) {
+
+    /* Sidebar */
+
+    .sidebar {
+        display: none !important;
+    }
+
+
+    /* About main cards */
+
+    .about-main-row {
+        display: block !important;
+    }
+
+    .about-main-row > .col-lg-7,
+    .about-main-row > .col-lg-5 {
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        margin-bottom: 20px;
+    }
+
+
+    /* About bottom cards */
+
+    .about-bottom-row {
+        display: block !important;
+    }
+
+    .about-bottom-row > .col-md-4 {
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        margin-bottom: 20px;
+    }
+
+
+    /* Fallback mobile */
+
+    .row:has(> .col-lg-7 .about-card) {
+        display: block !important;
+    }
+
+    .row:has(> .col-lg-7 .about-card) > .col-lg-7,
+    .row:has(> .col-lg-7 .about-card) > .col-lg-5 {
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        margin-bottom: 20px;
+    }
+
+    .row:has(> .col-md-4 .about-card) {
+        display: block !important;
+    }
+
+    .row:has(> .col-md-4 .about-card) > .col-md-4 {
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        margin-bottom: 20px;
+    }
+
+}
+
+
+/* ==========================================================
+   MOBILE DASHBOARD
+   ========================================================== */
+
+@media (max-width: 767px) {
+
+    .dashboard-container {
+        padding-top: 15px !important;
+    }
+
+    .dashboard-container .dashboard-cards-row {
+        gap: 10px;
+    }
+
+    .dashboard-container .dashboard-cards-row .col-6 {
+        flex: 0 0 calc(50% - 5px);
+
+        max-width: calc(50% - 5px);
+    }
+
+    .dashboard-container .stat-card {
+        padding: 18px;
+    }
+
+}
+/* =========================================
+   ABOUT PAGE - REDUCE TOP SPACE
+   ========================================= */
+
+main .container-fluid.py-4 {
+    padding-top: 8px !important;
+}
+/* =========================================
+   AUTH PAGE FOOTER
+   ========================================= */
+
+.auth-footer {
+    position: absolute;
+
+    bottom: 12px;
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    color: rgba(255, 255, 255, 0.65) !important;
+
+    font-size: 12px;
+
+    font-weight: 400;
+
+    letter-spacing: 0.3px;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+.auth-footer strong {
+    color: #16d9a5 !important;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   MOBILE FOOTER
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .auth-footer {
+        bottom: 8px;
+
+        font-size: 11px;
+
+        padding: 0 10px;
+    }
+
+}
+/* ==============================
+   AUTH FOOTER
+   ============================== */
+
+.auth-footer {
+    color: #c3c9d2 !important;
+    font-size: 18px !important;   /* ← इथे size change करा */
+    font-weight: 500;
+    text-align: center;
+}/* ==============================
+   AUTH FOOTER
+   ============================== */
+
+.auth-footer {
+    color: #c3c9d2 !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    text-align: center;
+}
+
+.auth-footer strong {
+    font-weight: 500 !important;
+    color: #2579f8 !important;
+}
