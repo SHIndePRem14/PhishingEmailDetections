@@ -12,7 +12,10 @@
 
 .about-page {
     width: 100%;
-    padding: 8px 18px 40px 18px;   /* SMALL TOP MARGIN */
+    min-height: calc(100vh - 50px);
+
+    padding: 10px 18px 30px 18px;
+
     box-sizing: border-box;
 }
 
@@ -24,35 +27,46 @@
 .about-header {
     width: 100%;
 
-    background: rgba(15, 23, 42, 0.80);
+    background: #0f172a;
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid #22303f;
 
-    border-radius: 14px;
+    border-radius: 12px;
 
-    padding: 20px;
-
-    backdrop-filter: blur(10px);
+    padding: 15px 16px;
 
     box-sizing: border-box;
 
-    margin-bottom: 18px !important;   /* SMALL GAP BELOW HEADER */
+    margin-bottom: 13px !important;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.12);
 }
+
 
 .about-header h3 {
     color: #f8fafc !important;
 
+    font-size: 22px;
+
     font-weight: 700;
 
-    margin: 0;
+    margin: 0 !important;
+
+    line-height: 1.25;
 }
+
 
 .about-subtitle {
     color: #45e207 !important;
 
-    font-size: 14px;
+    font-size: 13px;
 
-    margin-top: 5px;
+    font-weight: 500;
+
+    margin-top: 3px;
+
+    line-height: 1.4;
 }
 
 
@@ -61,28 +75,28 @@
    ========================================================= */
 
 .about-icon {
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 42px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    border-radius: 11px;
+    border-radius: 10px;
 
     background: rgba(13, 110, 253, 0.12);
 
     color: #45e207 !important;
 
-    font-size: 20px;
+    font-size: 18px;
 
     flex-shrink: 0;
 }
 
 
 /* =========================================================
-   MAIN ABOUT CARDS
+   MAIN TWO CARDS
    ========================================================= */
 
 .about-main-row {
@@ -93,7 +107,7 @@
 
     width: 100% !important;
 
-    gap: 20px !important;
+    gap: 14px !important;
 
     margin: 0 !important;
 
@@ -101,7 +115,9 @@
 }
 
 
-/* Remove Bootstrap column spacing */
+/* =========================================================
+   REMOVE BOOTSTRAP COLUMN SPACING
+   ========================================================= */
 
 .about-main-row > .col-lg-7,
 .about-main-row > .col-lg-5 {
@@ -114,23 +130,27 @@
 }
 
 
-/* Left card */
+/* =========================================================
+   LEFT CARD WIDTH
+   ========================================================= */
 
 .about-main-row > .col-lg-7 {
 
-    flex: 0 0 calc(58.333333% - 10px) !important;
+    flex: 0 0 calc(58.333333% - 7px) !important;
 
-    max-width: calc(58.333333% - 10px) !important;
+    max-width: calc(58.333333% - 7px) !important;
 }
 
 
-/* Right card */
+/* =========================================================
+   RIGHT CARD WIDTH
+   ========================================================= */
 
 .about-main-row > .col-lg-5 {
 
-    flex: 0 0 calc(41.666667% - 10px) !important;
+    flex: 0 0 calc(41.666667% - 7px) !important;
 
-    max-width: calc(41.666667% - 10px) !important;
+    max-width: calc(41.666667% - 7px) !important;
 }
 
 
@@ -140,52 +160,71 @@
 
 .about-card {
 
-    background: rgba(15, 23, 42, 0.82);
+    background: #0f172a;
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid #22303f;
 
-    border-radius: 14px;
-
-    backdrop-filter: blur(10px);
-
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
 
     box-sizing: border-box;
 
     overflow: hidden;
 
-    transition: all 0.25s ease;
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.12);
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
 .about-card:hover {
 
-    border-color: rgba(13, 110, 253, 0.35);
+    border-color: rgba(0, 212, 160, 0.45);
 
     transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.18);
 }
 
 
 /* =========================================================
-   ABOUT CARD TEXT
+   CARD HEADINGS
    ========================================================= */
 
-.about-card h5,
-.about-card h6 {
+.about-card h5 {
 
-    color: #eceaea !important;
+    color: #f1f5f9 !important;
 
-    font-weight: 600;
+    font-size: 17px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    margin-bottom: 12px;
 }
 
 
-.about-card p {
+.about-card h6 {
 
-    color: #d6dbe2 !important;
+    color: #f1f5f9 !important;
 
-    line-height: 1.7;
+    font-size: 16px;
 
-    font-size: 14px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+
+.about-card h5 i,
+.about-card h6 i {
+
+    color: #45e207 !important;
 }
 
 
@@ -195,13 +234,23 @@
 
 .about-text {
 
-    color: #cbd5e1 !important;
+    color: #d6dbe2 !important;
 
-    line-height: 1.8;
+    font-size: 15px;
 
-    font-size: 14px;
+    font-weight: 400;
 
-    margin-bottom: 3px;
+    line-height: 1.65;
+
+    margin-bottom: 9px;
+
+    text-align: left;
+}
+
+
+.about-text:last-of-type {
+
+    margin-bottom: 0;
 }
 
 
@@ -217,43 +266,67 @@
 
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
 
-    border-radius: 6px;
+    border-radius: 7px;
 
-    padding: 12px 14px;
+    padding: 11px 13px;
 
     font-size: 13px;
 
+    font-weight: 600;
+
     line-height: 1.5;
+
+    margin-top: 13px !important;
+
+    margin-bottom: 0 !important;
 }
 
 
 .project-note i {
 
     color: #45e207 !important;
+
+    font-size: 13px;
 }
 
 
 /* =========================================================
-   ML MODEL INFORMATION
+   ML MODEL HEADER
    ========================================================= */
 
 .ml-header {
 
-    padding: 18px 20px;
+    padding: 14px 17px;
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid #22303f;
+
+    background: rgba(15, 23, 42, 0.7);
+}
+
+
+.ml-header h5 {
+
+    margin: 0 !important;
+
+    font-size: 17px;
+
+    font-weight: 700;
 }
 
 
 .ml-content {
 
-    padding: 20px;
+    padding: 15px 17px;
 }
 
 
+/* =========================================================
+   MODEL INFORMATION
+   ========================================================= */
+
 .info-item {
 
-    padding: 14px 0;
+    padding: 10px 0;
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
@@ -271,11 +344,13 @@
 
     font-size: 12px;
 
+    font-weight: 600;
+
     text-transform: uppercase;
 
     letter-spacing: 0.6px;
 
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 
@@ -283,23 +358,27 @@
 
     color: #45e207 !important;
 
-    font-weight: 600;
+    font-weight: 700;
 
     font-size: 15px;
+
+    line-height: 1.4;
 }
 
 
 /* =========================================================
-   ML EMPTY INFORMATION
+   ML DESCRIPTION
    ========================================================= */
 
 .ml-description {
 
     color: #d6dbe2 !important;
 
-    font-size: 13px;
+    font-size: 14px;
 
-    line-height: 1.8;
+    font-weight: 400;
+
+    line-height: 1.65;
 
     text-align: center;
 
@@ -307,17 +386,21 @@
 }
 
 
+/* =========================================================
+   ML MODEL ICON
+   ========================================================= */
+
 .ml-model-icon {
 
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    margin: 0 auto 12px auto;
+    margin: 0 auto 10px auto;
 
     border-radius: 10px;
 
@@ -325,7 +408,7 @@
 
     color: #dce3ea !important;
 
-    font-size: 20px;
+    font-size: 19px;
 }
 
 
@@ -341,15 +424,17 @@
 
     width: 100% !important;
 
-    gap: 20px !important;
+    gap: 14px !important;
 
-    margin: 18px 0 0 0 !important;
+    margin: 13px 0 0 0 !important;
 
     padding: 0 !important;
 }
 
 
-/* Remove Bootstrap column spacing */
+/* =========================================================
+   BOTTOM COLUMNS
+   ========================================================= */
 
 .about-bottom-row > .col-md-4 {
 
@@ -367,7 +452,9 @@
 }
 
 
-/* Bottom card */
+/* =========================================================
+   BOTTOM CARD
+   ========================================================= */
 
 .about-bottom-row .about-card {
 
@@ -375,9 +462,9 @@
 
     height: 100% !important;
 
-    min-height: 130px;
+    min-height: 125px;
 
-    padding: 20px !important;
+    padding: 17px !important;
 }
 
 
@@ -387,39 +474,62 @@
 
 .about-bottom-row .about-icon {
 
-    margin-bottom: 12px;
+    width: 40px;
+    height: 40px;
+
+    margin-bottom: 10px;
+
+    font-size: 17px;
 }
 
+
+/* =========================================================
+   BOTTOM CARD HEADING
+   ========================================================= */
 
 .about-bottom-row h6 {
 
-    font-size: 15px;
+    font-size: 16px;
 
-    margin-bottom: 7px;
+    margin-top: 0 !important;
+
+    margin-bottom: 6px;
+
+    line-height: 1.4;
 }
 
 
+/* =========================================================
+   BOTTOM CARD TEXT
+   ========================================================= */
+
 .about-bottom-row p {
 
-    color: #bfc7d1 !important;
+    color: #cbd5e1 !important;
 
-    font-size: 12px;
+    font-size: 13px;
 
-    line-height: 1.6;
+    font-weight: 400;
+
+    line-height: 1.55;
 
     margin: 0;
 }
 
 
 /* =========================================================
-   BOOTSTRAP ALERT OVERRIDE
+   ALERT
    ========================================================= */
 
 .about-card .alert {
 
     border-radius: 7px;
 
-    font-size: 13px;
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    padding: 11px 12px;
 }
 
 
@@ -478,23 +588,15 @@
 
 
 /* =========================================================
-   DESKTOP LARGE SCREEN
+   LARGE DESKTOP
    ========================================================= */
 
 @media (min-width: 1200px) {
 
     .about-page {
 
-        padding-top: 8px;
-        padding-left: 18px;
-        padding-right: 18px;
-    }
-
-    .about-header {
-
-        padding: 20px;
-
-        margin-bottom: 18px !important;
+        padding:
+            10px 18px 30px 18px;
     }
 
 }
@@ -508,8 +610,10 @@
 
     .about-page {
 
-        padding-top: 8px;
+        padding:
+            10px 14px 30px 14px;
     }
+
 
     .about-main-row {
 
@@ -524,7 +628,7 @@
 
         max-width: 100% !important;
 
-        margin-bottom: 20px !important;
+        margin-bottom: 13px !important;
     }
 
 
@@ -538,7 +642,7 @@
 
         width: 100% !important;
 
-        margin-bottom: 20px !important;
+        margin-bottom: 13px !important;
     }
 
 }
@@ -552,27 +656,37 @@
 
     .about-page {
 
-        padding: 8px 12px 30px 12px;
+        padding:
+            8px 10px 25px 10px;
     }
 
 
     .about-header {
 
-        padding: 16px;
+        padding: 13px;
 
-        margin-bottom: 15px !important;
+        margin-bottom: 12px !important;
     }
 
 
     .about-header h3 {
 
-        font-size: 1.25rem;
+        font-size: 19px;
     }
 
 
     .about-subtitle {
 
         font-size: 12px;
+    }
+
+
+    .about-icon {
+
+        width: 38px;
+        height: 38px;
+
+        font-size: 16px;
     }
 
 
@@ -593,7 +707,7 @@
 
         max-width: 100% !important;
 
-        margin-bottom: 20px !important;
+        margin-bottom: 12px !important;
 
         padding: 0 !important;
     }
@@ -615,7 +729,7 @@
 
         width: 100% !important;
 
-        margin-bottom: 20px !important;
+        margin-bottom: 12px !important;
 
         padding: 0 !important;
     }
@@ -623,11 +737,39 @@
 
     .about-card {
 
-        border-radius: 12px;
+        border-radius: 10px;
     }
 
 
-    .about-card p {
+    .about-card h5 {
+
+        font-size: 16px;
+    }
+
+
+    .about-text {
+
+        font-size: 14px;
+
+        line-height: 1.6;
+    }
+
+
+    .ml-description {
+
+        font-size: 13px;
+
+        line-height: 1.6;
+    }
+
+
+    .about-bottom-row h6 {
+
+        font-size: 15px;
+    }
+
+
+    .about-bottom-row p {
 
         font-size: 13px;
     }
@@ -661,7 +803,7 @@
 
             <div>
 
-                <h3 class="mb-1">
+                <h3>
 
                     About PhishGuard
 
@@ -697,7 +839,7 @@
             <div class="about-card p-4 h-100">
 
 
-                <h5 class="mb-3">
+                <h5>
 
                     <i class="fa-solid fa-shield-halved me-2"></i>
 
@@ -771,9 +913,9 @@
                 </p>
 
 
-                <!-- Security Note -->
+                <!-- SECURITY NOTE -->
 
-                <div class="project-note mt-4 mb-0">
+                <div class="project-note">
 
                     <i class="fa-solid fa-circle-info me-2"></i>
 
@@ -798,11 +940,11 @@
             <div class="about-card h-100">
 
 
-                <!-- Header -->
+                <!-- ML HEADER -->
 
                 <div class="ml-header">
 
-                    <h5 class="mb-0">
+                    <h5>
 
                         <i class="fa-solid fa-microchip me-2"></i>
 
@@ -813,7 +955,7 @@
                 </div>
 
 
-                <!-- Content -->
+                <!-- ML CONTENT -->
 
                 <div class="ml-content">
 
@@ -821,7 +963,7 @@
                     {% if metrics %}
 
 
-                    <!-- Algorithm -->
+                    <!-- ALGORITHM -->
 
                     <div class="info-item">
 
@@ -843,7 +985,7 @@
                     </div>
 
 
-                    <!-- F1 Score -->
+                    <!-- F1 SCORE -->
 
                     <div class="info-item">
 
@@ -865,7 +1007,7 @@
                     </div>
 
 
-                    <!-- Accuracy -->
+                    <!-- ACCURACY -->
 
                     <div class="info-item">
 
@@ -887,9 +1029,9 @@
                     </div>
 
 
-                    <!-- Model Status -->
+                    <!-- MODEL STATUS -->
 
-                    <div class="mt-4">
+                    <div class="mt-3">
 
 
                         {% if model_ready %}
@@ -937,10 +1079,10 @@
 
 
                     <!-- =================================================
-                         NO METRICS - MODEL DESCRIPTION
+                         MODEL DESCRIPTION
                          ================================================= -->
 
-                    <div class="text-center py-2">
+                    <div class="text-center py-1">
 
 
                         <div class="ml-model-icon">
@@ -1032,7 +1174,7 @@
                 </div>
 
 
-                <h6 class="mt-3">
+                <h6>
 
                     Machine Learning
 
@@ -1068,7 +1210,7 @@
                 </div>
 
 
-                <h6 class="mt-3">
+                <h6>
 
                     Security Heuristics
 
@@ -1104,7 +1246,7 @@
                 </div>
 
 
-                <h6 class="mt-3">
+                <h6>
 
                     Analytics
 

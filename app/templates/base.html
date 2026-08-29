@@ -1,670 +1,1589 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>{% block title %}PhishGuard{% endblock %} | PhishGuard</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<!-- Bootstrap -->
-<link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
->
+    <title>
+        {% block title %}PhishGuard{% endblock %} | PhishGuard
+    </title>
 
-<!-- Font Awesome -->
-<link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    rel="stylesheet"
->
 
-<!-- Main CSS -->
-<link
-    href="{{ url_for('static', filename='css/style.css') }}"
-    rel="stylesheet"
->
+    <!-- =====================================================
+         BOOTSTRAP
+         ===================================================== -->
 
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
-<style>
 
-/* =========================================================
-   GLOBAL PAGE RESET
-   ========================================================= */
+    <!-- =====================================================
+         FONT AWESOME
+         ===================================================== -->
 
-html,
-body {
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        rel="stylesheet"
+    >
 
-    margin: 0 !important;
-    padding: 0 !important;
 
-    width: 100%;
-    height: 100%;
+    <!-- =====================================================
+         MAIN CSS
+         ===================================================== -->
 
-    min-height: 100%;
+    <link
+        href="{{ url_for('static', filename='css/style.css') }}"
+        rel="stylesheet"
+    >
 
-    overflow: hidden;
 
-}
+    <style>
 
+        /* =========================================================
+           GLOBAL RESET
+           ========================================================= */
 
-/* =========================================================
-   BOOTSTRAP RESET
-   ========================================================= */
+        html,
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            background: #080f1c;
 
-.container-fluid {
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+        }
 
-    margin: 0 !important;
-    padding: 0 !important;
 
-    width: 100%;
+        * {
+            box-sizing: border-box;
+        }
 
-}
 
+        /* =========================================================
+           BOOTSTRAP RESET
+           ========================================================= */
 
-.row {
+        .container-fluid {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100%;
+        }
 
-    margin: 0 !important;
-    padding: 0 !important;
 
-    --bs-gutter-x: 0;
-    --bs-gutter-y: 0;
+        .row {
+            margin: 0 !important;
+            padding: 0 !important;
 
-}
+            --bs-gutter-x: 0;
+            --bs-gutter-y: 0;
+        }
 
 
-/* =========================================================
-   MAIN CONTENT AREA
-   ========================================================= */
+        /* =========================================================
+           MAIN APPLICATION LAYOUT
+           ========================================================= */
 
-main {
+        .app-layout {
+            display: flex;
 
-    min-height: 100vh !important;
-    height: 100vh !important;
+            width: 100%;
+            min-height: 100vh;
 
-    overflow-y: auto;
-    overflow-x: hidden;
+            background:
+                linear-gradient(
+                    135deg,
+                    #080f1c,
+                    #0b1424
+                );
+        }
 
-    /*
-       IMPORTANT:
-       Space between sidebar and page content
-    */
 
-    padding: 25px 25px 40px 25px !important;
+        /* =========================================================
+           SIDEBAR
+           ========================================================= */
 
-    box-sizing: border-box;
+        .sidebar {
+            position: relative;
 
-}
+            /* CHANGED: 228px → 250px */
+            width: 250px;
+            min-width: 250px;
 
+            height: 100vh;
+            min-height: 100vh;
 
-/* =========================================================
-   SIDEBAR
-   ========================================================= */
+            display: flex !important;
+            flex-direction: column !important;
 
-.sidebar {
+            padding: 0 !important;
 
-    background-color: var(--bg-panel);
+            background:
+                linear-gradient(
+                    180deg,
+                    #111a29 0%,
+                    #0d1522 48%,
+                    #0a111c 100%
+                );
 
-    border-right: 1px solid var(--border-color);
+            border-right:
+                1px solid #223149;
 
-    min-height: 100vh !important;
-    height: 100vh !important;
+            box-shadow:
+                8px 0 30px rgba(0, 0, 0, 0.18);
 
-    display: flex !important;
+            overflow: hidden;
 
-    flex-direction: column !important;
+            z-index: 1000;
+        }
 
-    /*
-       Sidebar top spacing
-    */
 
-    padding-top: 1.5rem !important;
+        /* =========================================================
+           SIDEBAR TOP GLOW
+           ========================================================= */
 
-    padding-bottom: 1rem !important;
+        .sidebar::before {
+            content: "";
 
-    box-sizing: border-box;
+            position: absolute;
 
-}
+            width: 220px;
+            height: 220px;
 
+            top: -120px;
+            left: -100px;
 
-/* =========================================================
-   SIDEBAR MENU
-   ========================================================= */
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(13, 110, 253, 0.20),
+                    transparent 68%
+                );
 
-.sidebar > .nav {
+            pointer-events: none;
+        }
 
-    flex: 1 1 auto;
 
-    width: 100%;
+        .sidebar::after {
+            content: "";
 
-    margin: 0;
+            position: absolute;
 
-    padding: 0;
+            width: 180px;
+            height: 180px;
 
-}
+            bottom: -100px;
+            right: -100px;
 
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0, 212, 160, 0.08),
+                    transparent 68%
+                );
 
-/* =========================================================
-   SIDEBAR NAV LINKS
-   ========================================================= */
+            pointer-events: none;
+        }
 
-.sidebar .nav-link {
 
-    color: var(--text-muted);
+        /* =========================================================
+           SIDEBAR BRAND
+           ========================================================= */
 
-    padding: 0.7rem 1rem;
+        .sidebar-brand {
+            position: relative;
 
-    border-radius: 6px;
+            z-index: 2;
 
-    margin-bottom: 3px;
+            display: flex;
+            align-items: center;
 
-    font-size: 22px !important;
+            gap: 11px;
 
-    font-weight: 500;
+            min-height: 82px;
 
-    transition: all 0.2s ease;
+            padding: 0 18px;
 
-}
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.06);
+        }
 
 
-/* =========================================================
-   SIDEBAR ICONS
-   ========================================================= */
+        /* =========================================================
+           BRAND ICON
+           ========================================================= */
 
-.sidebar .nav-link i {
+        .sidebar-brand-icon {
+            width: 42px;
+            height: 42px;
 
-    font-size: 16px !important;
+            flex-shrink: 0;
 
-    width: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    text-align: center;
+            border-radius: 12px;
 
-}
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd,
+                    #0755c9
+                );
 
+            border:
+                1px solid rgba(96, 165, 250, 0.35);
 
-/* =========================================================
-   SIDEBAR ACTIVE / HOVER
-   ========================================================= */
+            color: #ffffff;
 
-.sidebar .nav-link.active,
-.sidebar .nav-link:hover {
+            font-size: 19px;
 
-    background-color: var(--bg-panel-light);
+            box-shadow:
+                0 7px 20px rgba(13, 110, 253, 0.28);
+        }
 
-    color: var(--accent);
 
-    transform: translateX(2px);
+        /* =========================================================
+           BRAND TEXT
+           ========================================================= */
 
-}
+        .sidebar-brand-text {
+            min-width: 0;
+        }
 
 
-/* =========================================================
-   LOGOUT SECTION
-   ========================================================= */
+        .sidebar-brand-title {
+            margin: 0;
 
-.sidebar-logout {
+            color: #f8fafc;
 
-    width: 100%;
+            /* CHANGED: 18px → 20px */
+            font-size: 20px;
 
-    margin-top: auto;
+            font-weight: 750;
 
-    padding: 15px 16px 20px 16px;
+            letter-spacing: -0.2px;
 
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+            line-height: 1.1;
+        }
 
-    box-sizing: border-box;
 
-}
+        .sidebar-brand-subtitle {
+            margin-top: 4px;
 
+            color: #718096;
 
-/* =========================================================
-   LOGOUT BUTTON
-   ========================================================= */
+            /* CHANGED: 9px → 10px */
+            font-size: 10px;
 
-.logout-link {
+            font-weight: 600;
 
-    display: flex;
+            text-transform: uppercase;
 
-    align-items: center;
+            letter-spacing: 0.8px;
+        }
 
-    width: 100%;
 
-    padding: 12px 14px;
+        /* =========================================================
+           SIDEBAR NAV CONTAINER
+           ========================================================= */
 
-    border-radius: 8px;
+        .sidebar-menu {
+            position: relative;
 
-    text-decoration: none;
+            z-index: 2;
 
-    color: #ff5470 !important;
+            flex: 1 1 auto;
 
-    font-size: 20px !important;
+            width: 100%;
 
-    font-weight: 600;
+            padding:
+                18px 10px 12px 10px;
 
-    transition: all 0.25s ease;
+            margin: 0;
 
-}
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
 
 
-/* =========================================================
-   LOGOUT ICON
-   ========================================================= */
+        .sidebar-menu::-webkit-scrollbar {
+            width: 4px;
+        }
 
-.logout-link i {
 
-    font-size: 18px !important;
+        .sidebar-menu::-webkit-scrollbar-track {
+            background: transparent;
+        }
 
-    width: 22px;
 
-    text-align: center;
+        .sidebar-menu::-webkit-scrollbar-thumb {
+            background: #293a52;
 
-}
+            border-radius: 10px;
+        }
 
 
-/* =========================================================
-   LOGOUT HOVER
-   ========================================================= */
+        /* =========================================================
+           SECTION TITLE
+           ========================================================= */
 
-.logout-link:hover {
+        .sidebar-section-title {
+            padding:
+                0 11px;
 
-    background-color: rgba(255, 84, 112, 0.12);
+            margin:
+                4px 0 9px 0;
 
-    color: #ff7185 !important;
+            color: #52647c;
 
-    transform: translateX(3px);
+            /* CHANGED: 9px → 11px */
+            font-size: 11px;
 
-}
+            font-weight: 750;
 
+            text-transform: uppercase;
 
-/* =========================================================
-   PAGE TITLE / TOP SPACE
-   ========================================================= */
+            letter-spacing: 1px;
+        }
 
-/*
-   This creates the space you marked in red
-   between the sidebar and the page heading/logo.
-*/
 
-main > .dashboard-page,
-main > .history-page,
-main > .profile-page,
-main > .about-page,
-main > .analyze-page {
+        /* =========================================================
+           NAV ITEM
+           ========================================================= */
 
-    margin-top: 10px;
+        .sidebar .nav-item {
+            width: 100%;
 
-}
+            margin-bottom: 4px;
+        }
 
 
-/* =========================================================
-   COMMON PAGE HEADING
-   ========================================================= */
+        /* =========================================================
+           NAV LINK
+           ========================================================= */
 
-main h1,
-main h2,
-main h3,
-main h4 {
+        .sidebar .nav-link {
+            position: relative;
 
-    margin-top: 0 !important;
+            display: flex;
+            align-items: center;
 
-}
+            width: 100%;
 
+            min-height: 48px;
 
-/* =========================================================
-   FLASH MESSAGES
-   ========================================================= */
+            padding:
+                9px 11px;
 
-main > .alert {
+            border-radius: 9px;
 
-    margin-left: 0 !important;
+            margin: 0;
 
-    margin-right: 0 !important;
+            color: #8fa1b7;
 
-}
+            background: transparent;
 
+            text-decoration: none;
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
+            /* CHANGED: 14px → 16px */
+            font-size: 16px !important;
 
-@media (max-width: 991px) {
+            font-weight: 550;
 
-    .sidebar {
+            letter-spacing: 0.05px;
 
-        display: none !important;
+            transition:
+                color 0.22s ease,
+                background 0.22s ease,
+                transform 0.22s ease,
+                box-shadow 0.22s ease;
+        }
 
-    }
 
-    main {
+        /* =========================================================
+           NAV ICON WRAPPER
+           ========================================================= */
 
-        padding: 25px 18px 35px 18px !important;
+        .sidebar .nav-link .sidebar-nav-icon {
+            width: 36px;
+            height: 36px;
 
-    }
+            flex-shrink: 0;
 
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
+            margin-right: 10px;
 
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
+            border-radius: 8px;
 
-@media (max-width: 576px) {
+            color: #7890aa;
 
-    main {
+            background:
+                rgba(255, 255, 255, 0.025);
 
-        padding: 20px 14px 30px 14px !important;
+            /* CHANGED: 14px → 15px */
+            font-size: 15px;
 
-    }
+            transition:
+                color 0.22s ease,
+                background 0.22s ease,
+                transform 0.22s ease;
+        }
 
-}
 
-</style>
+        /* =========================================================
+           NAV TEXT
+           ========================================================= */
+
+        .sidebar .nav-link .sidebar-nav-text {
+            flex: 1;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+           NAV ARROW
+           ========================================================= */
+
+        .sidebar .nav-link .sidebar-arrow {
+            color: #40536c;
+
+            font-size: 10px;
+
+            opacity: 0;
+
+            transform: translateX(-4px);
+
+            transition:
+                opacity 0.22s ease,
+                transform 0.22s ease;
+        }
+
+
+        /* =========================================================
+           HOVER
+           ========================================================= */
+
+        .sidebar .nav-link:hover {
+            color: #e8f0f8;
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            transform: translateX(2px);
+        }
+
+
+        .sidebar .nav-link:hover .sidebar-nav-icon {
+            color: #60a5fa;
+
+            background:
+                rgba(13, 110, 253, 0.12);
+
+            transform: scale(1.04);
+        }
+
+
+        .sidebar .nav-link:hover .sidebar-arrow {
+            opacity: 1;
+
+            transform: translateX(0);
+        }
+
+
+        /* =========================================================
+           ACTIVE NAV LINK
+           ========================================================= */
+
+        .sidebar .nav-link.active {
+            color: #ffffff !important;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(13, 110, 253, 0.18),
+                    rgba(13, 110, 253, 0.07)
+                );
+
+            border:
+                1px solid rgba(13, 110, 253, 0.16);
+
+            box-shadow:
+                inset 0 0 18px rgba(13, 110, 253, 0.035);
+
+            transform: none;
+        }
+
+
+        /* =========================================================
+           ACTIVE LEFT INDICATOR
+           ========================================================= */
+
+        .sidebar .nav-link.active::before {
+            content: "";
+
+            position: absolute;
+
+            left: -10px;
+
+            top: 8px;
+            bottom: 8px;
+
+            width: 3px;
+
+            border-radius:
+                0 5px 5px 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #0d6efd,
+                    #38bdf8
+                );
+
+            box-shadow:
+                0 0 10px rgba(13, 110, 253, 0.65);
+        }
+
+
+        .sidebar .nav-link.active .sidebar-nav-icon {
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd,
+                    #0755c9
+                );
+
+            box-shadow:
+                0 5px 14px rgba(13, 110, 253, 0.25);
+        }
+
+
+        .sidebar .nav-link.active .sidebar-arrow {
+            opacity: 1;
+
+            color: #60a5fa;
+
+            transform: translateX(0);
+        }
+
+
+        /* =========================================================
+           ADMIN SECTION
+           ========================================================= */
+
+        .admin-section {
+            margin-bottom: 17px;
+
+            padding-bottom: 13px;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.055);
+        }
+
+
+        .admin-section .sidebar-section-title {
+            color: #63758c;
+        }
+
+
+        /* =========================================================
+           ADMIN BADGE
+           ========================================================= */
+
+        .admin-badge {
+            margin-left: auto;
+
+            padding:
+                4px 7px;
+
+            border-radius: 5px;
+
+            color: #8ddcff;
+
+            background:
+                rgba(13, 110, 253, 0.10);
+
+            border:
+                1px solid rgba(13, 110, 253, 0.16);
+
+            font-size: 9px;
+
+            font-weight: 750;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =========================================================
+           USER MENU
+           ========================================================= */
+
+        .user-section {
+            margin-top: 0;
+        }
+
+
+        /* =========================================================
+           SIDEBAR ACCOUNT
+           ========================================================= */
+
+        .sidebar-account {
+            position: relative;
+
+            z-index: 3;
+
+            margin:
+                0 10px 10px 10px;
+
+            padding:
+                11px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255, 255, 255, 0.035);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.055);
+        }
+
+
+        .sidebar-account-avatar {
+            width: 36px;
+            height: 36px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #263852,
+                    #17263a
+                );
+
+            border:
+                1px solid #344b67;
+
+            color: #8fc8ff;
+
+            font-size: 14px;
+        }
+
+
+        .sidebar-account-info {
+            min-width: 0;
+
+            flex: 1;
+        }
+
+
+        .sidebar-account-name {
+            overflow: hidden;
+
+            color: #dce7f2;
+
+            /* CHANGED: 11px → 13px */
+            font-size: 13px;
+
+            font-weight: 650;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+        }
+
+
+        .sidebar-account-status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            margin-top: 3px;
+
+            color: #687d95;
+
+            /* CHANGED: 9px → 10px */
+            font-size: 10px;
+        }
+
+
+        .sidebar-status-dot {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+
+            box-shadow:
+                0 0 7px rgba(34, 197, 94, 0.55);
+        }
+
+
+        /* =========================================================
+           LOGOUT AREA
+           ========================================================= */
+
+        .sidebar-logout {
+            position: relative;
+
+            z-index: 3;
+
+            width: 100%;
+
+            padding:
+                11px 10px 15px 10px;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.055);
+        }
+
+
+        /* =========================================================
+           LOGOUT BUTTON
+           ========================================================= */
+
+        .logout-link {
+            display: flex;
+
+            align-items: center;
+
+            width: 100%;
+
+            min-height: 46px;
+
+            padding:
+                8px 11px;
+
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            color: #f36b80 !important;
+
+            background:
+                rgba(255, 84, 112, 0.035);
+
+            border:
+                1px solid transparent;
+
+            /* CHANGED: 13px → 15px */
+            font-size: 15px !important;
+
+            font-weight: 600;
+
+            transition:
+                all 0.22s ease;
+        }
+
+
+        .logout-link i {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 9px;
+
+            border-radius: 8px;
+
+            color: #ff6680;
+
+            background:
+                rgba(255, 84, 112, 0.08);
+
+            font-size: 14px !important;
+
+            transition:
+                all 0.22s ease;
+        }
+
+
+        .logout-link:hover {
+            color: #ffffff !important;
+
+            background:
+                rgba(255, 84, 112, 0.09);
+
+            border-color:
+                rgba(255, 84, 112, 0.13);
+
+            transform: translateX(2px);
+        }
+
+
+        .logout-link:hover i {
+            color: #ffffff;
+
+            background:
+                #dc3545;
+
+            box-shadow:
+                0 5px 15px rgba(220, 53, 69, 0.25);
+        }
+
+
+        /* =========================================================
+           MAIN CONTENT
+           ========================================================= */
+
+        main {
+            flex: 1 1 auto;
+
+            /* CHANGED: 228px → 250px */
+            width: calc(100% - 250px);
+
+            min-width: 0;
+
+            height: 100vh;
+
+            min-height: 100vh;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            padding:
+                25px 25px 40px 25px !important;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(13, 110, 253, 0.035),
+                    transparent 32%
+                ),
+                #080f1c;
+
+            box-sizing: border-box;
+        }
+
+
+        /* =========================================================
+           MAIN SCROLLBAR
+           ========================================================= */
+
+        main::-webkit-scrollbar {
+            width: 7px;
+        }
+
+
+        main::-webkit-scrollbar-track {
+            background: #080f1c;
+        }
+
+
+        main::-webkit-scrollbar-thumb {
+            background: #27384e;
+
+            border-radius: 10px;
+        }
+
+
+        main::-webkit-scrollbar-thumb:hover {
+            background: #35506e;
+        }
+
+
+        /* =========================================================
+           PAGE TOP SPACING
+           ========================================================= */
+
+        main > .dashboard-page,
+        main > .history-page,
+        main > .profile-page,
+        main > .about-page,
+        main > .analyze-page {
+            margin-top: 10px;
+        }
+
+
+        /* =========================================================
+           COMMON PAGE HEADINGS
+           ========================================================= */
+
+        main h1,
+        main h2,
+        main h3,
+        main h4 {
+            margin-top: 0 !important;
+        }
+
+
+        /* =========================================================
+           FLASH MESSAGES
+           ========================================================= */
+
+        main > .alert {
+            margin-left: 0 !important;
+
+            margin-right: 0 !important;
+        }
+
+
+        /* =========================================================
+           MOBILE HEADER
+           ========================================================= */
+
+        .mobile-topbar {
+            display: none;
+        }
+
+
+        /* =========================================================
+           MOBILE
+           ========================================================= */
+
+        @media (max-width: 991px) {
+
+            .app-layout {
+                display: block;
+            }
+
+
+            .sidebar {
+                display: none !important;
+            }
+
+
+            main {
+                width: 100%;
+
+                height: 100vh;
+
+                min-height: 100vh;
+
+                padding:
+                    25px 18px 35px 18px !important;
+            }
+        }
+
+
+        /* =========================================================
+           TABLET
+           ========================================================= */
+
+        @media (max-width: 768px) {
+
+            main {
+                padding:
+                    20px 15px 30px 15px !important;
+            }
+        }
+
+
+        /* =========================================================
+           SMALL MOBILE
+           ========================================================= */
+
+        @media (max-width: 576px) {
+
+            main {
+                padding:
+                    16px 12px 25px 12px !important;
+            }
+        }
+
+    </style>
 
 </head>
 
 
-<body class="m-0 p-0">
+<body>
 
 
 <!-- =========================================================
-     MAIN CONTAINER
+     APPLICATION LAYOUT
      ========================================================= -->
 
-<div class="container-fluid">
+<div class="app-layout">
 
-    <div class="row g-0">
 
+    {% if current_user.is_authenticated %}
 
-        {% if current_user.is_authenticated %}
 
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
 
-        <!-- =====================================================
-             SIDEBAR
-             ===================================================== -->
+    <nav class="sidebar">
 
-        <nav class="col-lg-2 d-none d-lg-flex sidebar">
 
+        <!-- =================================================
+             BRAND
+             ================================================= -->
 
-            <!-- =================================================
-                 SIDEBAR MENU
-                 ================================================= -->
+        <div class="sidebar-brand">
 
-            <ul class="nav flex-column">
+            <div class="sidebar-brand-icon">
 
-
-                <!-- =============================================
-                     ADMIN MENU
-                     ============================================= -->
-
-                {% if current_user.is_admin %}
-
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link {{ 'active' if request.endpoint == 'admin.dashboard' }}"
-                        href="{{ url_for('admin.dashboard') }}"
-                    >
-
-                        <i class="fa-solid fa-gauge me-2"></i>
-
-                        Admin Dashboard
-
-                    </a>
-
-                </li>
-
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link {{ 'active' if request.endpoint == 'admin.users' }}"
-                        href="{{ url_for('admin.users') }}"
-                    >
-
-                        <i class="fa-solid fa-users me-2"></i>
-
-                        Users
-
-                    </a>
-
-                </li>
-
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link {{ 'active' if request.endpoint == 'admin.detections' }}"
-                        href="{{ url_for('admin.detections') }}"
-                    >
-
-                        <i class="fa-solid fa-list-check me-2"></i>
-
-                        All Detections
-
-                    </a>
-
-                </li>
-
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link {{ 'active' if request.endpoint == 'admin.model_metrics' }}"
-                        href="{{ url_for('admin.model_metrics') }}"
-                    >
-
-                        <i class="fa-solid fa-chart-line me-2"></i>
-
-                        Model Metrics
-
-                    </a>
-
-                </li>
-
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link {{ 'active' if request.endpoint == 'admin.audit_logs' }}"
-                        href="{{ url_for('admin.audit_logs') }}"
-                    >
-
-                        <i class="fa-solid fa-clipboard-list me-2"></i>
-
-                        Audit Logs
-
-                    </a>
-
-                </li>
-
-
-                <li>
-
-                    <hr class="text-secondary">
-
-                </li>
-
-
-                {% endif %}
-
-
-                <!-- =============================================
-                     USER MENU
-                     ============================================= -->
-
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link {{ 'active' if request.endpoint == 'main.dashboard' }}"
-                        href="{{ url_for('main.dashboard') }}"
-                    >
-
-                        <i class="fa-solid fa-gauge-high me-2"></i>
-
-                        Dashboard
-
-                    </a>
-
-                </li>
-
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link {{ 'active' if request.endpoint == 'detection.analyze' }}"
-                        href="{{ url_for('detection.analyze') }}"
-                    >
-
-                        <i class="fa-solid fa-magnifying-glass me-2"></i>
-
-                        Analyze Email
-
-                    </a>
-
-                </li>
-
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link {{ 'active' if request.endpoint == 'detection.history' }}"
-                        href="{{ url_for('detection.history') }}"
-                    >
-
-                        <i class="fa-solid fa-clock-rotate-left me-2"></i>
-
-                        History
-
-                    </a>
-
-                </li>
-
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link {{ 'active' if request.endpoint == 'main.profile' }}"
-                        href="{{ url_for('main.profile') }}"
-                    >
-
-                        <i class="fa-solid fa-id-badge me-2"></i>
-
-                        Profile
-
-                    </a>
-
-                </li>
-
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link {{ 'active' if request.endpoint == 'main.about' }}"
-                        href="{{ url_for('main.about') }}"
-                    >
-
-                        <i class="fa-solid fa-circle-info me-2"></i>
-
-                        About
-
-                    </a>
-
-                </li>
-
-
-            </ul>
-
-
-            <!-- =================================================
-                 LOGOUT BUTTON
-                 ================================================= -->
-
-            <div class="sidebar-logout">
-
-                <a
-                    href="{{ url_for('auth.logout') }}"
-                    class="logout-link"
-                >
-
-                    <i class="fa-solid fa-right-from-bracket me-2"></i>
-
-                    Logout
-
-                </a>
+                <i class="fa-solid fa-shield-halved"></i>
 
             </div>
 
 
-        </nav>
+            <div class="sidebar-brand-text">
+
+                <div class="sidebar-brand-title">
+                    PhishGuard
+                </div>
 
 
-        <!-- =====================================================
-             MAIN CONTENT
-             ===================================================== -->
+                <div class="sidebar-brand-subtitle">
+                    Threat Protection
+                </div>
 
-        <main class="col-lg-10">
+            </div>
 
-
-        {% else %}
-
-
-        <!-- =====================================================
-             PUBLIC PAGE
-             ===================================================== -->
-
-        <main class="col-12">
+        </div>
 
 
-        {% endif %}
+        <!-- =================================================
+             SIDEBAR MENU
+             ================================================= -->
 
-
-            <!-- =================================================
-                 FLASH MESSAGES
-                 ================================================= -->
-
-            {% with messages = get_flashed_messages(with_categories=true) %}
-
-                {% if messages %}
-
-                    {% for category, message in messages %}
-
-                        <div
-                            class="alert alert-{{ category }} alert-dismissible fade show"
-                            role="alert"
-                        >
-
-                            {{ message }}
-
-                            <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="alert"
-                            ></button>
-
-                        </div>
-
-                    {% endfor %}
-
-                {% endif %}
-
-            {% endwith %}
+        <div class="sidebar-menu">
 
 
             <!-- =================================================
-                 PAGE CONTENT
+                 ADMIN MENU
                  ================================================= -->
 
-            {% block content %}
+            {% if current_user.is_admin %}
 
-            {% endblock %}
-
-
-        </main>
+            <div class="admin-section">
 
 
-    </div>
+                <div class="sidebar-section-title">
+                    Administration
+                </div>
+
+
+                <!-- ADMIN DASHBOARD -->
+
+                <div class="nav-item">
+
+                    <a
+                        class="nav-link
+                        {{ 'active' if request.endpoint == 'admin.dashboard' }}"
+                        href="{{ url_for('admin.dashboard') }}"
+                    >
+
+                        <span class="sidebar-nav-icon">
+
+                            <i class="fa-solid fa-gauge-high"></i>
+
+                        </span>
+
+
+                        <span class="sidebar-nav-text">
+                            Admin Dashboard
+                        </span>
+
+
+                        <span class="admin-badge">
+                            Admin
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- USERS -->
+
+                <div class="nav-item">
+
+                    <a
+                        class="nav-link
+                        {{ 'active' if request.endpoint == 'admin.users' }}"
+                        href="{{ url_for('admin.users') }}"
+                    >
+
+                        <span class="sidebar-nav-icon">
+
+                            <i class="fa-solid fa-users"></i>
+
+                        </span>
+
+
+                        <span class="sidebar-nav-text">
+                            Users
+                        </span>
+
+
+                        <span class="sidebar-arrow">
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- ALL DETECTIONS -->
+
+                <div class="nav-item">
+
+                    <a
+                        class="nav-link
+                        {{ 'active' if request.endpoint == 'admin.detections' }}"
+                        href="{{ url_for('admin.detections') }}"
+                    >
+
+                        <span class="sidebar-nav-icon">
+
+                            <i class="fa-solid fa-list-check"></i>
+
+                        </span>
+
+
+                        <span class="sidebar-nav-text">
+                            All Detections
+                        </span>
+
+
+                        <span class="sidebar-arrow">
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- MODEL METRICS -->
+
+                <div class="nav-item">
+
+                    <a
+                        class="nav-link
+                        {{ 'active' if request.endpoint == 'admin.model_metrics' }}"
+                        href="{{ url_for('admin.model_metrics') }}"
+                    >
+
+                        <span class="sidebar-nav-icon">
+
+                            <i class="fa-solid fa-chart-line"></i>
+
+                        </span>
+
+
+                        <span class="sidebar-nav-text">
+                            Model Metrics
+                        </span>
+
+
+                        <span class="sidebar-arrow">
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- AUDIT LOGS -->
+
+                <div class="nav-item">
+
+                    <a
+                        class="nav-link
+                        {{ 'active' if request.endpoint == 'admin.audit_logs' }}"
+                        href="{{ url_for('admin.audit_logs') }}"
+                    >
+
+                        <span class="sidebar-nav-icon">
+
+                            <i class="fa-solid fa-clipboard-list"></i>
+
+                        </span>
+
+
+                        <span class="sidebar-nav-text">
+                            Audit Logs
+                        </span>
+
+
+                        <span class="sidebar-arrow">
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 USER MENU
+                 ================================================= -->
+
+            <div class="user-section">
+
+
+                <div class="sidebar-section-title">
+                    Security Center
+                </div>
+
+
+                <!-- DASHBOARD -->
+
+                <div class="nav-item">
+
+                    <a
+                        class="nav-link
+                        {{ 'active' if request.endpoint == 'main.dashboard' }}"
+                        href="{{ url_for('main.dashboard') }}"
+                    >
+
+                        <span class="sidebar-nav-icon">
+
+                            <i class="fa-solid fa-gauge-high"></i>
+
+                        </span>
+
+
+                        <span class="sidebar-nav-text">
+                            Dashboard
+                        </span>
+
+
+                        <span class="sidebar-arrow">
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- ANALYZE EMAIL -->
+
+                <div class="nav-item">
+
+                    <a
+                        class="nav-link
+                        {{ 'active' if request.endpoint == 'detection.analyze' }}"
+                        href="{{ url_for('detection.analyze') }}"
+                    >
+
+                        <span class="sidebar-nav-icon">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                        </span>
+
+
+                        <span class="sidebar-nav-text">
+                            Analyze Email
+                        </span>
+
+
+                        <span class="sidebar-arrow">
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- HISTORY -->
+
+                <div class="nav-item">
+
+                    <a
+                        class="nav-link
+                        {{ 'active' if request.endpoint == 'detection.history' }}"
+                        href="{{ url_for('detection.history') }}"
+                    >
+
+                        <span class="sidebar-nav-icon">
+
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+
+                        </span>
+
+
+                        <span class="sidebar-nav-text">
+                            History
+                        </span>
+
+
+                        <span class="sidebar-arrow">
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- PROFILE -->
+
+                <div class="nav-item">
+
+                    <a
+                        class="nav-link
+                        {{ 'active' if request.endpoint == 'main.profile' }}"
+                        href="{{ url_for('main.profile') }}"
+                    >
+
+                        <span class="sidebar-nav-icon">
+
+                            <i class="fa-solid fa-id-badge"></i>
+
+                        </span>
+
+
+                        <span class="sidebar-nav-text">
+                            Profile
+                        </span>
+
+
+                        <span class="sidebar-arrow">
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- ABOUT -->
+
+                <div class="nav-item">
+
+                    <a
+                        class="nav-link
+                        {{ 'active' if request.endpoint == 'main.about' }}"
+                        href="{{ url_for('main.about') }}"
+                    >
+
+                        <span class="sidebar-nav-icon">
+
+                            <i class="fa-solid fa-circle-info"></i>
+
+                        </span>
+
+
+                        <span class="sidebar-nav-text">
+                            About
+                        </span>
+
+
+                        <span class="sidebar-arrow">
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             USER ACCOUNT
+             ================================================= -->
+
+        <div class="sidebar-account">
+
+
+            <div class="sidebar-account-avatar">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+
+            <div class="sidebar-account-info">
+
+                <div class="sidebar-account-name">
+
+                    {{ current_user.username or current_user.email or 'User' }}
+
+                </div>
+
+
+                <div class="sidebar-account-status">
+
+                    <span class="sidebar-status-dot"></span>
+
+                    Online
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             LOGOUT
+             ================================================= -->
+
+        <div class="sidebar-logout">
+
+            <a
+                href="{{ url_for('auth.logout') }}"
+                class="logout-link"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main>
+
+
+    {% else %}
+
+
+    <!-- =====================================================
+         PUBLIC PAGE
+         ===================================================== -->
+
+    <main style="width:100%;">
+
+
+    {% endif %}
+
+
+        <!-- =================================================
+             FLASH MESSAGES
+             ================================================= -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div
+                        class="alert
+                        alert-{{ category }}
+                        alert-dismissible
+                        fade
+                        show"
+                        role="alert"
+                    >
+
+                        {{ message }}
+
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"
+                        ></button>
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- =================================================
+             PAGE CONTENT
+             ================================================= -->
+
+        {% block content %}
+
+        {% endblock %}
+
+
+    </main>
+
 
 </div>
 
@@ -686,6 +1605,10 @@ main > .alert {
     src="{{ url_for('static', filename='js/main.js') }}"
 ></script>
 
+
+<!-- =========================================================
+     PAGE-SPECIFIC SCRIPTS
+     ========================================================= -->
 
 {% block scripts %}
 

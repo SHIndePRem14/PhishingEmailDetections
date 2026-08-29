@@ -6,214 +6,754 @@
 
 <style>
 
-/* =========================================
-   FULL PROFILE CONTENT AREA
-   Sidebar remains from base.html
-   ========================================= */
+/* =========================================================
+   PROFILE PAGE
+   ========================================================= */
 
 .profile-page {
     width: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh - 64px);
+
+    padding: 22px 24px 30px 24px;
+
     box-sizing: border-box;
-
-    /* Space from top and sidebar */
-    padding: 24px 24px 40px 24px;
-
-    margin: 0 !important;
 }
 
 
-/* =========================================
+/* =========================================================
    PROFILE HEADER
-   ========================================= */
+   ========================================================= */
 
 .profile-header {
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    color: #ffffff !important;
-
-    margin: 0 0 28px 0 !important;
-
-    padding: 0 !important;
+    margin-bottom: 18px;
 }
 
 .profile-title {
-    color: #ffffff !important;
-
-    font-size: 1.7rem;
-    font-weight: 600;
+    display: flex;
+    align-items: center;
 
     margin: 0 !important;
 
-    line-height: 1.4;
+    color: #f8fafc !important;
+
+    font-size: 30px !important;
+    font-weight: 700 !important;
+
+    line-height: 1.2;
 }
 
 .profile-title i {
     color: #00d4a0 !important;
+
+    font-size: 26px !important;
+
+    margin-right: 11px;
 }
 
 
-/* =========================================
-   PROFILE MAIN CARD
-   ========================================= */
+/* =========================================================
+   PROFILE SUBTITLE
+   ========================================================= */
+
+.profile-subtitle {
+    margin: 6px 0 0 37px;
+
+    color: #8b98a5;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   MAIN PROFILE CARD
+   ========================================================= */
 
 .profile-card {
+    position: relative;
+
     width: 100%;
-    max-width: none;
 
-    color: #ffffff !important;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18, 24, 34, 0.98),
+            rgba(15, 23, 34, 0.96)
+        ) !important;
 
-    background-color: #121822 !important;
+    border:
+        1px solid rgba(255, 255, 255, 0.08) !important;
 
-    border: 1px solid #22303f !important;
-
-    border-radius: 10px;
+    border-radius: 16px;
 
     padding: 28px !important;
 
     box-sizing: border-box;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.20);
 }
 
 
-/* =========================================
-   PROFILE INFORMATION
-   ========================================= */
+/* =========================================================
+   TOP ACCENT LINE
+   ========================================================= */
 
-.profile-card p {
-    color: #ffffff !important;
+.profile-card::before {
+    content: "";
 
-    font-size: 1rem;
+    position: absolute;
 
-    margin-bottom: 20px;
+    top: 0;
+    left: 0;
 
-    line-height: 1.6;
+    width: 100%;
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00d4a0,
+            #00a9ff,
+            transparent
+        );
 }
 
 
-/* =========================================
-   PROFILE LABEL
-   ========================================= */
+/* =========================================================
+   PROFILE CARD HEADER
+   ========================================================= */
 
-.profile-card span {
-    color: #00d4a0 !important;
+.profile-card-header {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 26px;
+}
+
+.profile-avatar {
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background:
+        rgba(0, 212, 160, 0.10);
+
+    border:
+        1px solid rgba(0, 212, 160, 0.25);
+
+    color: #00d4a0;
+
+    font-size: 30px;
+
+    margin-right: 18px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 212, 160, 0.08);
+}
+
+.profile-card-heading h4 {
+    margin: 0 0 5px 0;
+
+    color: #f8fafc;
+
+    font-size: 23px;
+
+    font-weight: 700;
+}
+
+.profile-card-heading p {
+    margin: 0;
+
+    color: #8b98a5;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   INFORMATION GRID
+   ========================================================= */
+
+.profile-info-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   INFORMATION ITEM
+   ========================================================= */
+
+.profile-info-item {
+    display: flex;
+    align-items: center;
+
+    min-height: 82px;
+
+    padding: 16px 18px;
+
+    background:
+        rgba(26, 34, 48, 0.78);
+
+    border:
+        1px solid #263547;
+
+    border-radius: 12px;
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.profile-info-item:hover {
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(0, 212, 160, 0.35);
+
+    background:
+        rgba(30, 41, 56, 0.90);
+}
+
+
+/* =========================================================
+   INFORMATION ICON
+   ========================================================= */
+
+.profile-info-icon {
+    width: 46px;
+    height: 46px;
+
+    min-width: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        rgba(0, 212, 160, 0.10);
+
+    color: #00d4a0;
+
+    font-size: 20px;
+
+    margin-right: 15px;
+}
+
+
+/* =========================================================
+   INFORMATION TEXT
+   ========================================================= */
+
+.profile-info-content {
+    min-width: 0;
+}
+
+.profile-info-label {
+    display: block;
+
+    color: #8b98a5;
+
+    font-size: 14px;
 
     font-weight: 600;
 
-    margin-right: 5px;
+    margin-bottom: 5px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+.profile-info-value {
+    display: block;
+
+    color: #f1f5f9;
+
+    font-size: 19px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    word-break: break-word;
 }
 
 
-/* =========================================
-   LAST ITEM
-   ========================================= */
+/* =========================================================
+   EMAIL VALUE
+   ========================================================= */
 
-.profile-card p:last-child {
-    margin-bottom: 0 !important;
+.profile-info-value.email-value {
+    font-size: 17px;
 }
 
 
-/* =========================================
-   MOBILE
-   ========================================= */
+/* =========================================================
+   TOTAL EMAILS
+   ========================================================= */
+
+.profile-info-item.total-item {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 212, 160, 0.10),
+            rgba(26, 34, 48, 0.80)
+        );
+
+    border-color:
+        rgba(0, 212, 160, 0.20);
+}
+
+.total-item .profile-info-value {
+    color: #00d4a0;
+
+    font-size: 24px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   SECURITY FOOTER
+   ========================================================= */
+
+.profile-security {
+    display: flex;
+    align-items: center;
+
+    margin-top: 18px;
+
+    padding: 14px 17px;
+
+    background:
+        rgba(26, 34, 48, 0.65);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.06);
+
+    border-radius: 10px;
+
+    color: #9aa6b2;
+
+    font-size: 14px;
+}
+
+.profile-security i {
+    color: #00d4a0;
+
+    font-size: 17px;
+
+    margin-right: 9px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .profile-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
 
 @media (max-width: 768px) {
 
     .profile-page {
-        padding: 24px 16px 40px 16px;
+        padding: 18px 16px 25px 16px;
     }
 
     .profile-title {
-        font-size: 1.45rem;
+        font-size: 27px !important;
     }
 
-    .profile-header {
-        margin-bottom: 20px !important;
+    .profile-title i {
+        font-size: 23px !important;
+    }
+
+    .profile-subtitle {
+        margin-left: 34px;
+
+        font-size: 14px;
     }
 
     .profile-card {
-        padding: 20px !important;
+        padding: 22px !important;
+
+        border-radius: 14px;
     }
 
-    .profile-card p {
-        font-size: 0.9rem;
+    .profile-card-header {
+        margin-bottom: 20px;
     }
+
+    .profile-avatar {
+        width: 60px;
+        height: 60px;
+
+        min-width: 60px;
+
+        font-size: 26px;
+    }
+
+    .profile-card-heading h4 {
+        font-size: 21px;
+    }
+
+    .profile-info-item {
+        min-height: 78px;
+
+        padding: 15px;
+    }
+
+    .profile-info-value {
+        font-size: 18px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    .profile-page {
+        padding: 15px 12px 20px 12px;
+    }
+
+    .profile-title {
+        font-size: 24px !important;
+    }
+
+    .profile-title i {
+        font-size: 21px !important;
+
+        margin-right: 8px;
+    }
+
+    .profile-subtitle {
+        margin-left: 29px;
+
+        font-size: 13px;
+    }
+
+    .profile-card {
+        padding: 18px !important;
+    }
+
+    .profile-card-header {
+        margin-bottom: 18px;
+    }
+
+    .profile-avatar {
+        width: 54px;
+        height: 54px;
+
+        min-width: 54px;
+
+        font-size: 23px;
+
+        margin-right: 13px;
+    }
+
+    .profile-card-heading h4 {
+        font-size: 19px;
+    }
+
+    .profile-card-heading p {
+        font-size: 13px;
+    }
+
+    .profile-info-item {
+        min-height: 74px;
+
+        padding: 13px;
+    }
+
+    .profile-info-icon {
+        width: 42px;
+        height: 42px;
+
+        min-width: 42px;
+
+        font-size: 18px;
+
+        margin-right: 12px;
+    }
+
+    .profile-info-label {
+        font-size: 12px;
+    }
+
+    .profile-info-value {
+        font-size: 17px;
+    }
+
+    .profile-info-value.email-value {
+        font-size: 15px;
+    }
+
+    .total-item .profile-info-value {
+        font-size: 22px;
+    }
+
+    .profile-security {
+        font-size: 13px;
+
+        padding: 12px;
+    }
+
 }
 
 </style>
 
 
-<!-- =========================================
+<!-- =========================================================
      PROFILE PAGE
-     ========================================= -->
+     ========================================================= -->
 
 <div class="profile-page">
 
 
-    <!-- =====================================
-         PROFILE HEADER
-         ===================================== -->
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
     <div class="profile-header">
 
-        <h3 class="profile-title">
+        <div>
 
-            <i class="fa-solid fa-id-badge me-2"></i>
+            <h3 class="profile-title">
 
-            My Profile
+                <i class="fa-solid fa-id-badge"></i>
 
-        </h3>
+                My Profile
+
+            </h3>
+
+            <p class="profile-subtitle">
+                View your PhishGuard account information and activity.
+            </p>
+
+        </div>
 
     </div>
 
 
-    <!-- =====================================
+    <!-- =====================================================
          PROFILE CARD
-         ===================================== -->
+         ===================================================== -->
 
     <div class="card-panel profile-card">
 
 
-        <!-- NAME -->
+        <!-- PROFILE CARD HEADER -->
 
-        <p>
-            <span>Name:</span>
-            {{ current_user.name }}
-        </p>
+        <div class="profile-card-header">
 
+            <div class="profile-avatar">
 
-        <!-- EMAIL -->
+                <i class="fa-solid fa-user"></i>
 
-        <p>
-            <span>Email:</span>
-            {{ current_user.email }}
-        </p>
+            </div>
 
 
-        <!-- ROLE -->
+            <div class="profile-card-heading">
 
-        <p>
-            <span>Role:</span>
-            {{ current_user.role | capitalize }}
-        </p>
+                <h4>
+                    Account Information
+                </h4>
+
+                <p>
+                    Your registered PhishGuard account details
+                </p>
+
+            </div>
+
+        </div>
 
 
-        <!-- MEMBER SINCE -->
+        <!-- =================================================
+             INFORMATION GRID
+             ================================================= -->
 
-        <p>
-            <span>Member since:</span>
-            {{ current_user.created_at.strftime('%Y-%m-%d') }}
-        </p>
+        <div class="profile-info-grid">
 
 
-        <!-- TOTAL EMAILS -->
+            <!-- NAME -->
 
-        <p>
-            <span>Total emails analyzed:</span>
-            {{ total_detections }}
-        </p>
+            <div class="profile-info-item">
+
+                <div class="profile-info-icon">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+                <div class="profile-info-content">
+
+                    <span class="profile-info-label">
+                        Name
+                    </span>
+
+                    <span class="profile-info-value">
+                        {{ current_user.name }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="profile-info-item">
+
+                <div class="profile-info-icon">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                </div>
+
+                <div class="profile-info-content">
+
+                    <span class="profile-info-label">
+                        Email
+                    </span>
+
+                    <span class="profile-info-value email-value">
+                        {{ current_user.email }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ROLE -->
+
+            <div class="profile-info-item">
+
+                <div class="profile-info-icon">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+                <div class="profile-info-content">
+
+                    <span class="profile-info-label">
+                        Role
+                    </span>
+
+                    <span class="profile-info-value">
+                        {{ current_user.role | capitalize }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- MEMBER SINCE -->
+
+            <div class="profile-info-item">
+
+                <div class="profile-info-icon">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                </div>
+
+                <div class="profile-info-content">
+
+                    <span class="profile-info-label">
+                        Member Since
+                    </span>
+
+                    <span class="profile-info-value">
+                        {{ current_user.created_at.strftime('%Y-%m-%d') }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL EMAILS -->
+
+            <div class="profile-info-item total-item">
+
+                <div class="profile-info-icon">
+
+                    <i class="fa-solid fa-envelope-circle-check"></i>
+
+                </div>
+
+                <div class="profile-info-content">
+
+                    <span class="profile-info-label">
+                        Total Emails Analyzed
+                    </span>
+
+                    <span class="profile-info-value">
+                        {{ total_detections }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             SECURITY INFORMATION
+             ================================================= -->
+
+        <div class="profile-security">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Your account is protected by PhishGuard security controls.
+
+        </div>
 
 
     </div>
+
 
 </div>
 

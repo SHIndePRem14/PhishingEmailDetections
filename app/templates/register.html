@@ -1,21 +1,28 @@
 {% extends "base.html" %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register | PhishGuard{% endblock %}
 
 {% block content %}
 
 <style>
 
 /* =========================================================
-   REMOVE BASE.HTML SPACING
+   PHISHGUARD REGISTER PAGE
+   ========================================================= */
+
+
+/* =========================================================
+   REMOVE BASE TEMPLATE SPACING
    ========================================================= */
 
 html,
 body {
     margin: 0 !important;
     padding: 0 !important;
+
     width: 100%;
     height: 100%;
+
     overflow: hidden;
 }
 
@@ -23,39 +30,44 @@ body {
 /* Remove Bootstrap/container spacing */
 
 main:has(.auth-wrapper),
-main.container-fluid:has(.auth-wrapper),
-main.container:has(.auth-wrapper) {
+main.container,
+main.container-fluid {
     margin: 0 !important;
     padding: 0 !important;
+
     width: 100% !important;
     max-width: none !important;
 }
 
 
 /* =========================================================
-   FULL PAGE REGISTER BACKGROUND
+   MAIN REGISTER AREA
    ========================================================= */
 
 .auth-wrapper {
+
     position: relative;
+
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
 
     display: flex;
 
     justify-content: flex-end;
-
     align-items: center;
 
-    width: 100vw;
+    padding: 0 19% 0 40px !important;
 
-    height: 100vh;
+    box-sizing: border-box;
 
-    min-height: 100vh;
-
-    margin: 0 !important;
-
-    padding: 0 330px 0 40px !important;
-
-    background-image: url("{{ url_for('static', filename='images/Image 123.png') }}");
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(2, 16, 38, 0.02),
+            rgba(2, 16, 38, 0.08)
+        ),
+        url("{{ url_for('static', filename='images/Image 123.png') }}");
 
     background-size: cover;
 
@@ -63,7 +75,7 @@ main.container:has(.auth-wrapper) {
 
     background-repeat: no-repeat;
 
-    box-sizing: border-box;
+    overflow: hidden;
 }
 
 
@@ -72,21 +84,51 @@ main.container:has(.auth-wrapper) {
    ========================================================= */
 
 .auth-card {
-    width: 420px;
 
-    max-width: 100%;
+    width: 390px;
 
-    padding: 38px;
-
-    background: rgba(15, 22, 32, 0.94);
-
-    border: 1px solid rgba(255, 255, 255, 0.15);
-
-    border-radius: 15px;
-
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.55);
+    padding: 30px 38px 24px;
 
     box-sizing: border-box;
+
+    background: rgba(13, 21, 32, 0.96);
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.55);
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   TOP BLUE LINE
+   ========================================================= */
+
+.auth-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -1px;
+
+    left: 25%;
+
+    width: 50%;
+
+    height: 2px;
+
+    background: #2196f3;
+
+    border-radius: 0 0 5px 5px;
+
+    opacity: 0.85;
 }
 
 
@@ -94,12 +136,40 @@ main.container:has(.auth-wrapper) {
    LOGO
    ========================================================= */
 
-.auth-card .fa-shield-halved {
-    color: #289bfa !important;
+.auth-logo {
 
-    filter: drop-shadow(
-        0 0 8px rgba(22, 217, 165, 0.35)
-    );
+    width: 58px;
+
+    height: 58px;
+
+    margin: 0 auto 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(33, 150, 243, 0.10);
+
+    border:
+        1px solid rgba(33, 150, 243, 0.20);
+}
+
+
+.auth-logo i {
+
+    font-size: 2.35rem;
+
+    color: #2196f3;
+
+    filter:
+        drop-shadow(
+            0 0 8px rgba(33, 150, 243, 0.35)
+        );
 }
 
 
@@ -108,15 +178,22 @@ main.container:has(.auth-wrapper) {
    ========================================================= */
 
 .auth-card h3 {
-    color: #b9c982 !important;
 
-    font-size: 2rem !important;
+    margin: 0;
+
+    color: #f1f5f9;
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    font-size: 1.85rem !important;
 
     font-weight: 700 !important;
 
-    margin-top: 10px !important;
-
-    margin-bottom: 5px !important;
+    letter-spacing: -0.4px;
 }
 
 
@@ -125,13 +202,34 @@ main.container:has(.auth-wrapper) {
    ========================================================= */
 
 .auth-subtitle {
-    color: #9aa4b2 !important;
 
-    font-size: 0.95rem !important;
-
-    line-height: 1.4;
+    margin-top: 5px !important;
 
     margin-bottom: 0 !important;
+
+    color: #8e9aaa !important;
+
+    font-size: 0.82rem !important;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   REGISTER HEADING
+   ========================================================= */
+
+.register-heading {
+
+    margin-top: 22px;
+
+    margin-bottom: 16px;
+
+    color: #e5eaf0;
+
+    font-size: 0.94rem;
+
+    font-weight: 600;
 }
 
 
@@ -140,67 +238,78 @@ main.container:has(.auth-wrapper) {
    ========================================================= */
 
 .auth-card .form-label {
+
     display: block;
 
-    color: #d8dee8 !important;
+    margin-bottom: 6px !important;
 
-    font-size: 0.85rem !important;
+    color: #cbd5e1 !important;
+
+    font-size: 0.80rem !important;
 
     font-weight: 600 !important;
-
-    margin-bottom: 6px !important;
 }
 
 
 /* =========================================================
-   INPUTS
+   FORM SPACING
+   ========================================================= */
+
+.auth-card .mb-3 {
+
+    margin-bottom: 13px !important;
+}
+
+
+.auth-card .mb-2 {
+
+    margin-bottom: 14px !important;
+}
+
+
+/* =========================================================
+   INPUT
    ========================================================= */
 
 .auth-card input.form-control {
+
     width: 100%;
 
     height: 40px !important;
 
-    min-height: 40px !important;
-
-    background-color: #eef1f7 !important;
-
-    color: #111827 !important;
-
-    border: none !important;
-
-    border-radius: 6px;
+    min-height: 40px;
 
     padding: 8px 12px !important;
 
     box-sizing: border-box;
 
-    font-family: "Segoe UI", Roboto, sans-serif !important;
+    background: #edf1f7 !important;
 
-    font-size: 15px !important;
+    color: #17202b !important;
+
+    border:
+        1px solid transparent !important;
+
+    border-radius: 7px !important;
+
+    outline: none !important;
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 14px !important;
 
     font-weight: 400 !important;
 
     line-height: 1.5 !important;
 
-    outline: none;
-}
-
-
-/* =========================================================
-   PLACEHOLDER
-   ========================================================= */
-
-.auth-card input.form-control::placeholder {
-    color: #555f6d !important;
-
-    font-family: "Segoe UI", Roboto, sans-serif !important;
-
-    font-size: 15px !important;
-
-    font-weight: 400 !important;
-
-    opacity: 1 !important;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
 
@@ -209,11 +318,11 @@ main.container:has(.auth-wrapper) {
    ========================================================= */
 
 .auth-card input.form-control:hover {
-    background-color: #eef1f7 !important;
 
-    color: #111827 !important;
+    background: #f3f5f9 !important;
 
-    font-size: 15px !important;
+    border-color:
+        rgba(33, 150, 243, 0.25) !important;
 }
 
 
@@ -222,58 +331,69 @@ main.container:has(.auth-wrapper) {
    ========================================================= */
 
 .auth-card input.form-control:focus {
-    background-color: #ffffff !important;
 
-    color: #111827 !important;
+    background: #ffffff !important;
 
-    border: none !important;
+    color: #17202b !important;
+
+    border-color:
+        #2196f3 !important;
 
     outline: none !important;
 
     box-shadow:
-        0 0 0 2px rgba(22, 217, 165, 0.35) !important;
-
-    font-family: "Segoe UI", Roboto, sans-serif !important;
-
-    font-size: 15px !important;
-
-    font-weight: 400 !important;
-
-    line-height: 1.5 !important;
+        0 0 0 3px
+        rgba(33, 150, 243, 0.12) !important;
 }
 
 
 /* =========================================================
-   INPUT ACTIVE
+   PLACEHOLDER
    ========================================================= */
 
-.auth-card input.form-control:active {
-    font-family: "Segoe UI", Roboto, sans-serif !important;
+.auth-card input.form-control::placeholder {
 
-    font-size: 15px !important;
+    color: #7b8490 !important;
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 13px !important;
 
     font-weight: 400 !important;
+
+    opacity: 1 !important;
 }
 
 
 /* =========================================================
-   CHROME / EDGE AUTOFILL
+   AUTOFILL
    ========================================================= */
 
 .auth-card input:-webkit-autofill,
 .auth-card input:-webkit-autofill:hover,
 .auth-card input:-webkit-autofill:focus,
 .auth-card input:-webkit-autofill:active {
-    font-family: "Segoe UI", Roboto, sans-serif !important;
 
-    font-size: 15px !important;
+    -webkit-text-fill-color:
+        #17202b !important;
+
+    -webkit-box-shadow:
+        0 0 0 1000px
+        #edf1f7 inset !important;
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 14px !important;
 
     font-weight: 400 !important;
-
-    -webkit-text-fill-color: #111827 !important;
-
-    transition:
-        background-color 5000s ease-in-out 0s;
 }
 
 
@@ -282,39 +402,67 @@ main.container:has(.auth-wrapper) {
    ========================================================= */
 
 .btn-phishguard {
+
     width: 100%;
 
-    background: #16d9a5 !important;
+    height: 43px;
 
-    color: #07110e !important;
-
-    font-size: 1rem !important;
-
-    font-weight: 700 !important;
+    margin-top: 3px;
 
     border: none !important;
 
-    border-radius: 6px;
+    border-radius: 7px !important;
 
-    padding: 0.65rem 0 !important;
+    background: #16d9a5 !important;
 
-    min-height: 42px;
+    color: #061712 !important;
 
-    margin-top: 8px;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
 
-    transition: all 0.2s ease;
+    font-size: 0.92rem !important;
+
+    font-weight: 700 !important;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
 }
 
 
-.btn-phishguard:hover {
-    background: #12c095 !important;
+/* =========================================================
+   REGISTER BUTTON HOVER
+   ========================================================= */
 
-    color: #07110e !important;
+.btn-phishguard:hover {
+
+    background: #13c697 !important;
+
+    color: #061712 !important;
 
     transform: translateY(-1px);
 
     box-shadow:
-        0 5px 15px rgba(22, 217, 165, 0.25);
+        0 5px 16px
+        rgba(22, 217, 165, 0.20);
+}
+
+
+/* =========================================================
+   REGISTER BUTTON ACTIVE
+   ========================================================= */
+
+.btn-phishguard:active {
+
+    transform: translateY(0);
+
+    box-shadow: none;
 }
 
 
@@ -323,31 +471,73 @@ main.container:has(.auth-wrapper) {
    ========================================================= */
 
 .auth-register {
-    color: #c3c9d2 !important;
 
-    font-size: 0.82rem !important;
-
-    margin-top: 14px !important;
+    margin-top: 16px !important;
 
     margin-bottom: 0 !important;
+
+    color: #858f9e !important;
+
+    font-size: 0.80rem !important;
 }
 
 
 .auth-register a {
+
     color: #16d9a5 !important;
 
-    font-size: 0.82rem !important;
+    font-size: 0.80rem !important;
+
+    font-weight: 600 !important;
 
     text-decoration: none;
 
-    font-weight: 600 !important;
+    transition:
+        color 0.2s ease;
 }
 
 
 .auth-register a:hover {
-    color: #12c095 !important;
+
+    color: #52e5c1 !important;
 
     text-decoration: underline;
+}
+
+
+/* =========================================================
+   SECURITY MESSAGE
+   ========================================================= */
+
+.register-security {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 16px;
+
+    padding-top: 13px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    color: #697585;
+
+    font-size: 0.67rem;
+}
+
+
+.register-security i {
+
+    color: #16d9a5;
+
+    font-size: 0.70rem;
 }
 
 
@@ -356,47 +546,105 @@ main.container:has(.auth-wrapper) {
    ========================================================= */
 
 .auth-card .text-danger {
-    color: #ff5470 !important;
 
-    font-size: 0.72rem !important;
+    margin-top: 3px !important;
 
-    margin-top: 3px;
+    color: #ff7180 !important;
+
+    font-size: 0.68rem !important;
+
+    line-height: 1.3;
 }
 
 
 /* =========================================================
-   AUTH FOOTER
+   PAGE FOOTER
    ========================================================= */
 
 .auth-footer {
+
     position: absolute;
 
     left: 0;
 
-    bottom: 12px;
+    bottom: 10px;
 
     width: 100%;
 
     text-align: center;
 
-    color: rgba(255, 255, 255, 0.65) !important;
+    color: #d1d7df;
 
-    font-size: 12px;
+    font-size: 0.82rem;
 
     font-weight: 400;
 
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
 
     z-index: 10;
 
     pointer-events: none;
+
+    text-shadow:
+        0 1px 5px
+        rgba(0, 0, 0, 0.75);
 }
 
 
 .auth-footer strong {
-    color: #2579f8 !important;
+
+    color: #3e98ed;
 
     font-weight: 600;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1600px) {
+
+    .auth-wrapper {
+
+        padding-right: 16% !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   LAPTOP
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .auth-wrapper {
+
+        padding-right: 8% !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .auth-wrapper {
+
+        justify-content: center;
+
+        padding: 20px !important;
+
+        background-position: center;
+
+    }
+
 }
 
 
@@ -404,89 +652,101 @@ main.container:has(.auth-wrapper) {
    MOBILE
    ========================================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
 
     html,
     body {
-        overflow: hidden;
-    }
 
+        overflow: auto;
 
-    main:has(.auth-wrapper),
-    main.container-fluid:has(.auth-wrapper),
-    main.container:has(.auth-wrapper) {
-        margin: 0 !important;
-
-        padding: 0 !important;
-
-        width: 100% !important;
-
-        max-width: none !important;
     }
 
 
     .auth-wrapper {
-        width: 100vw;
 
-        height: 100vh;
+        width: 100vw;
 
         min-height: 100vh;
 
-        justify-content: center;
+        height: auto;
 
-        align-items: center;
+        padding:
+            25px 15px 70px !important;
 
-        padding: 20px !important;
-
-        background-position: center;
     }
 
 
     .auth-card {
+
         width: 100%;
 
-        max-width: 380px;
+        max-width: 390px;
 
-        padding: 28px 24px;
+        padding:
+            28px 25px 23px;
+
+        border-radius: 12px;
+
     }
 
 
     .auth-card h3 {
-        font-size: 1.8rem !important;
+
+        font-size:
+            1.75rem !important;
+
     }
 
 
-    .auth-subtitle {
-        font-size: 0.9rem !important;
+    .auth-logo {
+
+        width: 55px;
+
+        height: 55px;
+
     }
 
 
-    .auth-card .form-label {
-        font-size: 0.9rem !important;
+    .auth-logo i {
+
+        font-size:
+            2.2rem;
+
     }
 
 
-    .auth-card input.form-control,
-    .auth-card input.form-control:hover,
-    .auth-card input.form-control:focus,
-    .auth-card input.form-control:active {
-        font-size: 16px !important;
+    .auth-card input.form-control {
 
-        height: 44px !important;
+        height:
+            43px !important;
+
+        min-height:
+            43px;
+
+        font-size:
+            15px !important;
+
     }
 
 
     .auth-card input.form-control::placeholder {
-        font-size: 16px !important;
+
+        font-size:
+            14px !important;
+
     }
 
 
     .auth-footer {
+
         bottom: 8px;
 
-        font-size: 11px;
+        font-size:
+            0.70rem;
 
-        padding: 0 10px;
+        padding:
+            0 10px;
+
     }
 
 }
@@ -496,17 +756,31 @@ main.container:has(.auth-wrapper) {
    SMALL MOBILE
    ========================================================= */
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
 
     .auth-card {
+
         max-width: 340px;
 
-        padding: 25px 20px;
+        padding:
+            25px 20px 21px;
+
     }
 
 
     .auth-card h3 {
-        font-size: 1.6rem !important;
+
+        font-size:
+            1.6rem !important;
+
+    }
+
+
+    .auth-card .form-label {
+
+        font-size:
+            0.78rem !important;
+
     }
 
 }
@@ -529,22 +803,43 @@ main.container:has(.auth-wrapper) {
 
 
         <!-- =================================================
-             LOGO AND HEADING
+             LOGO + BRAND
              ================================================= -->
 
-        <div class="text-center mb-4">
+        <div class="text-center">
 
-            <i class="fa-solid fa-shield-halved fa-4x"></i>
+
+            <div class="auth-logo">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
 
             <h3>
+
                 Create Account
+
             </h3>
+
 
             <p class="auth-subtitle">
 
                 Join PhishGuard to Start Analyzing Emails
 
             </p>
+
+
+        </div>
+
+
+        <!-- =================================================
+             REGISTER HEADING
+             ================================================= -->
+
+        <div class="register-heading">
+
+            Create your account
 
         </div>
 
@@ -555,22 +850,28 @@ main.container:has(.auth-wrapper) {
 
         <form method="POST" novalidate>
 
+
             {{ form.hidden_tag() }}
 
 
-            <!-- =================================================
-                 FULL NAME
-                 ================================================= -->
+            <!-- =============================================
+                 NAME
+                 ============================================= -->
 
             <div class="mb-3">
 
-                {{ form.name.label(class="form-label") }}
+
+                {{ form.name.label(
+                    class="form-label"
+                ) }}
+
 
                 {{ form.name(
                     class="form-control",
-                    placeholder="Jane Doe",
+                    placeholder="Enter your full name",
                     autocomplete="name"
                 ) }}
+
 
                 {% for error in form.name.errors %}
 
@@ -582,22 +883,28 @@ main.container:has(.auth-wrapper) {
 
                 {% endfor %}
 
+
             </div>
 
 
-            <!-- =================================================
+            <!-- =============================================
                  EMAIL
-                 ================================================= -->
+                 ============================================= -->
 
             <div class="mb-3">
 
-                {{ form.email.label(class="form-label") }}
+
+                {{ form.email.label(
+                    class="form-label"
+                ) }}
+
 
                 {{ form.email(
                     class="form-control",
-                    placeholder="you@example.com",
-                    autocomplete="username"
+                    placeholder="Enter your email address",
+                    autocomplete="email"
                 ) }}
+
 
                 {% for error in form.email.errors %}
 
@@ -609,22 +916,28 @@ main.container:has(.auth-wrapper) {
 
                 {% endfor %}
 
+
             </div>
 
 
-            <!-- =================================================
+            <!-- =============================================
                  PASSWORD
-                 ================================================= -->
+                 ============================================= -->
 
             <div class="mb-3">
 
-                {{ form.password.label(class="form-label") }}
+
+                {{ form.password.label(
+                    class="form-label"
+                ) }}
+
 
                 {{ form.password(
                     class="form-control",
-                    placeholder="At least 8 characters",
+                    placeholder="Enter your password",
                     autocomplete="new-password"
                 ) }}
+
 
                 {% for error in form.password.errors %}
 
@@ -636,22 +949,28 @@ main.container:has(.auth-wrapper) {
 
                 {% endfor %}
 
+
             </div>
 
 
-            <!-- =================================================
+            <!-- =============================================
                  CONFIRM PASSWORD
-                 ================================================= -->
+                 ============================================= -->
 
             <div class="mb-2">
 
-                {{ form.confirm_password.label(class="form-label") }}
+
+                {{ form.confirm_password.label(
+                    class="form-label"
+                ) }}
+
 
                 {{ form.confirm_password(
                     class="form-control",
                     placeholder="Confirm your password",
                     autocomplete="new-password"
                 ) }}
+
 
                 {% for error in form.confirm_password.errors %}
 
@@ -663,16 +982,18 @@ main.container:has(.auth-wrapper) {
 
                 {% endfor %}
 
+
             </div>
 
 
-            <!-- =================================================
-                 CREATE ACCOUNT BUTTON
-                 ================================================= -->
+            <!-- =============================================
+                 REGISTER BUTTON
+                 ============================================= -->
 
             {{ form.submit(
                 class="btn btn-phishguard w-100"
             ) }}
+
 
         </form>
 
@@ -685,29 +1006,56 @@ main.container:has(.auth-wrapper) {
 
             Already have an account?
 
+
             <a href="{{ url_for('auth.login') }}">
 
                 Login here
 
             </a>
 
+
         </p>
+
+
+        <!-- =================================================
+             SECURITY MESSAGE
+             ================================================= -->
+
+        <div class="register-security">
+
+
+            <i class="fa-solid fa-lock"></i>
+
+
+            <span>
+
+                Your account information is protected
+
+            </span>
+
+
+        </div>
 
 
     </div>
 
 
     <!-- =====================================================
-         FOOTER
+         PAGE FOOTER
          ===================================================== -->
 
     <div class="auth-footer">
 
-        © 2026 <strong>PhishGuard</strong>. All Rights Reserved.
+        © 2026
+
+        <strong>PhishGuard</strong>.
+
+        All Rights Reserved.
 
     </div>
 
 
 </div>
+
 
 {% endblock %}

@@ -5,6 +5,7 @@
 {% block content %}
 
 <style>
+
 /* =========================================
    ANALYZE EMAIL PAGE
    ========================================= */
@@ -12,9 +13,13 @@
 .analyze-page {
     width: 100%;
     min-height: 100vh;
-    padding: 3px 18px 40px 18px;
+
+    /* Small and normal top space */
+    padding: 8px 18px 40px 18px;
+
     box-sizing: border-box;
 }
+
 
 /* =========================================
    PAGE HEADER
@@ -25,15 +30,21 @@
     align-items: center;
     justify-content: space-between;
 
-    margin-bottom: 20px;
-    padding: 0 2px;
+    /* Normal spacing below heading */
+    margin-bottom: 18px;
+
+    padding: 0;
 }
 
 .analyze-header h3 {
     margin: 0;
+
     color: #f1f5f9;
+
     font-size: 28px;
     font-weight: 700;
+
+    line-height: 1.2;
 }
 
 .analyze-header h3 i {
@@ -42,11 +53,13 @@
 }
 
 .analyze-subtitle {
-    margin-top: 5px;
+    margin-top: 6px;
     margin-bottom: 0;
 
     color: #8b98a5;
+
     font-size: 14px;
+    line-height: 1.5;
 }
 
 
@@ -58,6 +71,7 @@
     width: 100%;
 
     background-color: #121822;
+
     border: 1px solid #22303f;
     border-radius: 12px;
 
@@ -65,7 +79,8 @@
 
     box-sizing: border-box;
 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -91,12 +106,14 @@
     font-size: 15px !important;
     font-weight: 600 !important;
 
-    margin-bottom: 7px;
+    margin-bottom: 8px !important;
+
+    line-height: 1.3;
 }
 
 
 /* =========================================
-   INPUT FIELDS
+   ALL INPUT FIELDS
    ========================================= */
 
 .analyze-card .form-control {
@@ -105,20 +122,34 @@
     background-color: #1a2230 !important;
 
     border: 1px solid #2b3a4d !important;
+
     border-radius: 7px;
 
     color: #f1f5f9 !important;
 
-    font-size: 15px !important;
+    /* Typed text size */
+    font-size: 18px !important;
+
     font-weight: 400 !important;
 
-    padding: 11px 13px;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    min-height: 45px;
+    padding: 11px 14px;
+
+    min-height: 48px;
+
+    box-sizing: border-box;
 
     box-shadow: none !important;
 
-    transition: all 0.2s ease;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
 }
 
 
@@ -127,11 +158,13 @@
    ========================================= */
 
 .analyze-card .form-control::placeholder {
-    color: #687586 !important;
+    color: #7d8999 !important;
 
     opacity: 1 !important;
 
-    font-size: 14px !important;
+    font-size: 15px !important;
+
+    font-weight: 400 !important;
 }
 
 
@@ -146,14 +179,68 @@
 
     border-color: #00d4a0 !important;
 
-    box-shadow: 0 0 0 3px rgba(0, 212, 160, 0.10) !important;
+    box-shadow:
+        0 0 0 3px
+        rgba(0, 212, 160, 0.10) !important;
 
     outline: none;
 }
 
 
 /* =========================================
-   EMAIL BODY TEXTAREA
+   SENDER + RECEIVER
+   ========================================= */
+
+.analyze-card input[name="sender_email"],
+.analyze-card input[name="receiver_email"] {
+    height: 48px !important;
+    min-height: 48px !important;
+
+    font-size: 18px !important;
+}
+
+
+/* =========================================
+   SUBJECT SECTION
+   ========================================= */
+
+.analyze-subject {
+    margin-top: 4px;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================
+   SUBJECT INPUT
+   ========================================= */
+
+.analyze-card input[name="subject"] {
+    height: 48px !important;
+    min-height: 48px !important;
+
+    font-size: 18px !important;
+
+    font-weight: 400 !important;
+
+    padding: 11px 14px !important;
+}
+
+
+/* =========================================
+   SUBJECT PLACEHOLDER
+   ========================================= */
+
+.analyze-card input[name="subject"]::placeholder {
+    font-size: 15px !important;
+
+    color: #7d8999 !important;
+
+    opacity: 1 !important;
+}
+
+
+/* =========================================
+   EMAIL BODY
    ========================================= */
 
 .analyze-card textarea.form-control {
@@ -166,6 +253,29 @@
     line-height: 1.6;
 
     padding: 13px 14px;
+
+    font-size: 18px !important;
+
+    font-weight: 400 !important;
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+}
+
+
+/* =========================================
+   EMAIL BODY PLACEHOLDER
+   ========================================= */
+
+.analyze-card textarea.form-control::placeholder {
+    color: #7d8999 !important;
+
+    opacity: 1 !important;
+
+    font-size: 15px !important;
 }
 
 
@@ -174,13 +284,17 @@
    ========================================= */
 
 #body-char-count {
-    color: #718096 !important;
+    color: #8b98a5 !important;
 
-    font-size: 13px !important;
+    font-size: 14px !important;
 
-    margin-top: 7px;
+    font-weight: 500 !important;
+
+    margin-top: 3px;
 
     margin-bottom: 18px;
+
+    line-height: 1.4;
 }
 
 
@@ -189,9 +303,11 @@
    ========================================= */
 
 .analyze-card .text-danger {
-    margin-top: 3px;
+    margin-top: 5px;
 
     font-size: 13px !important;
+
+    line-height: 1.4;
 }
 
 
@@ -205,7 +321,7 @@
     align-items: center;
     justify-content: center;
 
-    gap: 7px;
+    gap: 8px;
 
     background-color: #00d4a0 !important;
 
@@ -213,17 +329,21 @@
 
     color: #06231b !important;
 
-    font-size: 15px !important;
+    font-size: 16px !important;
 
     font-weight: 700 !important;
 
     padding: 11px 20px;
 
-    min-height: 45px;
+    min-height: 46px;
 
     border-radius: 7px;
 
-    transition: all 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .analyze-btn:hover {
@@ -234,6 +354,14 @@
     color: #ffffff !important;
 
     transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 212, 160, 0.18);
+}
+
+.analyze-btn:active {
+    transform: translateY(0);
 }
 
 
@@ -244,9 +372,10 @@
 .analyze-security-note {
     width: 100%;
 
-    margin-top: 10px;
+    /* Small normal gap from analyze card */
+    margin-top: 8px;
 
-    padding: 14px 16px;
+    padding: 15px 16px;
 
     box-sizing: border-box;
 
@@ -258,15 +387,42 @@
 
     color: #cbd5e1;
 
-    font-size: 13px;
+    font-size: 15px !important;
 
-    line-height: 1.5;
+    font-weight: 400;
+
+    line-height: 1.6;
+}
+
+.analyze-security-note strong {
+    color: #e2e8f0;
+
+    font-size: 15px !important;
+
+    font-weight: 700;
 }
 
 .analyze-security-note i {
     color: #00d4a0;
 
-    margin-right: 6px;
+    margin-right: 7px;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   FORM SPACING
+   ========================================= */
+
+/* Sender + Receiver row */
+.analyze-card .row.mb-3 {
+    margin-bottom: 18px !important;
+}
+
+/* Subject */
+.analyze-card .mb-3 {
+    margin-bottom: 18px !important;
 }
 
 
@@ -277,26 +433,98 @@
 @media (max-width: 768px) {
 
     .analyze-page {
-        padding: 18px 12px 30px 12px;
+        padding:
+            8px 12px 30px 12px;
     }
 
     .analyze-header h3 {
         font-size: 24px;
     }
 
+    .analyze-subtitle {
+        font-size: 13px;
+    }
+
     .analyze-card {
         padding: 18px;
+    }
+
+    .analyze-card .form-control {
+        font-size: 17px !important;
+    }
+
+    .analyze-card .form-control::placeholder {
+        font-size: 14px !important;
     }
 
     .analyze-card textarea.form-control {
         min-height: 220px;
         height: 220px;
+
+        font-size: 17px !important;
+    }
+
+    #body-char-count {
+        font-size: 14px !important;
+    }
+
+    .analyze-security-note {
+        font-size: 14px !important;
+    }
+
+    .analyze-security-note strong {
+        font-size: 14px !important;
     }
 }
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 500px) {
+
+    .analyze-page {
+        padding:
+            8px 10px 25px 10px;
+    }
+
+    .analyze-card {
+        padding: 16px;
+    }
+
+    .analyze-header h3 {
+        font-size: 22px;
+    }
+
+    .analyze-card .form-control {
+        font-size: 17px !important;
+    }
+
+    .analyze-card textarea.form-control {
+        font-size: 17px !important;
+
+        min-height: 210px;
+        height: 210px;
+    }
+
+    .analyze-security-note {
+        font-size: 14px !important;
+
+        padding:
+            13px 14px;
+    }
+
+    .analyze-btn {
+        font-size: 15px !important;
+    }
+}
+
 </style>
 
 
 <div class="analyze-page">
+
 
     <!-- =====================================
          PAGE HEADER
@@ -305,6 +533,7 @@
     <div class="analyze-header">
 
         <div>
+
             <h3>
                 <i class="fa-solid fa-magnifying-glass"></i>
                 Analyze Email
@@ -313,6 +542,7 @@
             <p class="analyze-subtitle">
                 Analyze an email for potential phishing threats using PhishGuard AI.
             </p>
+
         </div>
 
     </div>
@@ -347,9 +577,11 @@
                     ) }}
 
                     {% for error in form.sender_email.errors %}
+
                         <div class="text-danger small">
                             {{ error }}
                         </div>
+
                     {% endfor %}
 
                 </div>
@@ -367,9 +599,11 @@
                     ) }}
 
                     {% for error in form.receiver_email.errors %}
+
                         <div class="text-danger small">
                             {{ error }}
                         </div>
+
                     {% endfor %}
 
                 </div>
@@ -381,7 +615,7 @@
                  SUBJECT
                  ================================== -->
 
-            <div class="mb-3">
+            <div class="mb-3 analyze-subject">
 
                 {{ form.subject.label(class="form-label") }}
 
@@ -391,9 +625,11 @@
                 ) }}
 
                 {% for error in form.subject.errors %}
+
                     <div class="text-danger small">
                         {{ error }}
                     </div>
+
                 {% endfor %}
 
             </div>
@@ -415,9 +651,11 @@
                 ) }}
 
                 {% for error in form.email_body.errors %}
+
                     <div class="text-danger small">
                         {{ error }}
                     </div>
+
                 {% endfor %}
 
             </div>
@@ -440,8 +678,11 @@
                 type="submit"
                 class="btn analyze-btn"
             >
+
                 <i class="fa-solid fa-magnifying-glass"></i>
+
                 Analyze Email
+
             </button>
 
         </form>
@@ -464,6 +705,7 @@
 
     </div>
 
+
 </div>
 
 
@@ -475,21 +717,34 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const emailBody = document.getElementById("email_body");
-    const counter = document.getElementById("body-char-count");
+    const emailBody =
+        document.getElementById("email_body");
+
+    const counter =
+        document.getElementById("body-char-count");
+
 
     if (!emailBody || !counter) {
         return;
     }
 
+
     function updateCharacterCount() {
 
-        const length = emailBody.value.length;
+        const length =
+            emailBody.value.length;
 
-        counter.textContent = length + " characters";
+        counter.textContent =
+            length + " characters";
+
     }
 
-    emailBody.addEventListener("input", updateCharacterCount);
+
+    emailBody.addEventListener(
+        "input",
+        updateCharacterCount
+    );
+
 
     updateCharacterCount();
 
