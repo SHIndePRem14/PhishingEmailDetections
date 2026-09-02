@@ -1,75 +1,1713 @@
 {% extends "base.html" %}
-{% block title %}Detection Result{% endblock %}
+
+{% block title %}Detection Result | PhishGuard{% endblock %}
+
 {% block content %}
+
+<style>
+/* =========================================================
+   PHISHGUARD - DETECTION RESULT PAGE
+   Professional SOC / Cybersecurity UI
+   ========================================================= */
+
+.detection-page {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 0 35px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.detection-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.detection-header-text {
+    min-width: 0;
+}
+
+.detection-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 0;
+
+    color: #eaf6ff;
+
+    font-size: 27px;
+    font-weight: 800;
+
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+}
+
+.detection-title-icon {
+    width: 42px;
+    height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(0, 191, 255, 0.18),
+        rgba(0, 110, 220, 0.08)
+    );
+
+    border: 1px solid rgba(52, 192, 255, 0.30);
+
+    color: #59d5ff;
+
+    font-size: 17px;
+
+    box-shadow:
+        0 0 20px rgba(0, 160, 255, 0.08),
+        inset 0 0 15px rgba(0, 160, 255, 0.04);
+}
+
+.detection-header-text small {
+    display: block;
+
+    margin-top: 6px;
+    margin-left: 54px;
+
+    color: #7893aa;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   RESULT HERO
+   ========================================================= */
+
+.result-hero {
+    position: relative;
+    overflow: hidden;
+
+    margin-bottom: 18px;
+
+    padding: 25px 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12, 27, 51, 0.98),
+            rgba(7, 17, 35, 0.98)
+        );
+
+    border: 1px solid rgba(91, 138, 185, 0.20);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.23),
+        inset 0 1px 0 rgba(255,255,255,0.025);
+}
+
+
+/* Top status line */
+
+.result-hero::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 7%;
+
+    width: 86%;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--result-color, #ff4969),
+        var(--result-color, #ff6b7f),
+        var(--result-color, #ff4969),
+        transparent
+    );
+
+    box-shadow:
+        0 0 12px var(--result-glow, rgba(255,70,105,0.55));
+}
+
+
+/* Background glow */
+
+.result-hero::after {
+    content: "";
+
+    position: absolute;
+
+    right: -120px;
+    top: -150px;
+
+    width: 340px;
+    height: 340px;
+
+    background: radial-gradient(
+        circle,
+        var(--result-bg, rgba(255,58,90,0.09)),
+        transparent 68%
+    );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   RESULT CONTENT
+   ========================================================= */
+
+.result-content {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.result-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.result-label {
+    margin-bottom: 7px;
+
+    color: #7892a9;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.result-status {
+    margin: 0;
+
+    font-size: 30px;
+    line-height: 1.15;
+
+    font-weight: 850;
+    letter-spacing: -0.5px;
+}
+
+.result-status.phishing {
+    color: #ff5572;
+
+    text-shadow:
+        0 0 18px rgba(255, 75, 105, 0.16);
+}
+
+.result-status.legitimate {
+    color: #00d5a0;
+
+    text-shadow:
+        0 0 18px rgba(0, 213, 160, 0.15);
+}
+
+.result-description {
+    max-width: 700px;
+
+    margin: 8px 0 0;
+
+    color: #91a8bb;
+
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   CONFIDENCE SPEEDOMETER
+   ========================================================= */
+
+.confidence-box {
+    position: relative;
+
+    width: 165px;
+    min-width: 165px;
+
+    padding: 13px 14px 11px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18, 36, 62, 0.80),
+            rgba(8, 20, 39, 0.84)
+        );
+
+    border: 1px solid rgba(104, 151, 194, 0.20);
+
+    border-radius: 12px;
+
+    box-sizing: border-box;
+}
+
+
+/* Risk badge */
+
+.risk-badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 6px 10px;
+
+    margin-bottom: 6px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.badge-risk-high {
+    color: #ff7187;
+
+    background: rgba(255, 68, 100, 0.10);
+
+    border: 1px solid rgba(255, 68, 100, 0.28);
+}
+
+.badge-risk-medium {
+    color: #f5c84b;
+
+    background: rgba(245, 190, 45, 0.09);
+
+    border: 1px solid rgba(245, 190, 45, 0.28);
+}
+
+.badge-risk-low {
+    color: #38dfb0;
+
+    background: rgba(0, 213, 160, 0.09);
+
+    border: 1px solid rgba(0, 213, 160, 0.25);
+}
+
+
+/* Speedometer */
+
+.confidence-meter {
+    position: relative;
+
+    width: 130px;
+    height: 70px;
+
+    margin: 0 auto;
+}
+
+.confidence-meter svg {
+    width: 130px;
+    height: 70px;
+
+    display: block;
+
+    overflow: visible;
+}
+
+.meter-track {
+    fill: none;
+
+    stroke: rgba(80, 112, 142, 0.20);
+
+    stroke-width: 9;
+
+    stroke-linecap: round;
+}
+
+.meter-progress {
+    fill: none;
+
+    stroke: var(--meter-color, #f5c84b);
+
+    stroke-width: 9;
+
+    stroke-linecap: round;
+
+    stroke-dasharray: 157;
+
+    stroke-dashoffset: var(--meter-offset, 50);
+
+    filter:
+        drop-shadow(
+            0 0 5px var(--meter-glow, rgba(245,200,75,0.28))
+        );
+
+    transition: stroke-dashoffset 0.7s ease;
+}
+
+
+/* Percentage */
+
+.confidence-meter-value {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    bottom: 2px;
+
+    text-align: center;
+
+    color: #eaf7ff;
+
+    font-size: 22px;
+    line-height: 1;
+
+    font-weight: 850;
+
+    letter-spacing: -0.5px;
+}
+
+.confidence-label {
+    margin-top: 0;
+
+    color: #718aa0;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+}
+
+
+/* =========================================================
+   ANALYSIS GRID
+   ========================================================= */
+
+.analysis-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   ANALYSIS CARD
+   ========================================================= */
+
+.analysis-card {
+    position: relative;
+
+    min-height: 115px;
+
+    padding: 18px;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12, 25, 47, 0.97),
+            rgba(7, 17, 34, 0.97)
+        );
+
+    border: 1px solid rgba(89, 137, 180, 0.18);
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 9px 25px rgba(0,0,0,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.025);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.analysis-card:hover {
+    transform: translateY(-1px);
+
+    border-color: rgba(66, 177, 235, 0.30);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.21),
+        0 0 20px rgba(0,145,255,0.04);
+}
+
+
+/* =========================================================
+   ANALYSIS CARD HEADER
+   ========================================================= */
+
+.analysis-card-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+.analysis-icon {
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+}
+
+.keyword-icon {
+    color: #f5c84b;
+
+    background: rgba(245, 200, 75, 0.09);
+
+    border: 1px solid rgba(245, 200, 75, 0.16);
+}
+
+.url-icon {
+    color: #7de3c5;
+
+    background: rgba(0, 212, 160, 0.08);
+
+    border: 1px solid rgba(0, 212, 160, 0.15);
+}
+
+.analysis-card-title {
+    margin: 0;
+
+    color: #c4d8e9;
+
+    font-size: 14px;
+
+    font-weight: 750;
+}
+
+
+/* =========================================================
+   KEYWORD CHIPS
+   ========================================================= */
+
+.keyword-container {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+.keyword-chip {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 6px 9px;
+
+    color: #f3c94c;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(130, 92, 0, 0.20),
+            rgba(75, 57, 0, 0.16)
+        );
+
+    border: 1px solid rgba(225, 164, 20, 0.40);
+
+    border-radius: 18px;
+
+    font-size: 11px;
+
+    font-weight: 650;
+
+    line-height: 1.2;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.025);
+}
+
+.keyword-chip i {
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   URL LIST
+   ========================================================= */
+
+.url-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.url-chip {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 8px 10px;
+
+    color: #ff718a;
+
+    background:
+        rgba(115, 20, 48, 0.16);
+
+    border: 1px solid rgba(255, 69, 105, 0.30);
+
+    border-radius: 6px;
+
+    font-family:
+        "Consolas",
+        "Courier New",
+        monospace;
+
+    font-size: 11px;
+
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
+
+    box-shadow:
+        inset 0 0 12px rgba(255, 50, 80, 0.02);
+}
+
+.url-chip i {
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #7891a6;
+
+    font-size: 12px;
+}
+
+.empty-state i {
+    color: #38cfa7;
+}
+
+
+/* =========================================================
+   EMAIL DETAILS CARD
+   ========================================================= */
+
+.email-card {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 21px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12, 25, 47, 0.98),
+            rgba(7, 17, 34, 0.98)
+        );
+
+    border: 1px solid rgba(89, 137, 180, 0.19);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.025);
+}
+
+
+/* =========================================================
+   EMAIL DETAILS TITLE
+   ========================================================= */
+
+.email-card-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 0 0 17px;
+
+    color: #c6dbea;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    line-height: 1.3;
+}
+
+.email-card-title i {
+    color: #67cfff;
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   EMAIL METADATA
+   ========================================================= */
+
+.email-meta {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.meta-item {
+    min-width: 0;
+
+    padding: 12px 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22, 37, 59, 0.68),
+            rgba(17, 31, 51, 0.55)
+        );
+
+    border: 1px solid rgba(90, 134, 171, 0.15);
+
+    border-radius: 9px;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.meta-item:hover {
+    border-color: rgba(70, 174, 225, 0.28);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25, 45, 70, 0.75),
+            rgba(17, 31, 51, 0.65)
+        );
+}
+
+
+/* Metadata labels */
+
+.meta-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #6f8ba3;
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+}
+
+
+/* Metadata values */
+
+.meta-value {
+    display: block;
+
+    color: #c5d8e8;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   SUBJECT
+   ========================================================= */
+
+.subject-box {
+    margin-bottom: 16px;
+
+    padding: 13px 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(21, 37, 59, 0.65),
+            rgba(17, 31, 51, 0.55)
+        );
+
+    border-left: 3px solid #31bdf5;
+
+    border-radius: 7px;
+
+    box-shadow:
+        inset 0 0 15px rgba(0, 155, 220, 0.025);
+}
+
+.subject-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #6f8ba3;
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+}
+
+.subject-value {
+    display: block;
+
+    color: #d1e0eb;
+
+    font-size: 14px;
+
+    font-weight: 650;
+
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   EMAIL BODY LABEL
+   ========================================================= */
+
+.body-label {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 8px;
+
+    color: #7893a8;
+
+    font-size: 12px;
+
+    font-weight: 750;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+}
+
+.body-label i {
+    color: #4db9e9;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   EMAIL BODY
+   ========================================================= */
+
+.email-body {
+    position: relative;
+
+    margin: 0;
+
+    padding: 17px;
+
+    max-height: 380px;
+
+    overflow-y: auto;
+
+    color: #b8cbbf;
+
+    background:
+        linear-gradient(
+            145deg,
+            #172234,
+            #121d2e
+        );
+
+    border: 1px solid rgba(101, 136, 165, 0.17);
+
+    border-radius: 9px;
+
+    font-family:
+        "Consolas",
+        "Courier New",
+        monospace;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,0.10);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.email-body::-webkit-scrollbar {
+    width: 7px;
+}
+
+.email-body::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.025);
+
+    border-radius: 10px;
+}
+
+.email-body::-webkit-scrollbar-thumb {
+    background: rgba(94, 136, 168, 0.40);
+
+    border-radius: 10px;
+}
+
+.email-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(94, 160, 200, 0.60);
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+   ========================================================= */
+
+.result-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 17px;
+}
+
+.btn-analyze {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 42px;
+
+    padding: 0 18px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    color: #ffffff !important;
+
+    background:
+        linear-gradient(
+            100deg,
+            #087fba,
+            #079ed3,
+            #0bb5d5
+        ) !important;
+
+    font-size: 13px;
+
+    font-weight: 750;
+
+    text-decoration: none !important;
+
+    box-shadow:
+        0 7px 18px rgba(0, 143, 205, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn-analyze:hover {
+    color: #ffffff !important;
+
+    transform: translateY(-1px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 9px 22px rgba(0, 143, 205, 0.28);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .email-meta {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .result-content {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .confidence-box {
+        width: 100%;
+
+        min-width: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+    .confidence-meter {
+        margin: 0;
+    }
+
+    .confidence-label {
+        display: none;
+    }
+
+    .analysis-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-status {
+        font-size: 28px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .detection-title {
+        font-size: 23px;
+    }
+
+    .detection-title-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .detection-header-text small {
+        margin-left: 50px;
+
+        font-size: 11px;
+    }
+
+    .result-hero {
+        padding: 20px 16px;
+    }
+
+    .result-status {
+        font-size: 25px;
+    }
+
+    .result-description {
+        font-size: 13px;
+    }
+
+    .analysis-card,
+    .email-card {
+        padding: 16px;
+    }
+
+    .email-card-title {
+        font-size: 15px;
+    }
+
+    .email-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .meta-label {
+        font-size: 10px;
+    }
+
+    .meta-value {
+        font-size: 13px;
+    }
+
+    .subject-value {
+        font-size: 13px;
+    }
+
+    .email-body {
+        max-height: 320px;
+
+        font-size: 12px;
+
+        padding: 14px;
+
+        line-height: 1.7;
+    }
+
+    .confidence-box {
+        flex-direction: column;
+
+        gap: 2px;
+    }
+
+    .confidence-meter {
+        margin: 0 auto;
+    }
+
+    .result-actions {
+        width: 100%;
+    }
+
+    .btn-analyze {
+        width: 100%;
+
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .detection-title {
+        font-size: 21px;
+    }
+
+    .result-status {
+        font-size: 23px;
+    }
+
+    .email-card-title {
+        font-size: 14px;
+    }
+
+    .meta-value {
+        font-size: 12px;
+    }
+
+    .subject-value {
+        font-size: 12px;
+    }
+
+    .email-body {
+        font-size: 11px;
+    }
+
+}
+</style>
+
+
+{# =========================================================
+   DETECTION VARIABLES
+   ========================================================= #}
+
 {% set is_phishing = detection.prediction == 'phishing' %}
-{% set card_class = 'result-card-danger' if is_phishing else 'result-card-safe' %}
 
-<h3 class="mb-4"><i class="fa-solid fa-file-shield me-2"></i>Detection Result</h3>
+{% set confidence_percent = (detection.confidence * 100) | round(1) %}
 
-<div class="card-panel p-4 {{ card_class }} mb-4">
-  <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
-    <div>
-      <div class="text-muted small mb-1">Prediction</div>
-      <h2 class="mb-0" style="color: {{ '#ff5470' if is_phishing else '#00d4a0' }};">
-        {{ 'PHISHING EMAIL' if is_phishing else 'LEGITIMATE EMAIL' }}
-      </h2>
-      <p class="mt-2 mb-0">
-        {% if detection.risk_level == 'High' %}
-          High probability of phishing detected.
-        {% elif detection.risk_level == 'Medium' %}
-          Email contains potentially dangerous characteristics.
-        {% else %}
-          Email appears legitimate.
-        {% endif %}
-      </p>
+{# SVG semicircle circumference is approximately 157 #}
+
+{% set meter_offset = 157 - ((confidence_percent / 100) * 157) %}
+
+
+{# =========================================================
+   MAIN PAGE
+   ========================================================= #}
+
+<div class="detection-page">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+         ===================================================== -->
+
+    <div class="detection-header">
+
+        <div class="detection-header-text">
+
+            <h3 class="detection-title">
+
+                <span class="detection-title-icon">
+                    <i class="fa-solid fa-file-shield"></i>
+                </span>
+
+                Detection Result
+
+            </h3>
+
+            <small>
+                AI-powered email security analysis
+            </small>
+
+        </div>
+
     </div>
-    <div class="text-end">
-      <span class="badge {{ 'badge-risk-high' if detection.risk_level == 'High' else ('badge-risk-medium' if detection.risk_level == 'Medium' else 'badge-risk-low') }} fs-6 mb-2">{{ detection.risk_level }} Risk</span>
-      <div class="stat-value">{{ (detection.confidence * 100) | round(1) }}%</div>
-      <div class="stat-label">Confidence Score</div>
+
+
+    <!-- =====================================================
+         RESULT HERO
+         ===================================================== -->
+
+    <div
+        class="result-hero"
+        style="
+            --result-color:
+                {% if is_phishing %}
+                    #ff4969
+                {% else %}
+                    #00d5a0
+                {% endif %};
+
+            --result-glow:
+                {% if is_phishing %}
+                    rgba(255,70,105,0.55)
+                {% else %}
+                    rgba(0,213,160,0.45)
+                {% endif %};
+
+            --result-bg:
+                {% if is_phishing %}
+                    rgba(255,58,90,0.09)
+                {% else %}
+                    rgba(0,213,160,0.07)
+                {% endif %};
+        "
+    >
+
+        <div class="result-content">
+
+
+            <!-- =================================================
+                 RESULT INFORMATION
+                 ================================================= -->
+
+            <div class="result-left">
+
+                <div class="result-label">
+                    Prediction
+                </div>
+
+                <h2
+                    class="
+                        result-status
+                        {{ 'phishing' if is_phishing else 'legitimate' }}
+                    "
+                >
+
+                    {% if is_phishing %}
+
+                        PHISHING EMAIL
+
+                    {% else %}
+
+                        LEGITIMATE EMAIL
+
+                    {% endif %}
+
+                </h2>
+
+
+                <p class="result-description">
+
+                    {% if detection.risk_level == 'High' %}
+
+                        High probability of phishing detected.
+                        This email contains multiple suspicious characteristics.
+
+                    {% elif detection.risk_level == 'Medium' %}
+
+                        Email contains potentially dangerous characteristics.
+
+                    {% else %}
+
+                        Email appears legitimate based on the current analysis.
+
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 CONFIDENCE SPEEDOMETER
+                 ================================================= -->
+
+            <div class="confidence-box">
+
+
+                {% if detection.risk_level == 'High' %}
+
+                    <span class="risk-badge badge-risk-high">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                        High Risk
+
+                    </span>
+
+                {% elif detection.risk_level == 'Medium' %}
+
+                    <span class="risk-badge badge-risk-medium">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                        Medium Risk
+
+                    </span>
+
+                {% else %}
+
+                    <span class="risk-badge badge-risk-low">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Low Risk
+
+                    </span>
+
+                {% endif %}
+
+
+                <div
+                    class="confidence-meter"
+
+                    style="
+                        --meter-offset: {{ meter_offset }};
+
+                        --meter-color:
+                        {% if detection.risk_level == 'High' %}
+                            #ff5572
+                        {% elif detection.risk_level == 'Medium' %}
+                            #f5c84b
+                        {% else %}
+                            #00d5a0
+                        {% endif %};
+
+                        --meter-glow:
+                        {% if detection.risk_level == 'High' %}
+                            rgba(255,85,114,0.35)
+                        {% elif detection.risk_level == 'Medium' %}
+                            rgba(245,200,75,0.30)
+                        {% else %}
+                            rgba(0,213,160,0.30)
+                        {% endif %};
+                    "
+                >
+
+                    <svg
+                        viewBox="0 0 120 65"
+                        aria-label="Confidence Score"
+                    >
+
+                        <path
+                            class="meter-track"
+                            d="M 10 55 A 50 50 0 0 1 110 55"
+                        ></path>
+
+                        <path
+                            class="meter-progress"
+                            d="M 10 55 A 50 50 0 0 1 110 55"
+                        ></path>
+
+                    </svg>
+
+
+                    <div class="confidence-meter-value">
+                        {{ confidence_percent }}%
+                    </div>
+
+                </div>
+
+
+                <div class="confidence-label">
+                    Confidence Score
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
+
+
+    <!-- =====================================================
+         SUSPICIOUS ANALYSIS
+         ===================================================== -->
+
+    <div class="analysis-grid">
+
+
+        <!-- =================================================
+             SUSPICIOUS KEYWORDS
+             ================================================= -->
+
+        <div class="analysis-card">
+
+            <div class="analysis-card-header">
+
+                <div class="analysis-icon keyword-icon">
+
+                    <i class="fa-solid fa-key"></i>
+
+                </div>
+
+                <h5 class="analysis-card-title">
+
+                    Suspicious Keywords Detected
+
+                </h5>
+
+            </div>
+
+
+            {% if detection.keyword_list() %}
+
+                <div class="keyword-container">
+
+                    {% for kw in detection.keyword_list() %}
+
+                        <span class="keyword-chip">
+
+                            <i class="fa-solid fa-circle-exclamation"></i>
+
+                            {{ kw }}
+
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    No suspicious keywords detected.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- =================================================
+             SUSPICIOUS URLS
+             ================================================= -->
+
+        <div class="analysis-card">
+
+            <div class="analysis-card-header">
+
+                <div class="analysis-icon url-icon">
+
+                    <i class="fa-solid fa-link"></i>
+
+                </div>
+
+                <h5 class="analysis-card-title">
+
+                    Suspicious URLs Detected
+
+                </h5>
+
+            </div>
+
+
+            {% if detection.url_list() %}
+
+                <div class="url-list">
+
+                    {% for url in detection.url_list() %}
+
+                        <div class="url-chip">
+
+                            <i class="fa-solid fa-link"></i>
+
+                            {{ url }}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    No suspicious URLs detected.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         EMAIL DETAILS
+         ===================================================== -->
+
+    <div class="email-card">
+
+
+        <!-- TITLE -->
+
+        <h5 class="email-card-title">
+
+            <i class="fa-solid fa-envelope-open-text"></i>
+
+            Email Details
+
+        </h5>
+
+
+        <!-- =================================================
+             EMAIL METADATA
+             ================================================= -->
+
+        <div class="email-meta">
+
+
+            <!-- SENDER -->
+
+            <div class="meta-item">
+
+                <span class="meta-label">
+                    Sender
+                </span>
+
+                <span class="meta-value">
+
+                    {{ detection.sender_email or '—' }}
+
+                </span>
+
+            </div>
+
+
+            <!-- RECEIVER -->
+
+            <div class="meta-item">
+
+                <span class="meta-label">
+                    Receiver
+                </span>
+
+                <span class="meta-value">
+
+                    {{ detection.receiver_email or '—' }}
+
+                </span>
+
+            </div>
+
+
+            <!-- MODEL -->
+
+            <div class="meta-item">
+
+                <span class="meta-label">
+                    Model Used
+                </span>
+
+                <span class="meta-value">
+
+                    {{ detection.model_name or '—' }}
+
+                </span>
+
+            </div>
+
+
+            <!-- DATE -->
+
+            <div class="meta-item">
+
+                <span class="meta-label">
+                    Detection Date
+                </span>
+
+                <span class="meta-value">
+
+                    {% if detection.created_at %}
+
+                        {{ detection.created_at.strftime('%Y-%m-%d %H:%M') }}
+
+                    {% else %}
+
+                        —
+
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SUBJECT
+             ================================================= -->
+
+        <div class="subject-box">
+
+            <span class="subject-label">
+                Subject
+            </span>
+
+            <span class="subject-value">
+
+                {{ detection.subject or '(no subject)' }}
+
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             EMAIL BODY LABEL
+             ================================================= -->
+
+        <div class="body-label">
+
+            <i class="fa-solid fa-align-left"></i>
+
+            Email Body
+
+        </div>
+
+
+        <!-- =================================================
+             EMAIL BODY
+             ================================================= -->
+
+        <pre class="email-body">{{ detection.email_body or '(empty email body)' }}</pre>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         ACTION
+         ===================================================== -->
+
+    <div class="result-actions">
+
+        <a
+            href="{{ url_for('detection.analyze') }}"
+            class="btn-analyze"
+        >
+
+            <i class="fa-solid fa-plus"></i>
+
+            Analyze Another Email
+
+        </a>
+
+    </div>
+
+
 </div>
 
-<div class="row g-3">
-  <div class="col-md-6">
-    <div class="card-panel p-3 h-100">
-      <h5 class="mb-3"><i class="fa-solid fa-key me-2"></i>Suspicious Keywords Detected</h5>
-      {% if detection.keyword_list() %}
-        {% for kw in detection.keyword_list() %}
-          <span class="keyword-chip">{{ kw }}</span>
-        {% endfor %}
-      {% else %}
-        <p class="text-muted mb-0">No suspicious keywords detected.</p>
-      {% endif %}
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card-panel p-3 h-100">
-      <h5 class="mb-3"><i class="fa-solid fa-link me-2"></i>Suspicious URLs Detected</h5>
-      {% if detection.url_list() %}
-        {% for url in detection.url_list() %}
-          <div class="url-chip">{{ url }}</div>
-        {% endfor %}
-      {% else %}
-        <p class="text-muted mb-0">No suspicious URLs detected.</p>
-      {% endif %}
-    </div>
-  </div>
-</div>
-
-<div class="card-panel p-3 mt-3">
-  <h5 class="mb-3">Email Details</h5>
-  <div class="row small">
-    <div class="col-md-3 mb-2"><span class="text-muted">Sender:</span> {{ detection.sender_email or '—' }}</div>
-    <div class="col-md-3 mb-2"><span class="text-muted">Receiver:</span> {{ detection.receiver_email or '—' }}</div>
-    <div class="col-md-3 mb-2"><span class="text-muted">Model Used:</span> {{ detection.model_name }}</div>
-    <div class="col-md-3 mb-2"><span class="text-muted">Date:</span> {{ detection.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
-  </div>
-  <div class="mb-2"><span class="text-muted">Subject:</span> {{ detection.subject or '(no subject)' }}</div>
-  <div class="text-muted mb-1">Body:</div>
-  <pre class="p-2" style="white-space: pre-wrap; background: var(--bg-panel-light); border-radius: 8px;">{{ detection.email_body }}</pre>
-</div>
-
-<a href="{{ url_for('detection.analyze') }}" class="btn btn-phishguard mt-3"><i class="fa-solid fa-plus me-1"></i>Analyze Another Email</a>
 {% endblock %}

@@ -1,22 +1,16 @@
 :root {
-
     --bg-dark: #0b0f14;
     --bg-panel: #121822;
     --bg-panel-light: #1a2230;
     --border-color: #22303f;
-
-    --accent: #00d4a0;
+    --accent: #2d93f3;
     --accent-soft: #0ea578;
-
     --danger: #ff5470;
     --warning: #ffb020;
-    --safe: #00d4a0;
-
+    --safe: #2d93f3;
     --text-main: #93b392;
     --text-muted: #8b98a5;
-
 }
-
 
 /* =========================================
    GLOBAL
@@ -24,29 +18,20 @@
 
 html,
 body {
-
     margin: 0 !important;
     padding: 0 !important;
-
     width: 100%;
     height: 100%;
-
 }
 
-
 body {
-
     background-color: var(--bg-dark);
-
     color: var(--text-main);
-
     font-family:
         "Segoe UI",
         Roboto,
         sans-serif;
-
 }
-
 
 /* =========================================
    REMOVE BASE TEMPLATE SPACING
@@ -55,250 +40,155 @@ body {
 main:has(.auth-wrapper),
 main.container,
 main.container-fluid {
-
     margin: 0 !important;
     padding: 0 !important;
-
     width: 100% !important;
-
     max-width: none !important;
-
 }
-
 
 /* =========================================
    NAVBAR
    ========================================= */
 
 .navbar-phishguard {
-
     background-color: var(--bg-panel);
-
     border-bottom: 1px solid var(--border-color);
-
 }
-
 
 .navbar-phishguard .navbar-brand {
-
     color: var(--accent);
-
     font-weight: 700;
-
     letter-spacing: 0.5px;
-
 }
-
 
 .navbar-phishguard .nav-link {
-
     color: var(--text-muted);
-
 }
-
 
 .navbar-phishguard .nav-link:hover,
 .navbar-phishguard .nav-link.active {
-
     color: var(--text-main);
-
 }
-
 
 /* =========================================
    GENERAL CARDS
    ========================================= */
 
 .card-panel {
-
     background-color: var(--bg-panel);
-
     border: 1px solid var(--border-color);
-
     border-radius: 10px;
-
 }
-
 
 /* =========================================
    STAT CARDS
    ========================================= */
 
 .stat-card {
-
     background-color: var(--bg-panel);
-
     border: 1px solid var(--border-color);
-
     border-radius: 12px;
-
     padding: 1.25rem;
-
     height: 100%;
-
     box-sizing: border-box;
-
 }
-
 
 .stat-card .stat-value {
-
     font-size: 2rem;
-
     font-weight: 700;
-
 }
-
 
 .stat-card .stat-label {
-
     color: var(--text-muted);
-
     font-size: 0.85rem;
-
     text-transform: uppercase;
-
     letter-spacing: 0.5px;
-
 }
-
 
 /* =========================================
    STAT ICONS
    ========================================= */
 
 .stat-icon {
-
     width: 46px;
     height: 46px;
-
     border-radius: 10px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     font-size: 1.2rem;
-
 }
-
 
 .bg-icon-safe {
-
     background: rgba(0, 212, 160, 0.15);
-
     color: var(--safe);
-
 }
-
 
 .bg-icon-danger {
-
     background: rgba(255, 84, 112, 0.15);
-
     color: var(--danger);
-
 }
-
 
 .bg-icon-warning {
-
     background: rgba(255, 176, 32, 0.15);
-
     color: var(--warning);
-
 }
-
 
 .bg-icon-accent {
-
     background: rgba(0, 212, 160, 0.15);
-
     color: var(--accent);
-
 }
-
 
 /* =========================================
    RISK BADGES
    ========================================= */
 
 .badge-risk-high {
-
     background-color: var(--danger);
-
 }
-
 
 .badge-risk-medium {
-
     background-color: var(--warning);
-
     color: #1a1a1a;
-
 }
-
 
 .badge-risk-low {
-
     background-color: var(--safe);
-
     color: #063d2f;
-
 }
-
 
 /* =========================================
    TABLE
    ========================================= */
 
 .table-dark-panel {
-
     --bs-table-bg: var(--bg-panel);
-
     --bs-table-color: var(--text-main);
-
     --bs-table-border-color: var(--border-color);
-
 }
-
 
 /* =========================================================
    SIDEBAR
    ========================================================= */
 
 .sidebar {
-
     background-color: var(--bg-panel);
-
     border-right: 1px solid var(--border-color);
-
     min-height: 100vh;
-
     height: 100vh;
-
     display: flex;
-
     flex-direction: column;
-
 }
-
 
 /* =========================================================
    SIDEBAR MENU
    ========================================================= */
 
 .sidebar .nav {
-
     width: 100%;
-
     padding: 0;
-
     margin: 0;
-
 }
-
 
 /* =========================================================
    SIDEBAR NAV LINKS
@@ -306,130 +196,76 @@ main.container-fluid {
    ========================================================= */
 
 .sidebar .nav-link {
-
     color: var(--text-muted);
-
-    /*
-       INCREASED FONT SIZE
-    */
-
     font-size: 25px !important;
-
-    /*
-       STRONGER TEXT
-    */
-
     font-weight: 600 !important;
-
-    /*
-       MORE COMFORTABLE SPACING
-    */
-
     padding: 0.75rem 1rem;
-
     border-radius: 7px;
-
     margin-bottom: 4px;
-
     line-height: 1.35;
-
-    transition:
-        all 0.2s ease;
-
+    transition: all 0.2s ease;
 }
-
 
 /* =========================================================
    SIDEBAR ICONS
    ========================================================= */
 
 .sidebar .nav-link i {
-
     font-size: 18px !important;
-
     width: 25px;
-
     min-width: 25px;
-
     text-align: center;
-
 }
-
 
 /* =========================================================
    SIDEBAR ACTIVE
    ========================================================= */
 
 .sidebar .nav-link.active {
-
     background-color: var(--bg-panel-light);
-
     color: var(--accent);
-
     transform: translateX(2px);
-
 }
-
 
 /* =========================================================
    SIDEBAR HOVER
    ========================================================= */
 
 .sidebar .nav-link:hover {
-
     background-color: var(--bg-panel-light);
-
     color: var(--accent);
-
     transform: translateX(3px);
-
 }
-
 
 /* =========================================================
    SIDEBAR ACTIVE + HOVER
    ========================================================= */
 
 .sidebar .nav-link.active:hover {
-
     color: var(--accent);
-
     background-color: var(--bg-panel-light);
-
 }
-
 
 /* =========================================================
    SIDEBAR SEPARATOR
    ========================================================= */
 
 .sidebar hr {
-
     margin: 12px 15px;
-
     border-color: rgba(255, 255, 255, 0.10);
-
 }
-
 
 /* =========================================================
    SIDEBAR LOGOUT
    ========================================================= */
 
 .sidebar-logout {
-
     margin-top: auto;
-
     width: 100%;
-
     padding: 15px 16px 20px 16px;
-
     border-top: 1px solid rgba(255, 255, 255, 0.06);
-
     box-sizing: border-box;
-
 }
-
 
 /* =========================================================
    LOGOUT BUTTON
@@ -437,266 +273,166 @@ main.container-fluid {
    ========================================================= */
 
 .logout-link {
-
     display: flex;
-
     align-items: center;
-
     width: 100%;
-
     padding: 13px 14px;
-
     border-radius: 8px;
-
     text-decoration: none;
-
     color: #ff5470 !important;
-
     font-size: 22px !important;
-
     font-weight: 600 !important;
-
     line-height: 1.35;
-
-    transition:
-        all 0.25s ease;
-
+    transition: all 0.25s ease;
 }
-
 
 /* =========================================================
    LOGOUT ICON
    ========================================================= */
 
 .logout-link i {
-
     font-size: 19px !important;
-
     width: 25px;
-
     min-width: 25px;
-
     text-align: center;
-
 }
-
 
 /* =========================================================
    LOGOUT HOVER
    ========================================================= */
 
 .logout-link:hover {
-
     background-color: rgba(255, 84, 112, 0.12);
-
     color: #ff7185 !important;
-
     transform: translateX(3px);
-
 }
-
 
 /* =========================================
    PHISHGUARD BUTTON - GENERAL
    ========================================= */
 
 .btn-phishguard {
-
     background-color: var(--accent);
-
     border-color: var(--accent);
-
     color: #06231b;
-
     font-weight: 600;
-
 }
-
 
 .btn-phishguard:hover {
-
     background-color: var(--accent-soft);
-
     border-color: var(--accent-soft);
-
     color: #06231b;
-
 }
-
 
 /* =========================================
    DASHBOARD ANALYZE BUTTON
    ========================================= */
 
 .dashboard-header .btn-phishguard {
-
     width: auto !important;
-
     min-width: 180px;
-
     height: 38px;
-
     padding: 7px 22px;
-
     margin-top: 0 !important;
-
     border: none !important;
-
     border-radius: 7px;
-
-    background: #16d9a5 !important;
-
+    background: rgb(73, 145, 238) !important;
     color: #061712 !important;
-
     font-size: 1.10rem !important;
-
     font-weight: 700 !important;
-
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
     white-space: nowrap;
 
     transition:
         background 0.2s ease,
         transform 0.15s ease,
         box-shadow 0.2s ease;
-
 }
-
 
 .dashboard-header .btn-phishguard:hover {
-
-    background: #13c697 !important;
-
+    background: #3358fd !important;
     color: #061712 !important;
-
     transform: translateY(-1px);
 
-    box-shadow: 0 5px 16px rgba(22, 217, 165, 0.20);
-
+    box-shadow:
+        0 5px 16px rgba(22, 217, 165, 0.20);
 }
-
 
 /* =========================================
    KEYWORD CHIP
    ========================================= */
 
 .keyword-chip {
-
     display: inline-block;
-
     background-color: rgba(255, 176, 32, 0.15);
-
     color: var(--warning);
-
     border: 1px solid rgba(255, 176, 32, 0.3);
-
     border-radius: 20px;
-
     padding: 0.25rem 0.75rem;
-
     margin: 0.15rem;
-
     font-size: 0.85rem;
-
 }
-
 
 /* =========================================
    URL CHIP
    ========================================= */
 
 .url-chip {
-
     display: inline-block;
-
     background-color: rgba(255, 84, 112, 0.12);
-
     color: var(--danger);
-
     border: 1px solid rgba(255, 84, 112, 0.3);
-
     border-radius: 6px;
-
     padding: 0.25rem 0.6rem;
-
     margin: 0.15rem;
-
     font-size: 0.8rem;
-
     word-break: break-all;
-
 }
-
 
 /* =========================================================
    DASHBOARD CARD ROW
    ========================================================= */
 
 .dashboard-cards-row {
-
     display: flex;
-
     flex-wrap: nowrap;
-
     gap: 10px;
-
     width: 100%;
-
 }
-
 
 .dashboard-cards-row > [class*="col-"] {
-
     padding-left: 0 !important;
-
     padding-right: 0 !important;
-
     box-sizing: border-box;
-
 }
-
 
 /* =========================================
    FOUR STAT CARDS
    ========================================= */
 
 .dashboard-cards-row > .col-xl-3 {
-
     flex: 0 0 calc((100% - 30px) / 4);
-
     max-width: calc((100% - 30px) / 4);
-
 }
-
 
 /* =========================================
    STAT CARD ROW SPACING
    ========================================= */
 
 .analytics-row {
-
     margin-bottom: 18px !important;
-
 }
-
 
 /* =========================================
    RECENT HISTORY
    ========================================= */
 
 .recent-history-card {
-
     margin-top: 18px !important;
-
     margin-bottom: 20px !important;
-
 }
-
 
 /* =========================================================
    RECENT DETECTION HISTORY
@@ -705,877 +441,558 @@ main.container-fluid {
 .recent-history-card h5,
 .recent-history-card h6,
 .recent-history-card .card-title {
-
     color: #f1f5f9 !important;
-
     font-size: 20px !important;
-
     font-weight: 700 !important;
-
 }
-
 
 .recent-history-card .card-title i,
 .recent-history-card h5 i,
 .recent-history-card h6 i {
-
     font-size: 17px !important;
-
 }
-
 
 .recent-history-card .table-dark-panel thead th {
-
     font-size: 13px !important;
-
     font-weight: 700 !important;
-
     color: #a8b4c5 !important;
-
     padding: 15px 14px !important;
-
     letter-spacing: 0.6px;
-
 }
-
 
 .recent-history-card .table-dark-panel tbody td {
-
     font-size: 14px !important;
-
     padding: 16px 14px !important;
-
     color: #e2e8f0 !important;
-
     vertical-align: middle;
-
 }
-
 
 .recent-history-card .table-dark-panel tbody td:first-child {
-
     font-size: 13px !important;
-
     font-weight: 500 !important;
-
     color: #8fb3d9 !important;
-
 }
-
 
 .recent-history-card .table-dark-panel tbody td:nth-child(2) {
-
     font-size: 15px !important;
-
     font-weight: 700 !important;
-
     color: #f1f5f9 !important;
-
 }
-
 
 .recent-history-card .table-dark-panel tbody td:nth-child(3) {
-
     font-size: 14px !important;
-
     font-weight: 600 !important;
-
 }
-
 
 .recent-history-card .table-dark-panel tbody td:nth-child(4) {
-
     font-size: 14px !important;
-
     font-weight: 600 !important;
-
 }
-
 
 .recent-history-card .badge,
 .recent-history-card .badge-risk-high,
 .recent-history-card .badge-risk-medium,
 .recent-history-card .badge-risk-low {
-
     font-size: 12px !important;
-
     font-weight: 700 !important;
-
     padding: 6px 10px !important;
-
 }
-
 
 /* =========================================================
    DASHBOARD CONTAINER
    ========================================================= */
 
 .dashboard-container {
-
     min-height: calc(100vh - 100px);
-
     padding-top: 20px !important;
-
     padding-left: 0 !important;
-
     padding-right: 0 !important;
-
 }
-
 
 /* =========================================================
    DASHBOARD HEADER
    ========================================================= */
 
 .dashboard-header {
-
     background: rgba(15, 23, 42, 0.75);
-
     border: 1px solid rgba(255, 255, 255, 0.08);
-
     backdrop-filter: blur(10px);
-
     border-radius: 16px;
-
     padding: 20px;
-
 }
-
 
 .dashboard-header h3 {
-
     color: #f8fafc;
-
     font-weight: 700;
-
 }
-
 
 .dashboard-subtitle {
-
     color: #94a3b8;
-
     font-size: 14px;
-
 }
-
 
 /* =========================================================
    DASHBOARD STAT CARD
    ========================================================= */
 
 .dashboard-container .stat-card {
-
     position: relative;
-
     overflow: hidden;
-
     background: rgba(15, 23, 42, 0.82);
-
     border: 1px solid rgba(255, 255, 255, 0.08);
-
     border-radius: 16px;
-
     padding: 22px;
-
     min-height: 155px;
-
     transition: all 0.3s ease;
-
     backdrop-filter: blur(10px);
-
     box-sizing: border-box;
-
 }
-
 
 .dashboard-container .stat-card:hover {
-
     transform: translateY(-5px);
-
     border-color: rgba(13, 110, 253, 0.35);
 
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.25);
 }
-
 
 .dashboard-container .stat-card::after {
-
     content: "";
-
     position: absolute;
-
     width: 90px;
-
     height: 90px;
-
     right: -35px;
-
     bottom: -35px;
-
     background: rgba(13, 110, 253, 0.06);
-
     border-radius: 50%;
-
 }
-
 
 /* =========================================================
    DASHBOARD STAT ICON
    ========================================================= */
 
 .dashboard-container .stat-icon {
-
     width: 45px;
-
     height: 45px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     border-radius: 12px;
-
     font-size: 18px;
-
 }
-
 
 /* =========================================================
    DASHBOARD STAT COLORS
    ========================================================= */
 
 .dashboard-container .bg-icon-accent {
-
     background: rgba(13, 110, 253, 0.15);
-
     color: #60a5fa;
-
 }
-
 
 .dashboard-container .bg-icon-safe {
-
     background: rgba(25, 135, 84, 0.15);
-
     color: #4ade80;
-
 }
-
 
 .dashboard-container .bg-icon-warning {
-
     background: rgba(255, 193, 7, 0.15);
-
     color: #facc15;
-
 }
-
 
 .dashboard-container .bg-icon-danger {
-
     background: rgba(220, 53, 69, 0.15);
-
     color: #f87171;
-
 }
-
 
 /* =========================================================
    DASHBOARD STAT TEXT
    ========================================================= */
 
 .dashboard-container .stat-value {
-
     color: #f8fafc;
-
     font-size: 30px;
-
     font-weight: 700;
-
     line-height: 1.2;
-
 }
-
 
 .dashboard-container .stat-label {
-
     color: #94a3b8;
-
     font-size: 13px;
-
 }
-
 
 /* =========================================================
    ANALYTICS
    ========================================================= */
 
 .card-panel {
-
     background: rgba(15, 23, 42, 0.82);
-
     border: 1px solid rgba(255, 255, 255, 0.08);
-
     border-radius: 16px;
-
     backdrop-filter: blur(10px);
 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15);
 }
-
 
 /* =========================================================
    ANALYTICS ICON
    ========================================================= */
 
 .analytics-icon {
-
     width: 42px;
-
     height: 42px;
-
     border-radius: 10px;
-
     background: rgba(13, 110, 253, 0.12);
-
     color: #60a5fa;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
 }
-
 
 /* =========================================================
    ANALYTICS ROW
    ========================================================= */
 
 .dashboard-container .analytics-row + .dashboard-cards-row {
-
     display: flex;
-
     flex-wrap: nowrap;
-
     gap: 10px;
-
 }
-
 
 .dashboard-container
 .analytics-row:not(.mb-4)
 .col-lg-4 {
-
     flex: 0 0 calc((100% - 20px) / 3);
-
     max-width: calc((100% - 20px) / 3);
-
 }
-
 
 /* =========================================================
    TABLE
    ========================================================= */
 
 .table-dark-panel {
-
     --bs-table-bg: transparent;
-
     --bs-table-color: #e2e8f0;
-
-    --bs-table-border-color: rgba(255,255,255,0.07);
+    --bs-table-border-color: rgba(255, 255, 255, 0.07);
 
     margin-bottom: 0;
-
 }
-
 
 .table-dark-panel thead th {
-
     color: #94a3b8;
-
     font-size: 12px;
-
     text-transform: uppercase;
-
     letter-spacing: 0.5px;
 
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.08);
 
     padding: 14px;
-
 }
-
 
 .table-dark-panel tbody td {
-
     padding: 14px;
-
 }
-
 
 .table-dark-panel tbody tr {
-
     transition: 0.2s;
-
 }
-
 
 .table-dark-panel tbody tr:hover {
-
     background: rgba(13, 110, 253, 0.05);
-
 }
-
 
 /* =========================================================
    RISK BADGES
    ========================================================= */
 
 .badge-risk-high {
-
     background: rgba(220, 53, 69, 0.15);
-
     color: #ff6b7a;
-
     border: 1px solid rgba(220, 53, 69, 0.2);
-
     padding: 6px 10px;
-
     border-radius: 20px;
-
 }
-
 
 .badge-risk-medium {
-
     background: rgba(255, 193, 7, 0.15);
-
     color: #ffd43b;
-
     border: 1px solid rgba(255, 193, 7, 0.2);
-
     padding: 6px 10px;
-
     border-radius: 20px;
-
 }
-
 
 .badge-risk-low {
-
     background: rgba(25, 135, 84, 0.15);
-
     color: #51cf66;
-
     border: 1px solid rgba(25, 135, 84, 0.2);
-
     padding: 6px 10px;
-
     border-radius: 20px;
-
 }
-
 
 /* =========================================================
    MODEL INFO
    ========================================================= */
 
 .model-info-item {
-
     padding: 12px 0;
-
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.07);
 }
-
 
 .model-info-item:last-child {
-
     border-bottom: none;
-
 }
-
 
 .model-label {
-
     color: #64748b;
-
     font-size: 12px;
-
     margin-bottom: 4px;
-
 }
-
 
 .model-value {
-
     color: #f8fafc;
-
     font-weight: 600;
-
 }
-
 
 /* =========================================================
    ANALYZE EMAIL PAGE
    ========================================================= */
 
 .analyze-page {
-
     width: 100%;
-
     min-height: 100vh;
-
     padding: 3px 18px 40px 18px;
-
     box-sizing: border-box;
-
 }
-
 
 /* =========================================================
    ANALYZE HEADER
    ========================================================= */
 
 .analyze-header {
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
     margin-bottom: 14px;
-
     padding: 0;
-
 }
-
 
 .analyze-header h3 {
-
     margin: 0;
-
     color: #f1f5f9;
-
     font-size: 28px;
-
     font-weight: 700;
-
 }
-
 
 .analyze-header h3 i {
-
-    color: #00d4a0;
-
+    color: #2d93f3;
     margin-right: 8px;
-
 }
-
 
 .analyze-subtitle {
-
     margin-top: 5px;
-
     margin-bottom: 0;
-
     color: #8b98a5;
-
-    font-size: 14px;
-
+    font-size: 18px;
 }
-
 
 /* =========================================================
    ANALYZE CARD
    ========================================================= */
 
 .analyze-card {
-
     width: 100%;
-
     background-color: #121822;
-
     border: 1px solid #22303f;
-
     border-radius: 12px;
-
     padding: 24px;
-
     box-sizing: border-box;
 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.15);
 }
-
 
 /* =========================================================
    ANALYZE FORM ROW
    ========================================================= */
 
 .analyze-card .row {
-
     --bs-gutter-x: 18px;
-
     --bs-gutter-y: 18px;
-
 }
-
 
 /* =========================================================
    ANALYZE FORM LABEL
    ========================================================= */
 
 .analyze-card .form-label {
-
     display: block;
-
     color: #dbeafe !important;
-
-    font-size: 15px !important;
-
+    font-size: 18px !important;
     font-weight: 600 !important;
-
     margin-bottom: 7px;
-
 }
-
 
 /* =========================================================
    ANALYZE INPUT BOX
    ========================================================= */
 
 .analyze-card .form-control {
-
     width: 100%;
-
     background-color: #1a2230 !important;
-
     border: 1px solid #2b3a4d !important;
-
     border-radius: 7px;
-
     color: #f1f5f9 !important;
 
     font-size: 18px !important;
-
     font-weight: 400 !important;
 
     padding: 11px 13px;
-
     min-height: 45px;
 
     box-shadow: none !important;
 
-    transition: all 0.2s ease;
-
+    transition:
+        all 0.2s ease;
 }
-
 
 /* =========================================================
    INPUT PLACEHOLDER
    ========================================================= */
 
 .analyze-card .form-control::placeholder {
-
     color: #7d8999 !important;
-
     opacity: 1 !important;
-
-    font-size: 15px !important;
-
+    font-size: 20px !important;
     font-weight: 400 !important;
-
 }
-
 
 /* =========================================================
    INPUT FOCUS
    ========================================================= */
 
 .analyze-card .form-control:focus {
-
     background-color: #1a2230 !important;
-
     color: #ffffff !important;
+    border-color: #2d93f3 !important;
 
-    border-color: #00d4a0 !important;
-
-    box-shadow: 0 0 0 3px rgba(0, 212, 160, 0.10) !important;
+    box-shadow:
+        0 0 0 3px rgba(0, 212, 160, 0.10) !important;
 
     outline: none;
-
 }
-
 
 /* =========================================================
    EMAIL BODY TEXTAREA
    ========================================================= */
 
 .analyze-card textarea.form-control {
-
     min-height: 250px;
-
     height: 250px;
-
     resize: vertical;
-
     line-height: 1.6;
-
     padding: 13px 14px;
-
     font-size: 18px !important;
-
 }
-
 
 /* =========================================================
    CHARACTER COUNTER
    ========================================================= */
 
 #body-char-count {
-
     color: #8b98a5 !important;
-
     font-size: 14px !important;
-
     margin-top: 7px;
-
     margin-bottom: 18px;
-
 }
-
 
 /* =========================================================
    ERROR MESSAGE
    ========================================================= */
 
 .analyze-card .text-danger {
-
     margin-top: 3px;
-
     font-size: 14px !important;
-
 }
-
 
 /* =========================================================
    ANALYZE BUTTON
    ========================================================= */
 
 .analyze-btn {
-
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 7px;
 
-    background-color: #00d4a0 !important;
-
-    border: 1px solid #00d4a0 !important;
+    background-color: #2d93f3 !important;
+    border: 1px solid #2d93f3 !important;
 
     color: #06231b !important;
 
     font-size: 15px !important;
-
     font-weight: 700 !important;
 
     padding: 11px 20px;
-
     min-height: 45px;
 
     border-radius: 7px;
 
-    transition: all 0.2s ease;
-
+    transition:
+        all 0.2s ease;
 }
 
-
 .analyze-btn:hover {
-
     background-color: #0ea578 !important;
-
     border-color: #0ea578 !important;
-
     color: #ffffff !important;
 
     transform: translateY(-1px);
-
 }
-
 
 /* =========================================================
    SECURITY INFORMATION
    ========================================================= */
 
 .analyze-security-note {
-
     width: 100%;
-
     margin-top: 10px;
-
     padding: 15px 17px;
-
     box-sizing: border-box;
 
     background-color: #1a2230;
-
     border: 1px solid #22303f;
-
     border-radius: 8px;
 
     color: #dbe4ef;
 
     font-size: 15px !important;
-
     font-weight: 400;
-
     line-height: 1.6;
-
 }
-
 
 /* =========================================================
    SECURITY NOTE ICON
    ========================================================= */
 
 .analyze-security-note i {
-
-    color: #00d4a0;
-
+    color: #2d93f3;
     margin-right: 7px;
-
     font-size: 16px;
-
 }
-
 
 /* =========================================================
    SECURITY NOTE STRONG TEXT
    ========================================================= */
 
 .analyze-security-note strong {
-
     color: #f1f5f9;
-
     font-size: 15px !important;
-
     font-weight: 700;
-
 }
-
 
 /* =========================================================
    LOGIN PAGE
@@ -1583,23 +1000,17 @@ main.container-fluid {
    ========================================================= */
 
 .auth-wrapper {
-
     position: relative;
 
     width: 100vw;
-
     height: 100vh;
-
     min-height: 100vh;
 
     display: flex;
-
     justify-content: flex-end;
-
     align-items: center;
 
     padding: 0 !important;
-
     box-sizing: border-box;
 
     background-image:
@@ -1611,22 +1022,17 @@ main.container-fluid {
         url("{{ url_for('static', filename='images/Image 123.png') }}");
 
     background-size: cover;
-
     background-position: center;
-
     background-repeat: no-repeat;
 
     overflow: hidden;
-
 }
-
 
 /* =========================================================
    LOGIN CARD
    ========================================================= */
 
 .auth-card {
-
     width: 390px;
 
     padding: 36px 38px 28px;
@@ -1639,33 +1045,28 @@ main.container-fluid {
 
     border-radius: 14px;
 
-    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.55);
+    box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.55);
 
     position: relative;
-
     z-index: 2;
 
     margin-right: 120px;
-
 }
-
 
 /* =========================================================
    TOP BLUE LINE
    ========================================================= */
 
 .auth-card::before {
-
     content: "";
 
     position: absolute;
 
     top: -1px;
-
     left: 25%;
 
     width: 50%;
-
     height: 2px;
 
     background: #2196f3;
@@ -1673,26 +1074,20 @@ main.container-fluid {
     border-radius: 0 0 5px 5px;
 
     opacity: 0.85;
-
 }
-
 
 /* =========================================================
    LOGO
    ========================================================= */
 
 .auth-logo {
-
     width: 62px;
-
     height: 62px;
 
     margin: 0 auto 15px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 14px;
@@ -1700,29 +1095,23 @@ main.container-fluid {
     background: rgba(33, 150, 243, 0.10);
 
     border: 1px solid rgba(33, 150, 243, 0.20);
-
 }
-
 
 .auth-logo i {
-
     font-size: 2.5rem;
-
     color: #2196f3;
 
-    filter: drop-shadow(
-        0 0 8px rgba(33, 150, 243, 0.35)
-    );
-
+    filter:
+        drop-shadow(
+            0 0 8px rgba(33, 150, 243, 0.35)
+        );
 }
-
 
 /* =========================================================
    BRAND NAME
    ========================================================= */
 
 .auth-card h3 {
-
     margin: 0;
 
     color: #f1f5f9;
@@ -1734,20 +1123,16 @@ main.container-fluid {
         sans-serif;
 
     font-size: 2rem !important;
-
     font-weight: 700 !important;
 
     letter-spacing: -0.5px;
-
 }
-
 
 /* =========================================================
    SUBTITLE
    ========================================================= */
 
 .auth-subtitle {
-
     margin-top: 6px !important;
 
     color: #8e9aaa !important;
@@ -1755,35 +1140,27 @@ main.container-fluid {
     font-size: 0.86rem !important;
 
     line-height: 1.5;
-
 }
-
 
 /* =========================================================
    LOGIN HEADING
    ========================================================= */
 
 .login-heading {
-
     margin-top: 30px;
-
     margin-bottom: 20px;
 
     color: #e5eaf0;
 
     font-size: 1rem;
-
     font-weight: 600;
-
 }
-
 
 /* =========================================================
    LOGIN FORM LABEL
    ========================================================= */
 
 .auth-card .form-label {
-
     display: block;
 
     margin-bottom: 7px !important;
@@ -1791,22 +1168,16 @@ main.container-fluid {
     color: #cbd5e1 !important;
 
     font-size: 0.84rem !important;
-
     font-weight: 600 !important;
-
 }
-
 
 /* =========================================================
    LOGIN INPUT
    ========================================================= */
 
 .auth-card input.form-control {
-
     width: 100%;
-
     height: 48px !important;
-
     min-height: 48px;
 
     padding: 10px 18px !important;
@@ -1830,36 +1201,30 @@ main.container-fluid {
         sans-serif !important;
 
     font-size: 18px !important;
-
     font-weight: 400 !important;
 
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease,
         background 0.2s ease;
-
 }
-
 
 /* =========================================================
    LOGIN INPUT HOVER
    ========================================================= */
 
 .auth-card input.form-control:hover {
-
     background: #f3f5f9 !important;
 
-    border-color: rgba(33, 150, 243, 0.25) !important;
-
+    border-color:
+        rgba(33, 150, 243, 0.25) !important;
 }
-
 
 /* =========================================================
    LOGIN INPUT FOCUS
    ========================================================= */
 
 .auth-card input.form-control:focus {
-
     background: #ffffff !important;
 
     border-color: #2196f3 !important;
@@ -1871,24 +1236,17 @@ main.container-fluid {
     box-shadow:
         0 0 0 3px
         rgba(33, 150, 243, 0.12) !important;
-
 }
-
 
 /* =========================================================
    LOGIN PLACEHOLDER
    ========================================================= */
 
 .auth-card input.form-control::placeholder {
-
     color: #7b8490 !important;
-
-    font-size: 14px !important;
-
+    font-size: 18px !important;
     opacity: 1 !important;
-
 }
-
 
 /* =========================================================
    AUTOFILL
@@ -1898,7 +1256,6 @@ main.container-fluid {
 .auth-card input:-webkit-autofill:hover,
 .auth-card input:-webkit-autofill:focus,
 .auth-card input:-webkit-autofill:active {
-
     -webkit-text-fill-color: #17202b !important;
 
     -webkit-box-shadow:
@@ -1911,47 +1268,45 @@ main.container-fluid {
         sans-serif !important;
 
     font-size: 18px !important;
-
 }
-
 
 /* =========================================================
    LOGIN FORM SPACING
    ========================================================= */
 
 .auth-card .mb-3 {
-
     margin-bottom: 17px !important;
-
 }
-
 
 .auth-card .mb-2 {
-
     margin-bottom: 18px !important;
-
 }
-
 
 /* =========================================================
    LOGIN BUTTON
+   BLUE / CYAN CYBERSECURITY THEME
    ========================================================= */
 
 .auth-card .btn-phishguard {
-
     width: 100%;
-
     height: 47px;
 
     margin-top: 2px;
 
-    border: none !important;
+    border:
+        1px solid rgba(24, 191, 255, 0.65) !important;
 
     border-radius: 7px !important;
 
-    background: #16d9a5 !important;
+    background:
+        linear-gradient(
+            100deg,
+            #0878d1 0%,
+            #009eea 50%,
+            #12c8f5 100%
+        ) !important;
 
-    color: #061712 !important;
+    color: #ffffff !important;
 
     font-family:
         "Segoe UI",
@@ -1960,153 +1315,132 @@ main.container-fluid {
         sans-serif;
 
     font-size: 0.94rem !important;
-
     font-weight: 700 !important;
 
     cursor: pointer;
 
+    box-shadow:
+        0 7px 20px rgba(0, 157, 255, 0.25),
+        0 0 16px rgba(0, 190, 255, 0.12);
+
     transition:
         background 0.2s ease,
         transform 0.15s ease,
-        box-shadow 0.2s ease;
-
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
 }
-
 
 /* =========================================================
    LOGIN BUTTON HOVER
    ========================================================= */
 
 .auth-card .btn-phishguard:hover {
+    background:
+        linear-gradient(
+            100deg,
+            #0b8ee8 0%,
+            #00b5f5 50%,
+            #32d9ff 100%
+        ) !important;
 
-    background: #13c697 !important;
-
-    color: #061712 !important;
+    color: #ffffff !important;
 
     transform: translateY(-1px);
 
+    filter: brightness(1.08);
+
     box-shadow:
-        0 5px 16px
-        rgba(22, 217, 165, 0.20);
-
+        0 10px 28px rgba(0, 174, 255, 0.40),
+        0 0 24px rgba(0, 200, 255, 0.22);
 }
-
 
 /* =========================================================
    LOGIN BUTTON ACTIVE
    ========================================================= */
 
 .auth-card .btn-phishguard:active {
-
     transform: translateY(0);
 
-    box-shadow: none;
-
+    box-shadow:
+        0 4px 12px rgba(0, 157, 255, 0.30);
 }
-
 
 /* =========================================================
    REGISTER
    ========================================================= */
 
 .auth-register {
-
     margin-top: 20px !important;
-
     margin-bottom: 0 !important;
 
     color: #858f9e !important;
 
     font-size: 0.82rem !important;
-
 }
 
-
 .auth-register a {
-
     color: #16d9a5 !important;
 
     font-size: 0.82rem !important;
-
     font-weight: 600 !important;
 
     text-decoration: none;
 
     transition: color 0.2s ease;
-
 }
-
 
 .auth-register a:hover {
-
     color: #52e5c1 !important;
-
     text-decoration: underline;
-
 }
-
 
 /* =========================================================
    SECURITY MESSAGE - LOGIN
    ========================================================= */
 
 .login-security {
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     gap: 7px;
 
     margin-top: 22px;
-
     padding-top: 20px;
 
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    border-top:
+        1px solid rgba(255, 255, 255, 0.07);
 
     color: #697585;
 
     font-size: 0.70rem;
-
 }
-
 
 .login-security i {
-
     color: #16d9a5;
-
     font-size: 0.72rem;
-
 }
-
 
 /* =========================================================
    ERROR MESSAGE
    ========================================================= */
 
 .auth-card .text-danger {
-
     margin-top: 5px !important;
 
     color: #ff7180 !important;
 
     font-size: 0.72rem !important;
-
 }
-
 
 /* =========================================================
    PAGE FOOTER
    ========================================================= */
 
 .auth-footer {
-
     position: absolute;
 
     left: 0;
-
     bottom: 10px;
 
     width: 100%;
@@ -2116,41 +1450,30 @@ main.container-fluid {
     color: #c3c9d2 !important;
 
     font-size: 20px !important;
-
     font-weight: 500 !important;
 
     z-index: 10;
 
     pointer-events: none;
 
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.75);
-
+    text-shadow:
+        0 1px 5px rgba(0, 0, 0, 0.75);
 }
-
 
 .auth-footer strong {
-
     color: #2579f8 !important;
-
     font-weight: 500 !important;
-
 }
-
 
 /* =========================================================
    LARGE DESKTOP
    ========================================================= */
 
 @media (min-width: 1600px) {
-
     .auth-card {
-
         margin-right: 150px;
-
     }
-
 }
-
 
 /* =========================================================
    DESKTOP
@@ -2160,13 +1483,9 @@ main.container-fluid {
 and (max-width: 1599px) {
 
     .auth-card {
-
         margin-right: 120px;
-
     }
-
 }
-
 
 /* =========================================================
    LAPTOP
@@ -2176,13 +1495,9 @@ and (max-width: 1599px) {
 and (min-width: 901px) {
 
     .auth-card {
-
         margin-right: 60px;
-
     }
-
 }
-
 
 /* =========================================================
    DASHBOARD LAPTOP
@@ -2192,52 +1507,35 @@ and (min-width: 901px) {
 and (max-width: 1200px) {
 
     .dashboard-cards-row > .col-xl-3 {
-
         flex: 0 0 calc((100% - 30px) / 4);
-
         max-width: calc((100% - 30px) / 4);
-
     }
-
 
     .dashboard-container .stat-card {
-
         padding: 16px;
-
     }
-
 
     .dashboard-container .stat-value {
-
         font-size: 26px;
-
     }
-
 
     .dashboard-container .stat-label {
-
         font-size: 11px;
-
     }
-
 
     .recent-history-card .table-dark-panel tbody td {
-
         font-size: 13px !important;
-
         padding: 14px 12px !important;
-
     }
 
-
-    .recent-history-card .table-dark-panel tbody td:nth-child(2) {
+    .recent-history-card
+    .table-dark-panel
+    tbody
+    td:nth-child(2) {
 
         font-size: 14px !important;
-
     }
-
 }
-
 
 /* =========================================================
    TABLET
@@ -2246,172 +1544,116 @@ and (max-width: 1200px) {
 @media (max-width: 900px) {
 
     .auth-wrapper {
-
         justify-content: center;
-
         padding: 20px !important;
-
         background-position: center;
-
     }
-
 
     .auth-card {
-
         margin-right: 0;
-
     }
-
 
     /* Dashboard 2 columns */
 
     .dashboard-cards-row {
-
         flex-wrap: wrap;
-
     }
-
 
     .dashboard-cards-row > .col-xl-3 {
-
         flex: 0 0 calc((100% - 10px) / 2);
-
         max-width: calc((100% - 10px) / 2);
-
     }
-
 
     /* Analytics */
 
     .dashboard-container .analytics-row + .dashboard-cards-row {
-
         flex-wrap: wrap;
-
     }
-
 
     .dashboard-container
     .analytics-row:not(.mb-4)
     .col-lg-4 {
 
         flex: 0 0 calc((100% - 10px) / 2);
-
         max-width: calc((100% - 10px) / 2);
-
     }
-
 
     .dashboard-header {
-
         padding: 16px;
-
     }
-
 
     .dashboard-header .btn {
-
         width: auto !important;
-
         margin-top: 15px !important;
-
     }
-
 
     .dashboard-container .stat-card {
-
         min-height: 135px;
-
         padding: 18px;
-
     }
-
 
     .dashboard-container .stat-value {
-
         font-size: 25px;
-
     }
-
 
     /* Recent History */
 
-    .recent-history-card .table-dark-panel thead th {
+    .recent-history-card
+    .table-dark-panel
+    thead
+    th {
 
         font-size: 12px !important;
-
     }
 
-
-    .recent-history-card .table-dark-panel tbody td {
+    .recent-history-card
+    .table-dark-panel
+    tbody
+    td {
 
         font-size: 13px !important;
-
         padding: 13px 10px !important;
-
     }
 
-
-    .recent-history-card .table-dark-panel tbody td:nth-child(2) {
+    .recent-history-card
+    .table-dark-panel
+    tbody
+    td:nth-child(2) {
 
         font-size: 14px !important;
-
     }
-
 
     /* Analyze page */
 
     .analyze-page {
-
         padding: 18px 12px 30px 12px;
-
     }
-
 
     .analyze-header h3 {
-
         font-size: 24px;
-
     }
-
 
     .analyze-card {
-
         padding: 18px;
-
     }
-
 
     .analyze-card textarea.form-control {
-
         min-height: 220px;
-
         height: 220px;
-
     }
-
 
     .analyze-card .form-control {
-
         font-size: 17px !important;
-
     }
-
 
     .analyze-card .form-control::placeholder {
-
         font-size: 14px !important;
-
     }
-
 
     .analyze-security-note {
-
         font-size: 14px !important;
-
     }
-
 }
-
 
 /* =========================================================
    MOBILE
@@ -2421,192 +1663,133 @@ and (max-width: 1200px) {
 
     html,
     body {
-
         overflow: auto;
-
     }
-
 
     /* Login */
 
     .auth-wrapper {
-
         width: 100vw;
-
         min-height: 100vh;
-
         height: auto;
 
-        padding: 25px 15px 70px !important;
+        padding:
+            25px 15px 70px !important;
 
         justify-content: center;
-
     }
 
-
     .auth-card {
-
         width: 100%;
-
         max-width: 390px;
 
         margin-right: 0;
 
-        padding: 32px 25px 25px;
+        padding:
+            32px 25px 25px;
 
         border-radius: 12px;
-
     }
-
 
     .auth-card h3 {
-
         font-size: 1.8rem !important;
-
     }
-
 
     .auth-logo {
-
         width: 58px;
-
         height: 58px;
-
     }
-
 
     .auth-logo i {
-
         font-size: 2.25rem;
-
     }
-
 
     .auth-footer {
-
         bottom: 10px;
-
         font-size: 0.72rem !important;
-
     }
-
 
     /* Dashboard */
 
     .dashboard-cards-row {
-
         flex-direction: column;
-
         gap: 10px;
-
     }
-
 
     .dashboard-cards-row > .col-xl-3 {
-
         flex: 0 0 100%;
-
         max-width: 100%;
-
     }
-
 
     .dashboard-container .analytics-row + .dashboard-cards-row {
-
         flex-direction: column;
-
     }
-
 
     .dashboard-container
     .analytics-row:not(.mb-4)
     .col-lg-4 {
 
         flex: 0 0 100%;
-
         max-width: 100%;
-
     }
-
 
     .dashboard-header .btn-phishguard {
-
         width: 100% !important;
-
         margin-top: 15px !important;
-
     }
-
 
     /* Recent History */
 
-    .recent-history-card .table-dark-panel thead th {
+    .recent-history-card
+    .table-dark-panel
+    thead
+    th {
 
         font-size: 11px !important;
-
         padding: 10px 7px !important;
-
     }
 
-
-    .recent-history-card .table-dark-panel tbody td {
+    .recent-history-card
+    .table-dark-panel
+    tbody
+    td {
 
         font-size: 12px !important;
-
         padding: 11px 7px !important;
-
     }
 
-
-    .recent-history-card .table-dark-panel tbody td:nth-child(2) {
+    .recent-history-card
+    .table-dark-panel
+    tbody
+    td:nth-child(2) {
 
         font-size: 13px !important;
-
     }
-
 
     .recent-history-card .badge {
-
         font-size: 10px !important;
-
         padding: 5px 7px !important;
-
     }
-
 
     /* Analyze */
 
     .analyze-card .form-control {
-
         font-size: 17px !important;
-
     }
-
 
     .analyze-card textarea.form-control {
-
         font-size: 17px !important;
-
     }
-
 
     .analyze-security-note {
-
         font-size: 14px !important;
-
         padding: 13px 14px;
-
     }
-
 
     .analyze-security-note strong {
-
         font-size: 14px !important;
-
     }
-
 }
-
 
 /* =========================================================
    SMALL MOBILE
@@ -2615,75 +1798,61 @@ and (max-width: 1200px) {
 @media (max-width: 400px) {
 
     .auth-card {
-
-        padding: 28px 20px 22px;
+        padding:
+            28px 20px 22px;
 
         margin-right: 0;
-
     }
-
 
     .auth-card input.form-control {
-
         height: 46px !important;
-
         min-height: 46px;
-
         font-size: 18px !important;
-
     }
-
 
     .auth-card .btn-phishguard {
-
         height: 45px;
-
     }
-
 
     /* Recent History */
 
-    .recent-history-card .table-dark-panel tbody td {
+    .recent-history-card
+    .table-dark-panel
+    tbody
+    td {
 
         font-size: 11px !important;
-
         padding: 9px 5px !important;
-
     }
 
-
-    .recent-history-card .table-dark-panel tbody td:nth-child(2) {
+    .recent-history-card
+    .table-dark-panel
+    tbody
+    td:nth-child(2) {
 
         font-size: 12px !important;
-
     }
 
-
-    .recent-history-card .table-dark-panel thead th {
+    .recent-history-card
+    .table-dark-panel
+    thead
+    th {
 
         font-size: 10px !important;
-
     }
 
+    /* Analyze */
 
     .analyze-card .form-control {
-
         font-size: 16px !important;
-
     }
-
 
     .analyze-card .form-control::placeholder {
-
         font-size: 14px !important;
-
     }
-
 
     .analyze-security-note {
-
         font-size: 14px !important;
-
     }
-
 }
+

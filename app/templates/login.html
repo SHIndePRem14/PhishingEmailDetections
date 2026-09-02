@@ -8,40 +8,37 @@
 
 /* =========================================================
    PHISHGUARD LOGIN PAGE
+   INPUT FONT / AUTOFILL NORMALIZATION
    ========================================================= */
 
-
 /* =========================================================
-   REMOVE BASE TEMPLATE SPACING
+   GLOBAL
    ========================================================= */
 
 html,
 body {
     margin: 0 !important;
     padding: 0 !important;
-
     width: 100%;
     height: 100%;
-
     overflow: hidden;
+    background: #020b18;
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
 }
-
-
-/* Remove Bootstrap/base.html spacing */
 
 main:has(.auth-wrapper),
 main.container,
 main.container-fluid {
     margin: 0 !important;
     padding: 0 !important;
-
     width: 100% !important;
     max-width: none !important;
 }
 
 
 /* =========================================================
-   MAIN LOGIN AREA
+   FULL PAGE BACKGROUND
    ========================================================= */
 
 .auth-wrapper {
@@ -49,53 +46,140 @@ main.container-fluid {
     width: 100vw;
     height: 100vh;
     min-height: 100vh;
-
     display: flex;
     justify-content: flex-end;
     align-items: center;
-
-    /* RIGHT SIDE MARGIN */
-    padding: 0 60px 0 40px !important;
-
     box-sizing: border-box;
+    padding: 0 11vw 0 40px !important;
 
-    background-image:
+    background:
         linear-gradient(
             90deg,
-            rgba(2, 16, 38, 0.02),
-            rgba(2, 16, 38, 0.08)
+            rgba(1, 10, 25, 0.02) 0%,
+            rgba(1, 10, 25, 0.03) 48%,
+            rgba(1, 7, 19, 0.16) 100%
         ),
         url("{{ url_for('static', filename='images/Image 123.png') }}");
 
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
     overflow: hidden;
 }
 
+
 /* =========================================================
-   TOP BLUE LINE
+   SOFT DARKENING BEHIND LOGIN CARD
+   ========================================================= */
+
+.auth-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    width: 500px;
+    height: 720px;
+    transform: translateY(-50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(0, 24, 60, 0.30) 0%,
+            rgba(0, 12, 31, 0.12) 45%,
+            transparent 75%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   LOGIN CARD
+   ========================================================= */
+
+.auth-card {
+    position: relative;
+    z-index: 2;
+
+    width: 390px;
+    max-width: 100%;
+
+    padding: 30px 30px 24px;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(4, 25, 52, 0.91),
+            rgba(2, 12, 29, 0.94)
+        ) !important;
+
+    border: 1px solid rgba(42, 166, 255, 0.48) !important;
+    border-radius: 15px;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.58),
+        0 0 35px rgba(0, 128, 255, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(0, 145, 255, 0.08);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   GLASS HIGHLIGHT
+   ========================================================= */
+
+.auth-card::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 14px;
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 185, 255, 0.08),
+            transparent 28%,
+            transparent 72%,
+            rgba(30, 91, 255, 0.07)
+        );
+}
+
+
+/* =========================================================
+   NEON TOP EDGE
    ========================================================= */
 
 .auth-card::before {
-
     content: "";
-
     position: absolute;
-
-    top: -1px;
-
-    left: 25%;
-
-    width: 50%;
-
+    top: 0;
+    left: 20%;
+    width: 60%;
     height: 2px;
 
-    background: #2196f3;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #18bfff,
+            #147dff,
+            #18bfff,
+            transparent
+        );
 
-    border-radius: 0 0 5px 5px;
+    box-shadow:
+        0 0 12px rgba(0, 183, 255, 0.90),
+        0 0 25px rgba(0, 119, 255, 0.35);
 
-    opacity: 0.85;
+    border-radius: 0 0 10px 10px;
 }
 
 
@@ -104,140 +188,181 @@ main.container-fluid {
    ========================================================= */
 
 .auth-logo {
+    position: relative;
+    z-index: 3;
 
-    width: 62px;
+    width: 58px;
+    height: 58px;
 
-    height: 62px;
-
-    margin: 0 auto 15px;
+    margin: 0 auto 13px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 14px;
 
     background:
-        rgba(33, 150, 243, 0.10);
+        linear-gradient(
+            145deg,
+            rgba(0, 174, 255, 0.20),
+            rgba(9, 57, 112, 0.28)
+        );
 
-    border:
-        1px solid rgba(33, 150, 243, 0.20);
+    border: 1px solid rgba(0, 180, 255, 0.45);
+
+    box-shadow:
+        0 0 24px rgba(0, 153, 255, 0.18),
+        inset 0 0 18px rgba(0, 153, 255, 0.08);
 }
 
-
 .auth-logo i {
-
-    font-size: 2.5rem;
-
-    color: #2196f3;
+    font-size: 37px !important;
+    color: #18aaff !important;
 
     filter:
-        drop-shadow(
-            0 0 8px rgba(33, 150, 243, 0.35)
-        );
+        drop-shadow(0 0 7px rgba(0, 174, 255, 0.60));
 }
 
 
 /* =========================================================
-   BRAND NAME
+   BRAND
    ========================================================= */
 
 .auth-card h3 {
+    position: relative;
+    z-index: 3;
 
     margin: 0;
 
-    color: #f1f5f9;
+    color: #f5faff !important;
 
     font-family:
         "Segoe UI",
         Roboto,
         Arial,
-        sans-serif;
+        sans-serif !important;
 
-    font-size: 2rem !important;
+    font-size: 30px !important;
+    font-weight: 750 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.4px;
 
-    font-weight: 700 !important;
-
-    letter-spacing: -0.5px;
+    text-shadow:
+        0 0 18px rgba(0, 162, 255, 0.14);
 }
 
-
-/* =========================================================
-   SUBTITLE
-   ========================================================= */
-
 .auth-subtitle {
+    position: relative;
+    z-index: 3;
 
-    margin-top: 6px !important;
+    margin-top: 5px !important;
 
-    color: #8e9aaa !important;
+    color: #8faecc !important;
 
-    font-size: 0.86rem !important;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    line-height: 1.5;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
 }
 
 
 /* =========================================================
    LOGIN HEADING
+   CENTERED
    ========================================================= */
 
 .login-heading {
+    position: relative;
+    z-index: 3;
 
-    margin-top: 30px;
+    margin-top: 27px;
+    margin-bottom: 17px;
 
-    margin-bottom: 20px;
+    color: #e7f3ff !important;
 
-    color: #e5eaf0;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    font-size: 1rem;
+    font-size: 16px !important;
+    font-weight: 650 !important;
+    line-height: 1.4 !important;
 
-    font-weight: 600;
+    /* CENTER HEADING */
+    text-align: center !important;
 }
 
 
 /* =========================================================
-   FORM LABEL
+   LABELS
    ========================================================= */
 
 .auth-card .form-label {
+    position: relative;
+    z-index: 3;
 
     display: block;
 
     margin-bottom: 7px !important;
 
-    color: #cbd5e1 !important;
+    color: #b8cee2 !important;
 
-    font-size: 0.84rem !important;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    font-weight: 600 !important;
+    font-size: 18px !important;
+    font-weight: 650 !important;
+    line-height: 1.4 !important;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
 }
 
 
 /* =========================================================
-   INPUT
+   INPUTS
    ========================================================= */
 
-.auth-card input.form-control {
+.auth-card input.form-control,
+.auth-card input.form-control:hover,
+.auth-card input.form-control:focus,
+.auth-card input.form-control:active {
 
+    position: relative;
+    z-index: 3;
+
+    display: block;
     width: 100%;
 
-    height: 48px !important;
+    height: 50px !important;
+    min-height: 50px !important;
 
-    min-height: 48px;
-
-    padding: 10px 18px !important;
+    padding: 9px 15px !important;
 
     box-sizing: border-box;
 
-    background: #edf1f7 !important;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 38, 75, 0.90),
+            rgba(4, 25, 53, 0.88)
+        ) !important;
 
-    color: #17202b !important;
+    color: #eef8ff !important;
 
     border:
-        1px solid transparent !important;
+        1px solid rgba(91, 168, 225, 0.30) !important;
 
     border-radius: 7px !important;
 
@@ -249,80 +374,34 @@ main.container-fluid {
         Arial,
         sans-serif !important;
 
-    font-size: 15px !important;
-
+    font-size: 18px !important;
     font-weight: 400 !important;
+    font-style: normal !important;
+
+    line-height: 26px !important;
+    letter-spacing: normal !important;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+
+    -webkit-font-smoothing: antialiased;
+
+    box-shadow:
+        inset 0 1px 7px rgba(0, 0, 0, 0.20);
 
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease,
-        background 0.2s ease;
+        background 0.2s ease !important;
 }
 
 
 /* =========================================================
-   INPUT HOVER
-   ========================================================= */
-
-.auth-card input.form-control:hover {
-
-    background: #f3f5f9 !important;
-
-    border-color:
-        rgba(33, 150, 243, 0.25) !important;
-}
-
-
-/* =========================================================
-   INPUT FOCUS
-   ========================================================= */
-
-.auth-card input.form-control:focus {
-
-    background: #ffffff !important;
-
-    border-color:
-        #2196f3 !important;
-
-    color: #17202b !important;
-
-    outline: none !important;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(33, 150, 243, 0.12) !important;
-}
-
-
-/* =========================================================
-   PLACEHOLDER
+   INPUT PLACEHOLDER
    ========================================================= */
 
 .auth-card input.form-control::placeholder {
-
-    color: #7b8490 !important;
-
-    font-size: 14px !important;
-
-    opacity: 1 !important;
-}
-
-
-/* =========================================================
-   AUTOFILL
-   ========================================================= */
-
-.auth-card input:-webkit-autofill,
-.auth-card input:-webkit-autofill:hover,
-.auth-card input:-webkit-autofill:focus,
-.auth-card input:-webkit-autofill:active {
-
-    -webkit-text-fill-color:
-        #17202b !important;
-
-    -webkit-box-shadow:
-        0 0 0 1000px
-        #edf1f7 inset !important;
+    color: #7592ad !important;
 
     font-family:
         "Segoe UI",
@@ -330,7 +409,213 @@ main.container-fluid {
         Arial,
         sans-serif !important;
 
-    font-size: 15px !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+
+    line-height: 26px !important;
+    letter-spacing: normal !important;
+
+    opacity: 1 !important;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+}
+
+
+/* =========================================================
+   PLACEHOLDER ALL BROWSER STATES
+   ========================================================= */
+
+.auth-card input.form-control:focus::placeholder,
+.auth-card input.form-control:hover::placeholder {
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+    font-weight: 400 !important;
+
+    line-height: 26px !important;
+
+    opacity: 1 !important;
+}
+
+
+/* =========================================================
+   CHROME AUTOFILL
+   ========================================================= */
+
+.auth-card input:-webkit-autofill,
+.auth-card input:-webkit-autofill:hover,
+.auth-card input:-webkit-autofill:focus,
+.auth-card input:-webkit-autofill:active {
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+
+    line-height: 26px !important;
+    letter-spacing: normal !important;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+
+    -webkit-text-fill-color: #eef8ff !important;
+    color: #eef8ff !important;
+
+    caret-color: #ffffff !important;
+
+    -webkit-box-shadow:
+        0 0 0 1000px #082746 inset !important;
+
+    box-shadow:
+        0 0 0 1000px #082746 inset !important;
+
+    transition:
+        background-color 9999s ease-in-out 0s !important;
+
+    -webkit-font-smoothing: antialiased !important;
+}
+
+
+/* =========================================================
+   AUTOFILL FIRST LINE
+   ========================================================= */
+
+.auth-card input:-webkit-autofill::first-line {
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+    font-weight: 400 !important;
+
+    line-height: 26px !important;
+    letter-spacing: normal !important;
+}
+
+
+/* =========================================================
+   EMAIL INPUT
+   ========================================================= */
+
+.auth-card input[type="email"],
+.auth-card input[type="email"]:hover,
+.auth-card input[type="email"]:focus,
+.auth-card input[type="email"]:active {
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+    font-weight: 400 !important;
+
+    line-height: 26px !important;
+    letter-spacing: normal !important;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+}
+
+
+/* =========================================================
+   PASSWORD INPUT
+   ========================================================= */
+
+.auth-card input[type="password"],
+.auth-card input[type="password"]:hover,
+.auth-card input[type="password"]:focus,
+.auth-card input[type="password"]:active {
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+
+    line-height: 26px !important;
+    letter-spacing: normal !important;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+}
+
+
+/* =========================================================
+   PASSWORD AUTOFILL
+   ========================================================= */
+
+.auth-card input[type="password"]:-webkit-autofill,
+.auth-card input[type="password"]:-webkit-autofill:hover,
+.auth-card input[type="password"]:-webkit-autofill:focus,
+.auth-card input[type="password"]:-webkit-autofill:active {
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+
+    line-height: 26px !important;
+    letter-spacing: normal !important;
+
+    -webkit-text-fill-color: #eef8ff !important;
+    color: #eef8ff !important;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+
+    -webkit-font-smoothing: antialiased !important;
+}
+
+
+/* =========================================================
+   INPUT OUTLINE / FOCUS
+   ========================================================= */
+
+.auth-card input.form-control:focus {
+
+    outline: none !important;
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+    font-weight: 400 !important;
+
+    line-height: 26px !important;
+
+    border-color:
+        rgba(91, 168, 225, 0.30) !important;
+
+    box-shadow:
+        inset 0 1px 7px rgba(0, 0, 0, 0.20) !important;
 }
 
 
@@ -339,14 +624,11 @@ main.container-fluid {
    ========================================================= */
 
 .auth-card .mb-3 {
-
-    margin-bottom: 17px !important;
+    margin-bottom: 15px !important;
 }
 
-
 .auth-card .mb-2 {
-
-    margin-bottom: 18px !important;
+    margin-bottom: 16px !important;
 }
 
 
@@ -355,67 +637,91 @@ main.container-fluid {
    ========================================================= */
 
 .btn-phishguard {
+    position: relative;
+    z-index: 3;
 
     width: 100%;
+    height: 46px;
 
-    height: 47px;
-
-    margin-top: 2px;
+    margin-top: 1px;
 
     border: none !important;
-
     border-radius: 7px !important;
 
-    background: #16d9a5 !important;
+    background:
+        linear-gradient(
+            100deg,
+            #0797dc 0%,
+            #08a8e8 50%,
+            #13c0e8 100%
+        ) !important;
 
-    color: #061712 !important;
+    color: #ffffff !important;
 
     font-family:
         "Segoe UI",
         Roboto,
         Arial,
-        sans-serif;
+        sans-serif !important;
 
-    font-size: 0.94rem !important;
+    font-size: 18px !important;
+    font-weight: 750 !important;
 
-    font-weight: 700 !important;
+    line-height: 1 !important;
 
     cursor: pointer;
 
+    box-shadow:
+        0 8px 24px rgba(0, 145, 220, 0.32),
+        0 0 18px rgba(0, 180, 240, 0.12);
+
     transition:
-        background 0.2s ease,
-        transform 0.15s ease,
-        box-shadow 0.2s ease;
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
 }
 
 
 /* =========================================================
-   LOGIN BUTTON HOVER
+   BUTTON HOVER
    ========================================================= */
 
 .btn-phishguard:hover {
+    color: #ffffff !important;
 
-    background: #13c697 !important;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    color: #061712 !important;
+    font-size: 18px !important;
+    font-weight: 750 !important;
 
     transform: translateY(-1px);
-
-    box-shadow:
-        0 5px 16px
-        rgba(22, 217, 165, 0.20);
+    filter: brightness(1.05);
 }
 
 
 /* =========================================================
-   LOGIN BUTTON ACTIVE
+   BUTTON FOCUS / ACTIVE
    ========================================================= */
 
+.btn-phishguard:focus,
 .btn-phishguard:active {
 
-    transform: translateY(0);
+    color: #ffffff !important;
 
-    box-shadow: none;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+    font-weight: 750 !important;
+
+    outline: none !important;
 }
 
 
@@ -424,73 +730,104 @@ main.container-fluid {
    ========================================================= */
 
 .auth-register {
+    position: relative;
+    z-index: 3;
 
-    margin-top: 20px !important;
-
+    margin-top: 17px !important;
     margin-bottom: 0 !important;
 
-    color: #858f9e !important;
+    color: #7f98af !important;
 
-    font-size: 0.82rem !important;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+    font-weight: 400 !important;
+
+    line-height: 1.4 !important;
 }
 
-
 .auth-register a {
+    color: #18b9f7 !important;
 
-    color: #16d9a5 !important;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    font-size: 0.82rem !important;
-
-    font-weight: 600 !important;
+    font-size: 18px !important;
+    font-weight: 650 !important;
 
     text-decoration: none;
 
     transition:
-        color 0.2s ease;
+        color 0.2s ease,
+        text-shadow 0.2s ease;
 }
 
-
 .auth-register a:hover {
+    color: #55d4ff !important;
 
-    color: #52e5c1 !important;
+    font-size: 18px !important;
 
     text-decoration: underline;
+
+    text-shadow:
+        0 0 10px rgba(0, 190, 255, 0.35);
 }
 
 
 /* =========================================================
    SECURITY MESSAGE
+   FONT SIZE = 14px
    ========================================================= */
 
 .login-security {
+    position: relative;
+    z-index: 3;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     gap: 7px;
 
-    margin-top: 22px;
-
-    padding-top: 20px;
+    margin-top: 19px;
+    padding-top: 17px;
 
     border-top:
-        1px solid
-        rgba(255, 255, 255, 0.07);
+        1px solid rgba(100, 170, 220, 0.13);
 
-    color: #697585;
+    color: #66839d;
 
-    font-size: 0.70rem;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    /* CHANGED FROM 18px TO 14px */
+    font-size: 14px !important;
+
+    font-weight: 400 !important;
+
+    line-height: 1.4 !important;
 }
 
 
+/* Security lock icon = 14px */
+
 .login-security i {
+    color: #22d3ee !important;
 
-    color: #16d9a5;
+    font-size: 14px !important;
 
-    font-size: 0.72rem;
+    filter:
+        drop-shadow(0 0 7px rgba(34, 211, 238, 0.65));
 }
 
 
@@ -499,58 +836,66 @@ main.container-fluid {
    ========================================================= */
 
 .auth-card .text-danger {
-
     margin-top: 5px !important;
 
     color: #ff7180 !important;
 
-    font-size: 0.72rem !important;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+    font-weight: 400 !important;
+
+    line-height: 1.4 !important;
 }
 
 
 /* =========================================================
-   PAGE FOOTER
+   FOOTER
    ========================================================= */
 
-/*
-   IMPORTANT:
-   Footer is outside the login card.
-   It stays at the bottom of the complete page.
-*/
-
 .auth-footer {
-
     position: absolute;
 
     left: 0;
-
-    bottom: 10px;
+    bottom: 9px;
 
     width: 100%;
 
     text-align: center;
 
-    color: #d1d7df;
+    color: #c7d5e3;
 
-    font-size: 0.82rem;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    font-weight: 400;
+    font-size: 18px !important;
+    font-weight: 400 !important;
 
-    z-index: 10;
+    line-height: 1.4 !important;
+
+    z-index: 5;
 
     pointer-events: none;
 
     text-shadow:
-        0 1px 5px
-        rgba(0, 0, 0, 0.75);
+        0 2px 7px rgba(0, 0, 0, 0.85);
 }
 
-
 .auth-footer strong {
+    color: #27a9ff;
 
-    color: #3e98ed;
+    font-size: 18px !important;
+    font-weight: 650;
 
-    font-weight: 600;
+    text-shadow:
+        0 0 8px rgba(0, 150, 255, 0.25);
 }
 
 
@@ -561,11 +906,12 @@ main.container-fluid {
 @media (min-width: 1600px) {
 
     .auth-wrapper {
-
-        padding-right: 16% !important;
-
+        padding-right: 12vw !important;
     }
 
+    .auth-card {
+        width: 400px;
+    }
 }
 
 
@@ -576,11 +922,8 @@ main.container-fluid {
 @media (max-width: 1200px) {
 
     .auth-wrapper {
-
-        padding-right: 8% !important;
-
+        padding-right: 8vw !important;
     }
-
 }
 
 
@@ -591,15 +934,14 @@ main.container-fluid {
 @media (max-width: 900px) {
 
     .auth-wrapper {
-
         justify-content: center;
-
         padding: 20px !important;
-
-        background-position: center;
-
+        background-position: center center;
     }
 
+    .auth-wrapper::after {
+        display: none;
+    }
 }
 
 
@@ -611,74 +953,79 @@ main.container-fluid {
 
     html,
     body {
-
         overflow: auto;
-
     }
 
-
     .auth-wrapper {
-
         width: 100vw;
-
         min-height: 100vh;
-
         height: auto;
 
         padding:
             25px 15px 70px !important;
 
+        background-position: center center;
     }
 
-
     .auth-card {
-
         width: 100%;
-
         max-width: 390px;
 
         padding:
-            32px 25px 25px;
+            28px 23px 23px;
 
-        border-radius: 12px;
-
+        border-radius: 13px;
     }
-
 
     .auth-card h3 {
-
-        font-size:
-            1.8rem !important;
-
+        font-size: 30px !important;
     }
-
 
     .auth-logo {
-
-        width: 58px;
-
-        height: 58px;
-
+        width: 56px;
+        height: 56px;
     }
-
 
     .auth-logo i {
-
-        font-size:
-            2.25rem;
-
+        font-size: 34px !important;
     }
 
 
-    .auth-footer {
+    /* MOBILE INPUT FONT LOCK */
 
-        bottom: 10px;
+    .auth-card input.form-control,
+    .auth-card input.form-control:hover,
+    .auth-card input.form-control:focus,
+    .auth-card input.form-control:active,
+    .auth-card input:-webkit-autofill,
+    .auth-card input:-webkit-autofill:hover,
+    .auth-card input:-webkit-autofill:focus,
+    .auth-card input:-webkit-autofill:active {
 
-        font-size:
-            0.72rem;
+        height: 50px !important;
+        min-height: 50px !important;
 
+        font-family:
+            "Segoe UI",
+            Roboto,
+            Arial,
+            sans-serif !important;
+
+        font-size: 18px !important;
+        font-weight: 400 !important;
+
+        line-height: 26px !important;
+        letter-spacing: normal !important;
+
+        -webkit-text-size-adjust: none !important;
+        text-size-adjust: none !important;
     }
 
+    /* Keep security message 14px on mobile */
+    .login-security,
+    .login-security i {
+        font-size: 14px !important;
+    }
 }
 
 
@@ -689,34 +1036,45 @@ main.container-fluid {
 @media (max-width: 400px) {
 
     .auth-card {
-
         padding:
-            28px 20px 22px;
-
+            25px 19px 21px;
     }
 
+    .auth-card input.form-control,
+    .auth-card input.form-control:hover,
+    .auth-card input.form-control:focus,
+    .auth-card input.form-control:active,
+    .auth-card input:-webkit-autofill,
+    .auth-card input:-webkit-autofill:hover,
+    .auth-card input:-webkit-autofill:focus,
+    .auth-card input:-webkit-autofill:active {
 
-    .auth-card input.form-control {
+        height: 45px !important;
+        min-height: 45px !important;
 
-        height:
-            46px !important;
+        font-family:
+            "Segoe UI",
+            Roboto,
+            Arial,
+            sans-serif !important;
 
-        min-height:
-            46px;
+        font-size: 18px !important;
+        font-weight: 400 !important;
 
-        font-size:
-            14px !important;
-
+        line-height: 25px !important;
+        letter-spacing: normal !important;
     }
-
 
     .btn-phishguard {
-
-        height:
-            45px;
-
+        height: 44px;
+        font-size: 18px !important;
     }
 
+    /* Security message remains 14px */
+    .login-security,
+    .login-security i {
+        font-size: 14px !important;
+    }
 }
 
 </style>
@@ -742,27 +1100,17 @@ main.container-fluid {
 
         <div class="text-center">
 
-
             <div class="auth-logo">
-
                 <i class="fa-solid fa-shield-halved"></i>
-
             </div>
 
-
             <h3>
-
                 PhishGuard
-
             </h3>
 
-
             <p class="auth-subtitle mb-0">
-
                 AI-Powered Phishing Email Detection
-
             </p>
-
 
         </div>
 
@@ -772,9 +1120,7 @@ main.container-fluid {
              ================================================= -->
 
         <div class="login-heading">
-
             Sign in to your account
-
         </div>
 
 
@@ -783,7 +1129,6 @@ main.container-fluid {
              ================================================= -->
 
         <form method="POST" novalidate>
-
 
             {{ form.hidden_tag() }}
 
@@ -794,11 +1139,9 @@ main.container-fluid {
 
             <div class="mb-3">
 
-
                 {{ form.email.label(
                     class="form-label"
                 ) }}
-
 
                 {{ form.email(
                     class="form-control",
@@ -806,17 +1149,13 @@ main.container-fluid {
                     autocomplete="username"
                 ) }}
 
-
                 {% for error in form.email.errors %}
 
                     <div class="text-danger small">
-
                         {{ error }}
-
                     </div>
 
                 {% endfor %}
-
 
             </div>
 
@@ -827,11 +1166,9 @@ main.container-fluid {
 
             <div class="mb-2">
 
-
                 {{ form.password.label(
                     class="form-label"
                 ) }}
-
 
                 {{ form.password(
                     class="form-control",
@@ -839,17 +1176,13 @@ main.container-fluid {
                     autocomplete="current-password"
                 ) }}
 
-
                 {% for error in form.password.errors %}
 
                     <div class="text-danger small">
-
                         {{ error }}
-
                     </div>
 
                 {% endfor %}
-
 
             </div>
 
@@ -862,7 +1195,6 @@ main.container-fluid {
                 class="btn btn-phishguard w-100"
             ) }}
 
-
         </form>
 
 
@@ -872,16 +1204,11 @@ main.container-fluid {
 
         <p class="auth-register text-center">
 
-
             Don't have an account?
 
-
             <a href="{{ url_for('auth.register') }}">
-
                 Register here
-
             </a>
-
 
         </p>
 
@@ -892,16 +1219,11 @@ main.container-fluid {
 
         <div class="login-security">
 
-
             <i class="fa-solid fa-lock"></i>
 
-
             <span>
-
                 Your connection is protected and secure
-
             </span>
-
 
         </div>
 
@@ -925,6 +1247,5 @@ main.container-fluid {
 
 
 </div>
-
 
 {% endblock %}

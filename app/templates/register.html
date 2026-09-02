@@ -8,74 +8,96 @@
 
 /* =========================================================
    PHISHGUARD REGISTER PAGE
+   MATCHED WITH LOGIN PAGE FONT & FOOTER
    ========================================================= */
 
-
 /* =========================================================
-   REMOVE BASE TEMPLATE SPACING
+   GLOBAL
    ========================================================= */
 
 html,
 body {
     margin: 0 !important;
     padding: 0 !important;
-
     width: 100%;
     height: 100%;
-
     overflow: hidden;
+    background: #020b18;
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
 }
-
-
-/* Remove Bootstrap/container spacing */
 
 main:has(.auth-wrapper),
 main.container,
 main.container-fluid {
     margin: 0 !important;
     padding: 0 !important;
-
     width: 100% !important;
     max-width: none !important;
 }
 
 
 /* =========================================================
-   MAIN REGISTER AREA
+   FULL PAGE BACKGROUND
    ========================================================= */
 
 .auth-wrapper {
-
     position: relative;
-
     width: 100vw;
     height: 100vh;
     min-height: 100vh;
 
     display: flex;
-
     justify-content: flex-end;
     align-items: center;
 
-    padding: 0 19% 0 40px !important;
-
     box-sizing: border-box;
 
-    background-image:
+    padding: 0 11vw 0 40px !important;
+
+    background:
         linear-gradient(
             90deg,
-            rgba(2, 16, 38, 0.02),
-            rgba(2, 16, 38, 0.08)
+            rgba(1, 10, 25, 0.02) 0%,
+            rgba(1, 10, 25, 0.03) 48%,
+            rgba(1, 7, 19, 0.16) 100%
         ),
         url("{{ url_for('static', filename='images/Image 123.png') }}");
 
     background-size: cover;
-
-    background-position: center;
-
+    background-position: center center;
     background-repeat: no-repeat;
 
     overflow: hidden;
+}
+
+
+/* =========================================================
+   SOFT DARK GLOW BEHIND CARD
+   ========================================================= */
+
+.auth-wrapper::after {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    right: 5%;
+
+    width: 500px;
+    height: 720px;
+
+    transform: translateY(-50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(0, 24, 60, 0.30) 0%,
+            rgba(0, 12, 31, 0.12) 45%,
+            transparent 75%
+        );
+
+    pointer-events: none;
 }
 
 
@@ -84,51 +106,97 @@ main.container-fluid {
    ========================================================= */
 
 .auth-card {
+    position: relative;
+    z-index: 2;
 
-    width: 390px;
+    width: 400px;
+    max-width: 100%;
 
-    padding: 30px 38px 24px;
+    padding: 30px 30px 24px;
 
     box-sizing: border-box;
 
-    background: rgba(13, 21, 32, 0.96);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(4, 25, 52, 0.91),
+            rgba(2, 12, 29, 0.94)
+        ) !important;
 
-    border: 1px solid rgba(255, 255, 255, 0.13);
+    border:
+        1px solid rgba(42, 166, 255, 0.48) !important;
 
-    border-radius: 14px;
+    border-radius: 15px;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 
     box-shadow:
-        0 20px 55px rgba(0, 0, 0, 0.55);
+        0 24px 70px rgba(0, 0, 0, 0.58),
+        0 0 35px rgba(0, 128, 255, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(0, 145, 255, 0.08);
 
-    position: relative;
-
-    z-index: 2;
+    overflow: hidden;
 }
 
 
 /* =========================================================
-   TOP BLUE LINE
+   GLASS HIGHLIGHT
    ========================================================= */
 
-.auth-card::before {
-
+.auth-card::after {
     content: "";
 
     position: absolute;
 
-    top: -1px;
+    inset: 1px;
 
-    left: 25%;
+    border-radius: 14px;
 
-    width: 50%;
+    pointer-events: none;
 
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 185, 255, 0.08),
+            transparent 28%,
+            transparent 72%,
+            rgba(30, 91, 255, 0.07)
+        );
+}
+
+
+/* =========================================================
+   NEON TOP EDGE
+   ========================================================= */
+
+.auth-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 20%;
+
+    width: 60%;
     height: 2px;
 
-    background: #2196f3;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #18bfff,
+            #147dff,
+            #18bfff,
+            transparent
+        );
 
-    border-radius: 0 0 5px 5px;
+    box-shadow:
+        0 0 12px rgba(0, 183, 255, 0.90),
+        0 0 25px rgba(0, 119, 255, 0.35);
 
-    opacity: 0.85;
+    border-radius: 0 0 10px 10px;
 }
 
 
@@ -137,38 +205,44 @@ main.container-fluid {
    ========================================================= */
 
 .auth-logo {
+    position: relative;
+    z-index: 3;
 
     width: 58px;
-
     height: 58px;
 
-    margin: 0 auto 12px;
+    margin: 0 auto 13px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    border-radius: 13px;
+    border-radius: 14px;
 
     background:
-        rgba(33, 150, 243, 0.10);
+        linear-gradient(
+            145deg,
+            rgba(0, 174, 255, 0.20),
+            rgba(9, 57, 112, 0.28)
+        );
 
     border:
-        1px solid rgba(33, 150, 243, 0.20);
+        1px solid rgba(0, 180, 255, 0.45);
+
+    box-shadow:
+        0 0 24px rgba(0, 153, 255, 0.18),
+        inset 0 0 18px rgba(0, 153, 255, 0.08);
 }
 
 
 .auth-logo i {
+    font-size: 37px !important;
 
-    font-size: 2.35rem;
-
-    color: #2196f3;
+    color: #18aaff !important;
 
     filter:
         drop-shadow(
-            0 0 8px rgba(33, 150, 243, 0.35)
+            0 0 7px rgba(0, 174, 255, 0.60)
         );
 }
 
@@ -178,22 +252,29 @@ main.container-fluid {
    ========================================================= */
 
 .auth-card h3 {
+    position: relative;
+    z-index: 3;
 
     margin: 0;
 
-    color: #f1f5f9;
+    color: #f5faff !important;
 
     font-family:
         "Segoe UI",
         Roboto,
         Arial,
-        sans-serif;
+        sans-serif !important;
 
-    font-size: 1.85rem !important;
+    font-size: 30px !important;
 
-    font-weight: 700 !important;
+    font-weight: 750 !important;
+
+    line-height: 1.2 !important;
 
     letter-spacing: -0.4px;
+
+    text-shadow:
+        0 0 18px rgba(0, 162, 255, 0.14);
 }
 
 
@@ -202,16 +283,25 @@ main.container-fluid {
    ========================================================= */
 
 .auth-subtitle {
+    position: relative;
+    z-index: 3;
 
     margin-top: 5px !important;
-
     margin-bottom: 0 !important;
 
-    color: #8e9aaa !important;
+    color: #8faecc !important;
 
-    font-size: 0.82rem !important;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    line-height: 1.4;
+    font-size: 16px !important;
+
+    font-weight: 400 !important;
+
+    line-height: 1.5 !important;
 }
 
 
@@ -220,34 +310,59 @@ main.container-fluid {
    ========================================================= */
 
 .register-heading {
+    position: relative;
+    z-index: 3;
 
-    margin-top: 22px;
+    margin-top: 25px;
+    margin-bottom: 17px;
 
-    margin-bottom: 16px;
+    color: #e7f3ff !important;
 
-    color: #e5eaf0;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    font-size: 0.94rem;
+    font-size: 18px !important;
 
-    font-weight: 600;
+    font-weight: 650 !important;
+
+    line-height: 1.4 !important;
+
+    text-align: center !important;
 }
 
 
 /* =========================================================
-   FORM LABEL
+   LABELS
+   SAME AS LOGIN
    ========================================================= */
 
 .auth-card .form-label {
+    position: relative;
+    z-index: 3;
 
     display: block;
 
-    margin-bottom: 6px !important;
+    margin-bottom: 7px !important;
 
-    color: #cbd5e1 !important;
+    color: #b8cee2 !important;
 
-    font-size: 0.80rem !important;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    font-weight: 600 !important;
+    font-size: 18px !important;
+
+    font-weight: 650 !important;
+
+    line-height: 1.4 !important;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
 }
 
 
@@ -256,39 +371,49 @@ main.container-fluid {
    ========================================================= */
 
 .auth-card .mb-3 {
-
-    margin-bottom: 13px !important;
+    margin-bottom: 15px !important;
 }
 
-
 .auth-card .mb-2 {
-
-    margin-bottom: 14px !important;
+    margin-bottom: 16px !important;
 }
 
 
 /* =========================================================
-   INPUT
+   INPUTS
+   SAME AS LOGIN
    ========================================================= */
 
-.auth-card input.form-control {
+.auth-card input.form-control,
+.auth-card input.form-control:hover,
+.auth-card input.form-control:focus,
+.auth-card input.form-control:active {
+
+    position: relative;
+    z-index: 3;
+
+    display: block;
 
     width: 100%;
 
     height: 40px !important;
+    min-height: 40px !important;
 
-    min-height: 40px;
-
-    padding: 8px 12px !important;
+    padding: 9px 15px !important;
 
     box-sizing: border-box;
 
-    background: #edf1f7 !important;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 38, 75, 0.90),
+            rgba(4, 25, 53, 0.88)
+        ) !important;
 
-    color: #17202b !important;
+    color: #eef8ff !important;
 
     border:
-        1px solid transparent !important;
+        1px solid rgba(91, 168, 225, 0.30) !important;
 
     border-radius: 7px !important;
 
@@ -300,16 +425,55 @@ main.container-fluid {
         Arial,
         sans-serif !important;
 
-    font-size: 14px !important;
+    font-size: 18px !important;
 
     font-weight: 400 !important;
 
-    line-height: 1.5 !important;
+    font-style: normal !important;
+
+    line-height: 26px !important;
+
+    letter-spacing: normal !important;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+
+    -webkit-font-smoothing: antialiased;
+
+    box-shadow:
+        inset 0 1px 7px rgba(0, 0, 0, 0.20);
 
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease,
-        background 0.2s ease;
+        background 0.2s ease !important;
+}
+
+
+/* =========================================================
+   INPUT PLACEHOLDER
+   ========================================================= */
+
+.auth-card input.form-control::placeholder {
+    color: #7592ad !important;
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+
+    font-weight: 400 !important;
+
+    font-style: normal !important;
+
+    line-height: 26px !important;
+
+    letter-spacing: normal !important;
+
+    opacity: 1 !important;
 }
 
 
@@ -318,11 +482,15 @@ main.container-fluid {
    ========================================================= */
 
 .auth-card input.form-control:hover {
-
-    background: #f3f5f9 !important;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(10, 47, 91, 0.94),
+            rgba(5, 30, 62, 0.92)
+        ) !important;
 
     border-color:
-        rgba(33, 150, 243, 0.25) !important;
+        rgba(35, 181, 255, 0.60) !important;
 }
 
 
@@ -331,46 +499,29 @@ main.container-fluid {
    ========================================================= */
 
 .auth-card input.form-control:focus {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(10, 51, 98, 0.98),
+            rgba(5, 31, 64, 0.96)
+        ) !important;
 
-    background: #ffffff !important;
-
-    color: #17202b !important;
+    color: #ffffff !important;
 
     border-color:
-        #2196f3 !important;
+        #16b9ff !important;
 
     outline: none !important;
 
     box-shadow:
-        0 0 0 3px
-        rgba(33, 150, 243, 0.12) !important;
+        0 0 0 3px rgba(0, 166, 255, 0.10),
+        0 0 18px rgba(0, 151, 255, 0.13),
+        inset 0 1px 7px rgba(0, 0, 0, 0.20) !important;
 }
 
 
 /* =========================================================
-   PLACEHOLDER
-   ========================================================= */
-
-.auth-card input.form-control::placeholder {
-
-    color: #7b8490 !important;
-
-    font-family:
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif !important;
-
-    font-size: 13px !important;
-
-    font-weight: 400 !important;
-
-    opacity: 1 !important;
-}
-
-
-/* =========================================================
-   AUTOFILL
+   CHROME AUTOFILL
    ========================================================= */
 
 .auth-card input:-webkit-autofill,
@@ -378,12 +529,227 @@ main.container-fluid {
 .auth-card input:-webkit-autofill:focus,
 .auth-card input:-webkit-autofill:active {
 
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+
+    font-weight: 400 !important;
+
+    line-height: 26px !important;
+
+    letter-spacing: normal !important;
+
     -webkit-text-fill-color:
-        #17202b !important;
+        #eef8ff !important;
+
+    color:
+        #eef8ff !important;
+
+    caret-color:
+        #ffffff !important;
 
     -webkit-box-shadow:
-        0 0 0 1000px
-        #edf1f7 inset !important;
+        0 0 0 1000px #082746 inset !important;
+
+    box-shadow:
+        0 0 0 1000px #082746 inset !important;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+
+    -webkit-font-smoothing: antialiased !important;
+}
+
+
+/* =========================================================
+   BUTTON
+   SAME AS LOGIN
+   ========================================================= */
+
+.btn-phishguard {
+
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+
+    height: 46px;
+
+    margin-top: 1px;
+
+    border: none !important;
+
+    border-radius: 7px !important;
+
+    background:
+        linear-gradient(
+            100deg,
+            #0797dc 0%,
+            #08a8e8 50%,
+            #13c0e8 100%
+        ) !important;
+
+    color: #ffffff !important;
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+
+    font-weight: 750 !important;
+
+    line-height: 1 !important;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 24px rgba(0, 145, 220, 0.32),
+        0 0 18px rgba(0, 180, 240, 0.12);
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+}
+
+
+/* =========================================================
+   BUTTON HOVER
+   ========================================================= */
+
+.btn-phishguard:hover {
+
+    color: #ffffff !important;
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+
+    font-weight: 750 !important;
+
+    transform: translateY(-1px);
+
+    filter: brightness(1.05);
+
+    box-shadow:
+        0 10px 28px rgba(0, 145, 220, 0.42),
+        0 0 20px rgba(0, 190, 246, 0.20);
+}
+
+
+/* =========================================================
+   BUTTON ACTIVE
+   ========================================================= */
+
+.btn-phishguard:active {
+
+    transform: translateY(0);
+
+    box-shadow:
+        0 4px 12px rgba(0, 118, 255, 0.20);
+}
+
+
+/* =========================================================
+   LOGIN LINK
+   SAME FONT AS LOGIN PAGE
+   ========================================================= */
+
+.auth-register {
+
+    position: relative;
+    z-index: 3;
+
+    margin-top: 17px !important;
+    margin-bottom: 0 !important;
+
+    color: #7f98af !important;
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+
+    font-weight: 400 !important;
+
+    line-height: 1.4 !important;
+}
+
+
+.auth-register a {
+
+    color: #18b9f7 !important;
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
+
+    font-size: 18px !important;
+
+    font-weight: 650 !important;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        text-shadow 0.2s ease;
+}
+
+
+.auth-register a:hover {
+
+    color: #55d4ff !important;
+
+    font-size: 18px !important;
+
+    text-decoration: underline;
+
+    text-shadow:
+        0 0 10px rgba(0, 190, 255, 0.35);
+}
+
+
+/* =========================================================
+   SECURITY MESSAGE
+   KEEP 14px
+   ========================================================= */
+
+.register-security {
+
+    position: relative;
+    z-index: 3;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 19px;
+
+    padding-top: 17px;
+
+    border-top:
+        1px solid rgba(100, 170, 220, 0.13);
+
+    color: #66839d;
 
     font-family:
         "Segoe UI",
@@ -394,171 +760,55 @@ main.container-fluid {
     font-size: 14px !important;
 
     font-weight: 400 !important;
-}
 
-
-/* =========================================================
-   REGISTER BUTTON
-   ========================================================= */
-
-.btn-phishguard {
-
-    width: 100%;
-
-    height: 43px;
-
-    margin-top: 3px;
-
-    border: none !important;
-
-    border-radius: 7px !important;
-
-    background: #16d9a5 !important;
-
-    color: #061712 !important;
-
-    font-family:
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    font-size: 0.92rem !important;
-
-    font-weight: 700 !important;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        transform 0.15s ease,
-        box-shadow 0.2s ease;
-}
-
-
-/* =========================================================
-   REGISTER BUTTON HOVER
-   ========================================================= */
-
-.btn-phishguard:hover {
-
-    background: #13c697 !important;
-
-    color: #061712 !important;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 5px 16px
-        rgba(22, 217, 165, 0.20);
-}
-
-
-/* =========================================================
-   REGISTER BUTTON ACTIVE
-   ========================================================= */
-
-.btn-phishguard:active {
-
-    transform: translateY(0);
-
-    box-shadow: none;
-}
-
-
-/* =========================================================
-   LOGIN LINK
-   ========================================================= */
-
-.auth-register {
-
-    margin-top: 16px !important;
-
-    margin-bottom: 0 !important;
-
-    color: #858f9e !important;
-
-    font-size: 0.80rem !important;
-}
-
-
-.auth-register a {
-
-    color: #16d9a5 !important;
-
-    font-size: 0.80rem !important;
-
-    font-weight: 600 !important;
-
-    text-decoration: none;
-
-    transition:
-        color 0.2s ease;
-}
-
-
-.auth-register a:hover {
-
-    color: #52e5c1 !important;
-
-    text-decoration: underline;
-}
-
-
-/* =========================================================
-   SECURITY MESSAGE
-   ========================================================= */
-
-.register-security {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    margin-top: 16px;
-
-    padding-top: 13px;
-
-    border-top:
-        1px solid
-        rgba(255, 255, 255, 0.07);
-
-    color: #697585;
-
-    font-size: 0.67rem;
+    line-height: 1.4 !important;
 }
 
 
 .register-security i {
 
-    color: #16d9a5;
+    color: #22d3ee !important;
 
-    font-size: 0.70rem;
+    font-size: 14px !important;
+
+    filter:
+        drop-shadow(
+            0 0 7px rgba(34, 211, 238, 0.65)
+        );
 }
 
 
 /* =========================================================
-   ERROR MESSAGES
+   ERROR MESSAGE
+   SAME AS LOGIN
    ========================================================= */
 
 .auth-card .text-danger {
 
-    margin-top: 3px !important;
+    position: relative;
+    z-index: 3;
+
+    margin-top: 5px !important;
 
     color: #ff7180 !important;
 
-    font-size: 0.68rem !important;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    line-height: 1.3;
+    font-size: 18px !important;
+
+    font-weight: 400 !important;
+
+    line-height: 1.4 !important;
 }
 
 
 /* =========================================================
-   PAGE FOOTER
+   FOOTER
+   SAME AS LOGIN PAGE
    ========================================================= */
 
 .auth-footer {
@@ -566,36 +816,45 @@ main.container-fluid {
     position: absolute;
 
     left: 0;
-
-    bottom: 10px;
+    bottom: 9px;
 
     width: 100%;
 
     text-align: center;
 
-    color: #d1d7df;
+    color: #c7d5e3;
 
-    font-size: 0.82rem;
+    font-family:
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif !important;
 
-    font-weight: 400;
+    font-size: 18px !important;
 
-    letter-spacing: 0.2px;
+    font-weight: 400 !important;
 
-    z-index: 10;
+    line-height: 1.4 !important;
+
+    z-index: 5;
 
     pointer-events: none;
 
     text-shadow:
-        0 1px 5px
-        rgba(0, 0, 0, 0.75);
+        0 2px 7px rgba(0, 0, 0, 0.85);
 }
 
 
 .auth-footer strong {
 
-    color: #3e98ed;
+    color: #27a9ff;
 
-    font-weight: 600;
+    font-size: 18px !important;
+
+    font-weight: 650;
+
+    text-shadow:
+        0 0 8px rgba(0, 150, 255, 0.25);
 }
 
 
@@ -606,11 +865,12 @@ main.container-fluid {
 @media (min-width: 1600px) {
 
     .auth-wrapper {
-
-        padding-right: 16% !important;
-
+        padding-right: 12vw !important;
     }
 
+    .auth-card {
+        width: 410px;
+    }
 }
 
 
@@ -621,11 +881,12 @@ main.container-fluid {
 @media (max-width: 1200px) {
 
     .auth-wrapper {
-
-        padding-right: 8% !important;
-
+        padding-right: 8vw !important;
     }
 
+    .auth-card {
+        width: 400px;
+    }
 }
 
 
@@ -641,10 +902,17 @@ main.container-fluid {
 
         padding: 20px !important;
 
-        background-position: center;
-
+        background-position:
+            center center;
     }
 
+    .auth-wrapper::after {
+        display: none;
+    }
+
+    .auth-card {
+        width: 400px;
+    }
 }
 
 
@@ -656,11 +924,8 @@ main.container-fluid {
 
     html,
     body {
-
         overflow: auto;
-
     }
-
 
     .auth-wrapper {
 
@@ -673,6 +938,10 @@ main.container-fluid {
         padding:
             25px 15px 70px !important;
 
+        justify-content: center;
+
+        background-position:
+            center center;
     }
 
 
@@ -680,75 +949,131 @@ main.container-fluid {
 
         width: 100%;
 
-        max-width: 390px;
+        max-width: 400px;
 
         padding:
-            28px 25px 23px;
+            28px 23px 23px;
 
-        border-radius: 12px;
-
+        border-radius: 13px;
     }
 
 
     .auth-card h3 {
-
-        font-size:
-            1.75rem !important;
-
+        font-size: 30px !important;
     }
 
 
     .auth-logo {
 
-        width: 55px;
-
-        height: 55px;
-
+        width: 56px;
+        height: 56px;
     }
 
 
     .auth-logo i {
-
-        font-size:
-            2.2rem;
-
+        font-size: 34px !important;
     }
 
 
-    .auth-card input.form-control {
+    .register-heading {
 
-        height:
-            43px !important;
+        margin-top: 22px;
 
-        min-height:
-            43px;
+        margin-bottom: 15px;
 
-        font-size:
-            15px !important;
+        font-size: 18px !important;
+    }
 
+
+    .auth-card .form-label {
+
+        font-size: 18px !important;
+    }
+
+
+    .auth-card input.form-control,
+    .auth-card input.form-control:hover,
+    .auth-card input.form-control:focus,
+    .auth-card input.form-control:active,
+    .auth-card input:-webkit-autofill,
+    .auth-card input:-webkit-autofill:hover,
+    .auth-card input:-webkit-autofill:focus,
+    .auth-card input:-webkit-autofill:active {
+
+        height: 46px !important;
+
+        min-height: 46px !important;
+
+        font-family:
+            "Segoe UI",
+            Roboto,
+            Arial,
+            sans-serif !important;
+
+        font-size: 18px !important;
+
+        font-weight: 400 !important;
+
+        line-height: 26px !important;
+
+        letter-spacing: normal !important;
+
+        -webkit-text-size-adjust: none !important;
+
+        text-size-adjust: none !important;
     }
 
 
     .auth-card input.form-control::placeholder {
 
-        font-size:
-            14px !important;
+        font-size: 18px !important;
+    }
 
+
+    .btn-phishguard {
+
+        height: 46px;
+
+        font-size: 18px !important;
+    }
+
+
+    .auth-register {
+
+        font-size: 18px !important;
+    }
+
+
+    .auth-register a {
+
+        font-size: 18px !important;
+    }
+
+
+    /* Security stays 14px */
+
+    .register-security,
+    .register-security i {
+
+        font-size: 14px !important;
     }
 
 
     .auth-footer {
 
-        bottom: 8px;
+        bottom: 10px;
 
-        font-size:
-            0.70rem;
+        font-size: 18px !important;
 
         padding:
             0 10px;
-
     }
 
+
+    .auth-footer strong {
+
+        font-size: 18px !important;
+    }
 }
 
 
@@ -760,36 +1085,107 @@ main.container-fluid {
 
     .auth-card {
 
-        max-width: 340px;
-
         padding:
-            25px 20px 21px;
-
+            25px 19px 21px;
     }
 
 
     .auth-card h3 {
 
-        font-size:
-            1.6rem !important;
+        font-size: 28px !important;
+    }
 
+
+    .auth-logo {
+
+        width: 54px;
+        height: 54px;
+    }
+
+
+    .auth-logo i {
+
+        font-size: 32px !important;
     }
 
 
     .auth-card .form-label {
 
-        font-size:
-            0.78rem !important;
-
+        font-size: 17px !important;
     }
 
+
+    .auth-card input.form-control,
+    .auth-card input.form-control:hover,
+    .auth-card input.form-control:focus,
+    .auth-card input.form-control:active,
+    .auth-card input:-webkit-autofill,
+    .auth-card input:-webkit-autofill:hover,
+    .auth-card input:-webkit-autofill:focus,
+    .auth-card input:-webkit-autofill:active {
+
+        height: 45px !important;
+
+        min-height: 45px !important;
+
+        font-family:
+            "Segoe UI",
+            Roboto,
+            Arial,
+            sans-serif !important;
+
+        font-size: 17px !important;
+
+        font-weight: 400 !important;
+
+        line-height: 25px !important;
+
+        letter-spacing: normal !important;
+    }
+
+
+    .auth-card input.form-control::placeholder {
+
+        font-size: 17px !important;
+    }
+
+
+    .btn-phishguard {
+
+        height: 44px;
+
+        font-size: 18px !important;
+    }
+
+
+    .auth-register,
+    .auth-register a {
+
+        font-size: 17px !important;
+    }
+
+
+    /* Security remains 14px */
+
+    .register-security,
+    .register-security i {
+
+        font-size: 14px !important;
+    }
+
+
+    .auth-footer,
+    .auth-footer strong {
+
+        font-size: 16px !important;
+    }
 }
 
 </style>
 
 
 <!-- =========================================================
-     REGISTER PAGE
+     PHISHGUARD REGISTER PAGE
      ========================================================= -->
 
 <div class="auth-wrapper">
@@ -808,7 +1204,6 @@ main.container-fluid {
 
         <div class="text-center">
 
-
             <div class="auth-logo">
 
                 <i class="fa-solid fa-shield-halved"></i>
@@ -817,18 +1212,13 @@ main.container-fluid {
 
 
             <h3>
-
                 Create Account
-
             </h3>
 
 
             <p class="auth-subtitle">
-
                 Join PhishGuard to Start Analyzing Emails
-
             </p>
-
 
         </div>
 
@@ -850,7 +1240,6 @@ main.container-fluid {
 
         <form method="POST" novalidate>
 
-
             {{ form.hidden_tag() }}
 
 
@@ -860,11 +1249,9 @@ main.container-fluid {
 
             <div class="mb-3">
 
-
                 {{ form.name.label(
                     class="form-label"
                 ) }}
-
 
                 {{ form.name(
                     class="form-control",
@@ -872,17 +1259,13 @@ main.container-fluid {
                     autocomplete="name"
                 ) }}
 
-
                 {% for error in form.name.errors %}
 
                     <div class="text-danger small">
-
                         {{ error }}
-
                     </div>
 
                 {% endfor %}
-
 
             </div>
 
@@ -893,11 +1276,9 @@ main.container-fluid {
 
             <div class="mb-3">
 
-
                 {{ form.email.label(
                     class="form-label"
                 ) }}
-
 
                 {{ form.email(
                     class="form-control",
@@ -905,17 +1286,13 @@ main.container-fluid {
                     autocomplete="email"
                 ) }}
 
-
                 {% for error in form.email.errors %}
 
                     <div class="text-danger small">
-
                         {{ error }}
-
                     </div>
 
                 {% endfor %}
-
 
             </div>
 
@@ -926,11 +1303,9 @@ main.container-fluid {
 
             <div class="mb-3">
 
-
                 {{ form.password.label(
                     class="form-label"
                 ) }}
-
 
                 {{ form.password(
                     class="form-control",
@@ -938,17 +1313,13 @@ main.container-fluid {
                     autocomplete="new-password"
                 ) }}
 
-
                 {% for error in form.password.errors %}
 
                     <div class="text-danger small">
-
                         {{ error }}
-
                     </div>
 
                 {% endfor %}
-
 
             </div>
 
@@ -959,11 +1330,9 @@ main.container-fluid {
 
             <div class="mb-2">
 
-
                 {{ form.confirm_password.label(
                     class="form-label"
                 ) }}
-
 
                 {{ form.confirm_password(
                     class="form-control",
@@ -971,17 +1340,13 @@ main.container-fluid {
                     autocomplete="new-password"
                 ) }}
 
-
                 {% for error in form.confirm_password.errors %}
 
                     <div class="text-danger small">
-
                         {{ error }}
-
                     </div>
 
                 {% endfor %}
-
 
             </div>
 
@@ -994,7 +1359,6 @@ main.container-fluid {
                 class="btn btn-phishguard w-100"
             ) }}
 
-
         </form>
 
 
@@ -1006,13 +1370,9 @@ main.container-fluid {
 
             Already have an account?
 
-
             <a href="{{ url_for('auth.login') }}">
-
                 Login here
-
             </a>
-
 
         </p>
 
@@ -1023,25 +1383,19 @@ main.container-fluid {
 
         <div class="register-security">
 
-
             <i class="fa-solid fa-lock"></i>
 
-
             <span>
-
                 Your account information is protected
-
             </span>
 
-
         </div>
-
 
     </div>
 
 
     <!-- =====================================================
-         PAGE FOOTER
+         FOOTER
          ===================================================== -->
 
     <div class="auth-footer">
@@ -1054,8 +1408,6 @@ main.container-fluid {
 
     </div>
 
-
 </div>
-
 
 {% endblock %}
